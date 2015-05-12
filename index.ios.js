@@ -6,32 +6,26 @@
 
 var React = require('react-native');
 var styles = require('./styles.js');
+var Products = require('./App/Views/Products');
 
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
   NavigatorIOS
 } = React;
 
 var PHReactNative = React.createClass({
   render: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+Control+Z for dev menu
-        </Text>
-      </View>
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'Products',
+          component: Products
+        }} />
     );
   }
 });
 
 AppRegistry.registerComponent('PHReactNative', () => PHReactNative);
+
+module.exports = 'PHReactNative';

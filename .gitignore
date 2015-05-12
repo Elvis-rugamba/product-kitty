@@ -26,3 +26,6 @@ project.xcworkspace
 #
 node_modules/
 npm-debug.log
+
+# api keys
+app/utils/api.js
