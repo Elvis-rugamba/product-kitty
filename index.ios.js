@@ -18,9 +18,12 @@ var PHReactNative = React.createClass({
     return (
       <NavigatorIOS
         style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
         initialRoute={{
           title: 'Products',
-          component: Products
+          component: Products,
         }} />
     );
   }
