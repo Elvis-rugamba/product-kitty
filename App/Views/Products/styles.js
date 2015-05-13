@@ -6,7 +6,7 @@ var {
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F6F6EF',
+    backgroundColor: '#FFFFFD',
   },
   loadingText: {
     fontSize: 75,
@@ -14,7 +14,11 @@ var styles = StyleSheet.create({
     marginTop: 75,
     marginBottom: 10,
     marginRight: 10,
-    color: '#FF6600'
+    color: '#D6573D'
+  },
+  postsListView:{
+    backgroundColor: '#FFFFFD',
   }
 })
+
 module.exports = styles;
