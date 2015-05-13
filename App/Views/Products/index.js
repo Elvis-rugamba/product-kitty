@@ -5,37 +5,81 @@ var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 
 var {
-  TabBarIOS,
   Text,
   View,
-  ListView
 } = React;
 
 var Products = React.createClass({
   getInitialState: function() {
     return {
-      clientToken: undefined,
-      // dataSource: new ListView.DataSource({
-      //   rowHasChanged: (row1, row2) => row1 !== row2
-      // }),
+      accessToken: false,
       loaded: false
     }
   },
-  // componentDidMount: function() {
-  //   var test = this.getToken()
-  //   this.setState({
-  //     clientToken: test
-  //   });
-  // },
-  componentDidMount: function () {
-      this.setState({
-        clientToken: this.getToken(),
-        loaded: true
+  componentWillMount: function () {
+    fetch(api.token.link, api.token.object)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          accessToken: responseData.access_token,
+        });
+        console.log('response token = state token', responseData.access_token === this.state.accessToken);
       })
+      .then(() => {
+        console.log('componentWillMount', this.state.accessToken)
+        this.getPosts();
+      })
+      .done();
   },
-  getToken: function() {
-    return api.getToken();
+  getPosts: function() {
+    var headersObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.state.accessToken}`,
+        'Origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+    fetch('https://api.producthunt.com/v1/posts/1', headersObj)
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+      })
+      .done();
   },
+  render: function() {
+    if (!this.state.loaded) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.loadingText}>
+            {this.state.accessToken}
+          </Text>
+        </View>
+      )
+    }
+    return (
+      this.renderView()
+    )
+  },
+  renderView: function() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>
+          Hello
+        </Text>
+      </View>
+    )
+  }
+  // render: function() {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.loadingText}>
+  //         Test
+  //       </Text>
+  //     </View>
+  //   );
+  // },
   // render: function() {
   //   if (!this.state.loaded) {
   //     return(
@@ -57,15 +101,6 @@ var Products = React.createClass({
 
   //   )
   // }
-  render: function() {
-    return(
-      <View style={styles.container}>
-        <Text style={styles.text}>
-          Loading
-        </Text>
-      </View>
-    )
-  }
 })
 
 // var Products = React.createClass({

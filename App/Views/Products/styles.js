@@ -6,12 +6,12 @@ var {
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F6F6EF'
+    backgroundColor: '#F6F6EF',
   },
-  text: {
-    fontSize: 25,
+  loadingText: {
+    fontSize: 75,
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 75,
     marginBottom: 10,
     marginRight: 10,
     color: '#FF6600'
