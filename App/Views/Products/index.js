@@ -3,16 +3,19 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
+var Cell = require('./Cell');
 
 var {
   Text,
   View,
+  ListView
 } = React;
 
 var Products = React.createClass({
   getInitialState: function() {
     return {
       accessToken: false,
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       loaded: false
     }
   },
@@ -23,10 +26,8 @@ var Products = React.createClass({
         this.setState({
           accessToken: responseData.access_token,
         });
-        console.log('response token = state token', responseData.access_token === this.state.accessToken);
       })
       .then(() => {
-        console.log('componentWillMount', this.state.accessToken)
         this.getPosts();
       })
       .done();
@@ -41,10 +42,13 @@ var Products = React.createClass({
         'Host': 'api.producthunt.com'
       }
     };
-    fetch('https://api.producthunt.com/v1/posts/1', headersObj)
+    fetch('https://api.producthunt.com/v1/posts/', headersObj)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData);
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
+          loaded: true
+        })
       })
       .done();
   },
@@ -53,67 +57,31 @@ var Products = React.createClass({
       return (
         <View style={styles.container}>
           <Text style={styles.loadingText}>
-            {this.state.accessToken}
+            Loading...
           </Text>
         </View>
       )
     }
     return (
-      this.renderView()
+      this.renderListView()
     )
   },
-  renderView: function() {
+  renderListView: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>
-          Hello
-        </Text>
-      </View>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderPostCell}
+        style={styles.postsListView}
+      />
     )
-  }
-  // render: function() {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.loadingText}>
-  //         Test
-  //       </Text>
-  //     </View>
-  //   );
-  // },
-  // render: function() {
-  //   if (!this.state.loaded) {
-  //     return(
-  //       <View>
-  //         <Text>
-  //           Loading posts...
-  //         </Text>
-  //       </View>
-  //     );
-  //   }
-  //   return (
-  //     this.renderListView()
-  //   )
-  // },
-  // renderListView: function() {
-  //   return(
-  //     <ListView
-  //       dataSource={this.state.dataSource}/>
-
-  //   )
-  // }
+  },
+  renderPostCell: function(post) {
+    return (
+        <Cell
+          onSelect={() => this.selectPost(post)}
+          post={post}/>
+    )
+  },
 })
-
-// var Products = React.createClass({
-//   render: function() {
-//     return (
-//       <View>
-//         <Text>
-//           Loading...
-//         </Text>
-//       </View>
-//     )
-//   }
-// })
-
 
 module.exports = Products;
