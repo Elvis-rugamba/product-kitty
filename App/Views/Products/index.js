@@ -1,9 +1,8 @@
-'use strict';
-
 var React = require('react-native');
 var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 var Cell = require('./Cell');
+var Item = require('../Item');
 
 var {
   Text,
@@ -20,6 +19,7 @@ var Products = React.createClass({
     }
   },
   componentWillMount: function () {
+    if (!this.state.accessToken){
     fetch(api.token.link, api.token.object)
       .then((response) => response.json())
       .then((responseData) => {
@@ -31,6 +31,7 @@ var Products = React.createClass({
         this.getPosts();
       })
       .done();
+    }
   },
   getPosts: function() {
     var headersObj = {
@@ -82,6 +83,16 @@ var Products = React.createClass({
           post={post}/>
     )
   },
+  selectPost: function(post) {
+    this.props.navigator.push({
+      title: post.name,
+      component: Item,
+      passProps: {post_id: post.id,
+                  post_name: post.name,
+                  post_tagline: post.tagline,
+                  accessToken: this.state.accessToken}
+    })
+  }
 })
 
 module.exports = Products;

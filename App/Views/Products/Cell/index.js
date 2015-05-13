@@ -9,9 +9,6 @@ var {
 } = React;
 
 var Cell = React.createClass({
-  componentDidMount: function() {
-    console.log('In Cell!', this.props);
-  },
   render: function() {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>
