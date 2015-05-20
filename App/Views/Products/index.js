@@ -87,9 +87,13 @@ var Products = React.createClass({
     this.props.navigator.push({
       title: post.name,
       component: Item,
-      passProps: {post_id: post.id,
-                  post_name: post.name,
-                  post_tagline: post.tagline,
+      passProps: {postId: post.id,
+                  postName: post.name,
+                  postTagline: post.tagline,
+                  postedBy: post.user.name,
+                  postVotes: post.votes_count,
+                  postComments: post.comments_count,
+                  postImage: post.user.image_url['96px'],
                   accessToken: this.state.accessToken}
     })
   }

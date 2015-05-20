@@ -12,6 +12,12 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFD',
   },
+  image: {
+    margin: 10,
+    height: 50,
+    borderRadius: 25,
+    flex: 1
+  },
   postCount: {
     fontSize: 20,
     textAlign: 'right',

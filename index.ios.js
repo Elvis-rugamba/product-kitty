@@ -22,7 +22,7 @@ var PHReactNative = React.createClass({
         barTintColor='#FFFFFD'
         titleTextColor='#D6573D'
         initialRoute={{
-          title: 'Products',
+          title: 'Product Hunt',
           component: Products,
         }} />
     );
