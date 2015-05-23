@@ -24,7 +24,7 @@ var api = {
       })
   },
 
-  getPosts: function(token) {
+  getAllPosts: function(token) {
     var requestObj = {
       headers: {
         'Accept': 'application/json',
@@ -35,6 +35,21 @@ var api = {
     };
 
     return fetch('https://api.producthunt.com/v1/posts', requestObj)
+      .then(function(res) {
+        return res.json();
+      })
+  },
+
+  getSinglePost: function(token, id) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'Host': 'api.producthunt.com'
+      }
+    }
+    return fetch('https://api.producthunt.com/v1/posts/' + id, requestObj)
       .then(function(res) {
         return res.json();
       })

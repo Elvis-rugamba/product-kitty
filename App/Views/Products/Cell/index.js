@@ -19,6 +19,7 @@ var Cell = React.createClass({
       imageLink: this.props.post.user.image_url['48px']
     }
   },
+
   render: function() {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>
@@ -36,7 +37,7 @@ var Cell = React.createClass({
         </View>
       </View>
       </TouchableHighlight>
-    );
+      );
   }
 })
 module.exports = Cell;

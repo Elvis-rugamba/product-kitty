@@ -19,6 +19,11 @@ var styles = StyleSheet.create({
   },
   postsListView:{
     backgroundColor: '#FFFFFD',
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80
   }
 })
 

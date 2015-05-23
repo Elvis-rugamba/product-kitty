@@ -7,7 +7,8 @@ var Item = require('../Item');
 var {
   Text,
   View,
-  ListView
+  ListView,
+  ActivityIndicatorIOS
 } = React;
 
 var Products = React.createClass({
@@ -18,6 +19,7 @@ var Products = React.createClass({
       loaded: false
     }
   },
+
   componentWillMount: function () {
     if (!this.state.accessToken){
     api.getToken()
@@ -27,16 +29,16 @@ var Products = React.createClass({
         });
       })
       .then(() => {
-        this.getPosts();
+        this.getAllPosts();
       })
       .done();
     }
   },
-  getPosts: function() {
 
-    api.getPosts(this.state.accessToken)
+  getAllPosts: function() {
+
+    api.getAllPosts(this.state.accessToken)
       .then((responseData) => {
-        console.log(responseData);
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
           loaded: true
@@ -44,6 +46,7 @@ var Products = React.createClass({
       })
       .done();
   },
+
   render: function() {
     if (!this.state.loaded) {
       return (
@@ -51,22 +54,27 @@ var Products = React.createClass({
           <Text style={styles.loadingText}>
             Loading...
           </Text>
+          <ActivityIndicatorIOS
+            animating={!this.state.loaded}
+            style={styles.centering}
+            size="large" />
         </View>
-      )
+        )
     }
     return (
       this.renderListView()
-    )
+      )
   },
+
   renderListView: function() {
     return (
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderPostCell}
-        style={styles.postsListView}
-      />
-    )
+        style={styles.postsListView} />
+      )
   },
+
   renderPostCell: function(post) {
     return (
         <Cell
@@ -74,17 +82,12 @@ var Products = React.createClass({
           post={post}/>
     )
   },
+
   selectPost: function(post) {
     this.props.navigator.push({
       title: post.name,
       component: Item,
       passProps: {postId: post.id,
-                  postName: post.name,
-                  postTagline: post.tagline,
-                  postedBy: post.user.name,
-                  postVotes: post.votes_count,
-                  postComments: post.comments_count,
-                  postImage: post.user.image_url['96px'],
                   accessToken: this.state.accessToken}
     })
   }

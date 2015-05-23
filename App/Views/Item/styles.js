@@ -13,22 +13,26 @@ var styles = StyleSheet.create({
     head: {
       marginLeft:10,
       marginRight:10,
-      marginBottom:5,
+      marginBottom:10,
     },
     foot: {
       flex:2
     },
     image: {
-      height: 15,
-      borderRadius: 50,
-      flex: 1,
+      height: 48,
+      width: 48,
+      borderRadius: 25,
+      marginTop: 75,
+      alignSelf: 'center',
+      marginRight: 5,
+      marginLeft: 5
     },
     postDetailsContainer: {
       flex: 1
     },
     postTitle: {
       fontSize: 15,
-      textAlign: 'left',
+      textAlign: 'center',
       marginTop: 10,
       marginBottom: 4,
       marginRight: 10,
@@ -82,6 +86,19 @@ var styles = StyleSheet.create({
       fontSize: 12,
       marginBottom: 10,
       color: 'gray',
+    },
+    centering: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 80
+    },
+    loadingText: {
+      fontSize: 75,
+      textAlign: 'center',
+      marginTop: 75,
+      marginBottom: 10,
+      marginRight: 10,
+      color: '#D6573D'
     }
 });
 
