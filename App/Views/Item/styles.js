@@ -6,12 +6,12 @@ var {
 
 var styles = StyleSheet.create({
     container: {
-      flex:1,
+      flex: 1,
+      marginTop: 65,
       backgroundColor: '#FFFFFD',
       flexDirection: 'column',
     },
     commentListView:{
-      color: '#000000',
       margin: 0,
       marginTop: 10,
       marginRight: 15,
@@ -23,6 +23,11 @@ var styles = StyleSheet.create({
       justifyContent: 'center',
       height: 80
     },
+    header: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      flex: 1
+    },
     loadingText: {
       fontSize: 75,
       textAlign: 'center',
@@ -30,6 +35,16 @@ var styles = StyleSheet.create({
       marginBottom: 10,
       marginRight: 10,
       color: '#D6573D'
+    },
+    text: {
+      textAlign: 'center',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignSelf: 'stretch',
+      fontSize: 40,
+      flex: 1,
+      color: '#D6573D'
+
     }
 });
 
