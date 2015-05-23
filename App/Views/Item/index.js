@@ -1,14 +1,13 @@
 var React = require('react-native');
 var styles = require('./styles');
 var api = require('../../Utils/api.js');
+var CommentCell = require('./CommentCell');
 
 var {
   Text,
   View,
-  Image,
   ListView,
   ActivityIndicatorIOS,
-  TouchableHighlight
 } = React;
 
 var Item = React.createClass({
@@ -21,16 +20,17 @@ var Item = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     api.getSinglePost(this.props.accessToken, this.props.postId)
       .then((responseData) => {
+        console.log(responseData);
         this.setState({
           productLink: responseData.post.redirect_url,
-          dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
-          // comments: responseData.post.comments,
+          dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
         });
       })
+      .done()
   },
 
   render: function() {
@@ -56,8 +56,15 @@ var Item = React.createClass({
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderCommentsCell}
-        style={styles.commentsListView} />
+        renderRow={this.renderCommentCell}
+        style={styles.commentListView} />
+      )
+  },
+
+  renderCommentCell: function(comment) {
+    return (
+      <CommentCell
+        comment={comment} />
       )
   },
 

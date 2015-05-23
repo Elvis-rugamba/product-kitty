@@ -33,7 +33,7 @@ var Cell = React.createClass({
           <Text style={styles.postDetailsLine}>
           {this.state.numComments} Comments | {this.state.numVotes} Votes | Posted by {this.state.postedBy}
           </Text>
-          <View style={styles.separator}/>
+          <View style={styles.separator} />
         </View>
       </View>
       </TouchableHighlight>
