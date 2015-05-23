@@ -7,6 +7,7 @@ var {
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
+    flex: 1
   },
   loadingText: {
     fontSize: 75,

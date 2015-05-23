@@ -20,8 +20,7 @@ var Products = React.createClass({
   },
   componentWillMount: function () {
     if (!this.state.accessToken){
-    fetch(api.token.link, api.token.object)
-      .then((response) => response.json())
+    api.getToken()
       .then((responseData) => {
         this.setState({
           accessToken: responseData.access_token,
@@ -34,18 +33,10 @@ var Products = React.createClass({
     }
   },
   getPosts: function() {
-    var headersObj = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.state.accessToken}`,
-        'Origin': '',
-        'Host': 'api.producthunt.com'
-      }
-    };
-    fetch('https://api.producthunt.com/v1/posts/', headersObj)
-      .then((response) => response.json())
+
+    api.getPosts(this.state.accessToken)
       .then((responseData) => {
+        console.log(responseData);
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
           loaded: true
