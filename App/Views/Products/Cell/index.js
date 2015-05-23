@@ -16,7 +16,7 @@ var Cell = React.createClass({
       numComments: this.props.post.comments_count,
       numVotes: this.props.post.votes_count,
       postedBy: this.props.post.user.name,
-      imageLink: this.props.post.user.image_url['96px']
+      imageLink: this.props.post.user.image_url['48px']
     }
   },
   render: function() {

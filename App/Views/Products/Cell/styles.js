@@ -13,10 +13,13 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFFFFD',
   },
   image: {
-    margin: 10,
-    height: 50,
+    height: 48,
+    width: 48,
     borderRadius: 25,
-    flex: 1
+    marginTop: 10,
+    alignSelf: 'center',
+    marginRight: 15,
+    marginLeft: 15
   },
   postCount: {
     fontSize: 20,
