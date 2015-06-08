@@ -58,15 +58,14 @@ var Item = React.createClass({
       <View style={styles.container}>
       <TouchableHighlight onPress={this.onSelect}>
       <View style={styles.header}>
-        <Text style={styles.text}>
-        Visit Site
-        </Text>
+
       </View>
       </TouchableHighlight>
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderCommentCell}
-        style={styles.commentListView} />
+        style={styles.commentListView}
+        automaticallyAdjustContentInsets={false} />
       </View>
       )
   },
