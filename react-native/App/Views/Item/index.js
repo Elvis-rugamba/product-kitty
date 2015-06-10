@@ -1,7 +1,7 @@
 var React = require('react-native');
 var styles = require('./styles');
-var api = require('../../Utils/api.js');
-var CommentCell = require('./CommentCell');
+
+var Comments = require('./Comments');
 var Web = require('./Web');
 
 var {
@@ -9,83 +9,90 @@ var {
   View,
   ListView,
   ActivityIndicatorIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  TabBarIOS
 } = React;
 
 var Item = React.createClass({
   getInitialState: function() {
     return {
-      accessToken: this.props.accessToken,
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      comments: [],
-      loaded: false
+      selectedTab: 'comments'
     }
-  },
-
-  componentWillMount: function() {
-    api.getSinglePost(this.props.accessToken, this.props.postId)
-      .then((responseData) => {
-        this.setState({
-          productLink: responseData.post.redirect_url,
-          dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
-          loaded: true
-        });
-      })
-      .done()
   },
 
   render: function() {
-    if (!this.state.loaded) {
+    return (
+        <TabBarIOS
+          barTintColor="FFFFFD"
+          tintColor="D6573D">
+          <TabBarIOS.Item
+            title="Comments"
+            selected={this.state.selectedTab === 'comments'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'comments'
+              });
+            }}>
+            {this.renderCommentsView()}
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title="Web"
+            selected={this.state.selectedTab === 'web'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'web'
+              });
+            }}>
+            {this.renderWebView()}
+          </TabBarIOS.Item>
+        </TabBarIOS>
+      )
+  },
+
+  renderCommentsView: function() {
+
       return (
         <View style={styles.container}>
-        <Text style={styles.loadingText}>
-          Loading...
-        </Text>
-        <ActivityIndicatorIOS
-          animating={!this.state.loaded}
-          style={styles.centering}
-          size="large" />
+        <Comments
+          accessToken={this.props.accessToken}
+          postId={this.props.postId}
+          link={(link) => this.getLink(link)} />
         </View>
         )
-    }
+  },
+
+  renderWebView: function() {
     return (
-      this.renderListView()
+      <Web
+        url={this.state.productLink} />
       )
   },
 
-  renderListView: function() {
-    return (
-      <View style={styles.container}>
-      <TouchableHighlight onPress={this.onSelect}>
-      <View style={styles.header}>
-
-      </View>
-      </TouchableHighlight>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderCommentCell}
-        style={styles.commentListView}
-        automaticallyAdjustContentInsets={false} />
-      </View>
-      )
-  },
-
-  renderCommentCell: function(comment) {
-    return (
-      <CommentCell
-        comment={comment} />
-      )
-  },
-
-  onSelect: function() {
-    this.props.navigator.push({
-      title: 'Web View',
-      component: Web,
-      passProps: {
-        url: this.state.productLink
-      }
-    });
+  getLink: function(link) {
+    this.setState({
+      productLink: link
+    })
   }
+  // renderListView: function() {
+  //   return (
+  //     <View style={styles.container}>
+  //       <TabBarIOS
+  //         barTintColor="FFFFFD"
+  //         tintColor="D6573D">
+  //       </TabBarIOS>
+  //     </View>
+  //     )
+  // },
+
+  // onSelect: function() {
+  //   this.props.navigator.push({
+  //     title: 'Web View',
+  //     component: Web,
+  //     passProps: {
+  //       url: this.state.productLink
+  //     }
+  //   });
+  // }
 });
 
 module.exports = Item;
