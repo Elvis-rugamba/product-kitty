@@ -8,12 +8,7 @@ var SMXTabBarIOS = require('SMXTabBarIOS');
 var SMXTabBarItemIOS = SMXTabBarIOS.Item;
 
 var {
-  Text,
-  View,
-  ListView,
-  ActivityIndicatorIOS,
-  TouchableHighlight,
-  TabBarIOS,
+  View
 } = React;
 
 var Item = React.createClass({
@@ -25,31 +20,31 @@ var Item = React.createClass({
 
   render: function() {
     return (
-        <TabBarIOS
-          barTintColor="FFFFFD"
-          tintColor="D6573D">
-          <TabBarIOS.Item
-            title="Comments"
-            selected={this.state.selectedTab === 'comments'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'comments'
-              });
-            }}>
-            {this.renderCommentsView()}
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-            title="Web"
-            systemIcon="more"
-            selected={this.state.selectedTab === 'web'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'web'
-              });
-            }}>
-            {this.renderWebView()}
-          </TabBarIOS.Item>
-        </TabBarIOS>
+    <SMXTabBarIOS
+      selectedTab={this.state.selectedTab}>
+      <SMXTabBarItemIOS
+        title="Comments"
+        selected={this.state.selectedTab === 'comments'}
+        iconName={'fontawesome|comments-o'}
+        onPress={() => {
+          this.setState({
+            selectedTab: 'comments'
+          });
+        }}>
+        {this.renderCommentsView()}
+      </SMXTabBarItemIOS>
+      <SMXTabBarItemIOS
+        title="Web"
+        selected={this.state.selectedTab === 'web'}
+        iconName={'fontawesome|compass'}
+        onPress={() => {
+          this.setState({
+            selectedTab: 'web'
+          });
+        }}>
+        {this.renderWebView()}
+      </SMXTabBarItemIOS>
+    </SMXTabBarIOS>
       )
   },
 
