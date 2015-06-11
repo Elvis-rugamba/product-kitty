@@ -3,6 +3,9 @@ var styles = require('./styles');
 
 var Comments = require('./Comments');
 var Web = require('./Web');
+var Icon = require('FAKIconImage')
+var SMXTabBarIOS = require('SMXTabBarIOS');
+var SMXTabBarItemIOS = SMXTabBarIOS.Item;
 
 var {
   Text,
@@ -10,7 +13,7 @@ var {
   ListView,
   ActivityIndicatorIOS,
   TouchableHighlight,
-  TabBarIOS
+  TabBarIOS,
 } = React;
 
 var Item = React.createClass({
@@ -37,6 +40,7 @@ var Item = React.createClass({
           </TabBarIOS.Item>
           <TabBarIOS.Item
             title="Web"
+            systemIcon="more"
             selected={this.state.selectedTab === 'web'}
             onPress={() => {
               this.setState({
@@ -73,26 +77,7 @@ var Item = React.createClass({
       productLink: link
     })
   }
-  // renderListView: function() {
-  //   return (
-  //     <View style={styles.container}>
-  //       <TabBarIOS
-  //         barTintColor="FFFFFD"
-  //         tintColor="D6573D">
-  //       </TabBarIOS>
-  //     </View>
-  //     )
-  // },
 
-  // onSelect: function() {
-  //   this.props.navigator.push({
-  //     title: 'Web View',
-  //     component: Web,
-  //     passProps: {
-  //       url: this.state.productLink
-  //     }
-  //   });
-  // }
 });
 
 module.exports = Item;
