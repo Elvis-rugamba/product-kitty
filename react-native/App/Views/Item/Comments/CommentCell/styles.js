@@ -21,13 +21,6 @@ var styles = StyleSheet.create({
     marginRight: 15,
     marginLeft: 15
   },
-  postCount: {
-    fontSize: 20,
-    textAlign: 'right',
-    margin: 10,
-    color: 'gray',
-    marginLeft: 15,
-  },
   postDetailsContainer:{
     flex: 1,
   },
