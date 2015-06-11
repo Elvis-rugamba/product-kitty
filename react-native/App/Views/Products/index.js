@@ -1,5 +1,6 @@
 var React = require('react-native');
 var styles = require('./styles.js');
+
 var api = require('../../Utils/api.js');
 var Cell = require('./Cell');
 var Item = require('../Item');

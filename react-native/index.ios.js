@@ -6,7 +6,7 @@
 
 var React = require('react-native');
 var styles = require('./styles.js');
-var Products = require('./App/Views/Products');
+var Main = require('./App/Views/Main');
 
 var {
   AppRegistry,
@@ -23,7 +23,7 @@ var PHReactNative = React.createClass({
         titleTextColor='#D6573D'
         initialRoute={{
           title: 'Product Hunt',
-          component: Products,
+          component: Main,
         }} />
     );
   }
