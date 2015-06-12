@@ -9,7 +9,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFFFFD',
     flex: 1
   },
-  postsListView:{
+  collectionListView:{
     backgroundColor: '#FFFFFD',
   }
 })

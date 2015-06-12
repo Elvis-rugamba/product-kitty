@@ -12,6 +12,6 @@ var styles = StyleSheet.create({
   postsListView:{
     backgroundColor: '#FFFFFD',
   }
-})
+});
 
 module.exports = styles;
