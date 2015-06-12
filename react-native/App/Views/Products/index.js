@@ -2,6 +2,7 @@ var React = require('react-native');
 var styles = require('./styles.js');
 
 var api = require('../../Utils/api.js');
+var Loading = require('../Loading');
 var Cell = require('./Cell');
 var Item = require('../Item');
 
@@ -51,15 +52,7 @@ var Products = React.createClass({
   render: function() {
     if (!this.state.loaded) {
       return (
-        <View style={styles.container}>
-          <Text style={styles.loadingText}>
-            Loading...
-          </Text>
-          <ActivityIndicatorIOS
-            animating={!this.state.loaded}
-            style={styles.centering}
-            size="large" />
-        </View>
+        this.renderLoading()
         )
     }
     return (
@@ -67,6 +60,14 @@ var Products = React.createClass({
       )
   },
 
+  renderLoading: function() {
+    return (
+      <View style={styles.container}>
+        <Loading
+          loaded={this.state.loaded} />
+      </View>
+      )
+  },
   renderListView: function() {
     return (
       <ListView
