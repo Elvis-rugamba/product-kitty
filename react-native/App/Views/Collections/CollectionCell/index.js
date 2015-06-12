@@ -30,9 +30,9 @@ var CollectionCell = React.createClass({
                 By {this.state.curator}
               </Text>
             </View>
+            <View style={styles.separator} />
             <Image source={{uri: this.state.imageLink}}
                    style={styles.image} />
-            <View style={styles.separator} />
         </View>
       </TouchableHighlight>
             )
