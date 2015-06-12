@@ -81,7 +81,7 @@ var Products = React.createClass({
     return (
         <Cell
           onSelect={() => this.selectPost(post)}
-          post={post}/>
+          post={post} />
     )
   },
 
