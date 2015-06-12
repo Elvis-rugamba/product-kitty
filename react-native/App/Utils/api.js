@@ -53,6 +53,38 @@ var api = {
       .then(function(res) {
         return res.json();
       })
+  },
+
+  getAllCollections: function(token) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+    return fetch('https://api.producthunt.com/v1/collections?search[featured]=true', requestObj)
+      .then(function(res) {
+        return res.json();
+      })
+  },
+
+  getSingleCollection: function(token, id) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+    return fetch('https://api.producthunt.com/v1/collections/' + id, requestObj)
+      .then(function(res) {
+        return res.json();
+      })
   }
 }
 

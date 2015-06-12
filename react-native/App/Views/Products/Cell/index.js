@@ -22,21 +22,21 @@ var Cell = React.createClass({
   render: function() {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>
-      <View style={styles.container}>
-      <Image source={{uri: this.state.imageLink}}
-             style={styles.image} />
-        <View style={styles.postDetailsContainer}>
-          <Text style={styles.postTitle}>
-            {this.state.postName}
-          </Text>
-          <Text style={styles.postDetailsLine}>
-          {this.state.numComments} Comments | {this.state.numVotes} Votes | Posted by {this.state.postedBy}
-          </Text>
-          <View style={styles.separator} />
+        <View style={styles.container}>
+          <Image source={{uri: this.state.imageLink}}
+                 style={styles.image} />
+            <View style={styles.postDetailsContainer}>
+              <Text style={styles.postTitle}>
+                {this.state.postName}
+              </Text>
+              <Text style={styles.postDetailsLine}>
+              {this.state.numComments} Comments | {this.state.numVotes} Votes | Posted by {this.state.postedBy}
+              </Text>
+              <View style={styles.separator} />
+            </View>
         </View>
-      </View>
       </TouchableHighlight>
-      );
+            );
   }
 })
 module.exports = Cell;

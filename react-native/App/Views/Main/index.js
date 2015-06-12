@@ -3,7 +3,7 @@ var styles = require('./styles.js');
 
 var api = require('../../Utils/api.js');
 var Products = require('../Products');
-
+var Collections = require('../Collections');
 
 var Icon = require('FAKIconImage');
 var SMXTabBarIOS = require('SMXTabBarIOS');
@@ -20,6 +20,18 @@ var Main = React.createClass({
       selectedTab: 'products'
     }
   },
+  componentWillMount: function() {
+    if (!this.state.accessToken){
+    api.getToken()
+      .then((responseData) => {
+        this.setState({
+          accessToken: responseData.access_token,
+        });
+      })
+      .done();
+    }
+  },
+
   render: function() {
     return (
       <SMXTabBarIOS
@@ -30,7 +42,7 @@ var Main = React.createClass({
           iconName={'fontawesome|home'}
           onPress={() => {
             this.setState({
-              selected: 'products'
+              selectedTab: 'products'
             });
           }}>
           {this.renderProducts()}
@@ -41,7 +53,7 @@ var Main = React.createClass({
           iconName={'fontawesome|bars'}
           onPress={() => {
             this.setState({
-              selected: 'collections'
+              selectedTab: 'collections'
             });
           }}>
           {this.renderCollections()}
@@ -52,7 +64,7 @@ var Main = React.createClass({
           iconName={'fontawesome|search'}
           onPress={() => {
             this.setState({
-              selected: 'search'
+              selectedTab: 'search'
             });
           }}>
           {this.renderSearch()}
@@ -64,13 +76,17 @@ var Main = React.createClass({
     return (
       <View style={styles.container}>
       <Products
-        navigator={this.props.navigator}
-        setAccessToken={this.setAccessToken} />
+        navigator={this.props.navigator} />
       </View>
       )
   },
   renderCollections: function() {
-
+    return (
+      <View style={styles.container}>
+      <Collections
+        navigator={this.props.navigator}
+        accessToken={this.state.accessToken} />
+      </View>)
   },
   renderSearch: function() {
 

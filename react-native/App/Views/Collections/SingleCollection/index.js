@@ -1,46 +1,31 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../Utils/api.js');
-var Loading = require('../Loading');
-var Cell = require('./Cell');
-var Item = require('../Item');
+var api = require('../../../Utils/api.js');
+var Loading = require('../../Loading');
+var Cell = require('../../Products/Cell');
+var Item = require('../../Item');
 
 var {
-  Text,
   View,
-  ListView,
+  ListView
 } = React;
 
-var Products = React.createClass({
+var SingleCollection = React.createClass({
   getInitialState: function() {
     return {
       accessToken: this.props.accessToken,
+      collectionId: this.props.collectionId,
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       loaded: false
     }
   },
 
-  componentDidMount: function () {
-    if (!this.state.accessToken){
-    api.getToken()
+  componentDidMount: function() {
+    api.getSingleCollection(this.state.accessToken, this.state.collectionId)
       .then((responseData) => {
         this.setState({
-          accessToken: responseData.access_token,
-        });
-      })
-      .then(() => {
-        this.getAllPosts();
-      })
-    }
-  },
-
-  getAllPosts: function() {
-
-    api.getAllPosts(this.state.accessToken)
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
+          dataSource: this.state.dataSource.cloneWithRows(responseData.collection.posts),
           loaded: true
         })
       })
@@ -61,26 +46,27 @@ var Products = React.createClass({
   renderLoading: function() {
     return (
       <View style={styles.container}>
-        <Loading
-          loaded={this.state.loaded} />
+      <Loading
+        loaded={this.state.loaded} />
       </View>
       )
   },
+
   renderListView: function() {
     return (
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderPostCell}
         style={styles.postsListView} />
-      )
+        )
   },
 
   renderPostCell: function(post) {
     return (
-        <Cell
-          onSelect={() => this.selectPost(post)}
-          post={post} />
-    )
+      <Cell
+      onSelect={() => this.selectPost(post)}
+      post={post} />
+      )
   },
 
   selectPost: function(post) {
@@ -91,6 +77,6 @@ var Products = React.createClass({
                   accessToken: this.state.accessToken}
     })
   }
-})
+});
 
-module.exports = Products;
+module.exports = SingleCollection;

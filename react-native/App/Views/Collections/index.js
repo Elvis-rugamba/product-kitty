@@ -4,23 +4,31 @@ var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 var Loading = require('../Loading');
 var CollectionCell = require('./CollectionCell');
-var Item = require('../Item');
+var SingleCollection = require('./SingleCollection');
 
 var {
  View,
- Text,
- Image,
- TouchableHightlight,
- ActivityIndicatorIOS
+ ListView
 } = React;
 
 var Collections = React.createClass({
   getInitialState: function() {
     return {
       accessToken: this.props.accessToken,
-      dataSource: new ListView.dataSource({someFunctionHere})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       loaded: false,
     }
+  },
+
+  componentDidMount: function() {
+    api.getAllCollections(this.props.accessToken)
+      .then((responseData) => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(responseData.collections),
+          loaded: true
+        })
+      })
+      .done()
   },
 
   render: function() {
@@ -32,7 +40,6 @@ var Collections = React.createClass({
       return (
         this.renderListView()
         )
-    }
   },
 
   renderLoading: function() {
@@ -56,7 +63,7 @@ var Collections = React.createClass({
   renderCollectionCell: function(collection) {
     return (
       <CollectionCell
-        onselect={() => this.selectCollection}
+        onSelect={() => this.selectCollection(collection)}
         collection={collection} />
       )
   },
@@ -64,8 +71,8 @@ var Collections = React.createClass({
   selectCollection: function(collection) {
     this.props.navigator.push({
       title: collection.name,
-      component: Item,
-      passProps: {postId: post.id,
+      component: SingleCollection,
+      passProps: {collectionId: collection.id,
                   accessToken: this.state.accessToken}
     })
   }
