@@ -3,6 +3,7 @@ var styles = require('./styles');
 
 var api = require('../../../Utils/api.js');
 var CommentCell = require('./CommentCell');
+var Loading = require('../../Loading');
 
 var {
   Text,
@@ -41,19 +42,20 @@ var Comments = React.createClass({
   render: function() {
     if (!this.state.loaded) {
       return (
-        <View>
-          <Text style={styles.loadingText}>
-            Loading...
-          </Text>
-          <ActivityIndicatorIOS
-            animating={!this.state.loaded}
-            style={styles.centering}
-            size="large" />
-        </View>
+        this.renderLoading()
         )
     }
     return (
       this.renderListView()
+      )
+  },
+
+  renderLoading: function() {
+    return (
+      <View style={styles.container}>
+        <Loading
+          loaded={this.state.loaded} />
+      </View>
       )
   },
 
