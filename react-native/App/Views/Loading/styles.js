@@ -14,9 +14,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 80
-  },
-  logo: {
-    justifyContent: 'center'
   }
 })
 
