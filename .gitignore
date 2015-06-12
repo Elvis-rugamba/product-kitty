@@ -28,4 +28,4 @@ node_modules/
 npm-debug.log
 
 # api keys
-app/utils/keys.js
+react-native/app/utils/keys.js
