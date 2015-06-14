@@ -85,7 +85,25 @@ var api = {
       .then(function(res) {
         return res.json();
       })
-  }
+  },
+
+  getProfileInfo: function(token, username) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+    return fetch('https://api.producthunt.com/v1/users/' + username, requestObj)
+      .then(function(res) {
+        return res.json();
+      })
+  },
+
+
 }
 
 module.exports = api;

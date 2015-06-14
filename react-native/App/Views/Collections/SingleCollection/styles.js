@@ -11,6 +11,19 @@ var styles = StyleSheet.create({
   },
   postsListView:{
     backgroundColor: '#FFFFFD',
+  },
+  postTitle: {
+    fontSize: 15,
+    textAlign: 'left',
+    marginTop: 10,
+    marginBottom: 4,
+    marginRight: 10,
+    color: '#D6573D'
+  },
+  postDetailsLine: {
+    fontSize: 12,
+    marginBottom: 10,
+    color: 'gray',
   }
 });
 
