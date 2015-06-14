@@ -1,8 +1,6 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var glassholeKitty = require('../../Assets/glasshole-kitty.png')
-
 var {
   View,
   Image,
@@ -19,10 +17,9 @@ var Loading = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={glassholeKitty}
-           />
+      <Image
+        source={require('image!glasshole-kitty')}
+         />
         <ActivityIndicatorIOS
           animating={!this.state.loaded}
           style={styles.centering}
