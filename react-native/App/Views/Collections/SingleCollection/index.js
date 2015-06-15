@@ -6,11 +6,12 @@ var Loading = require('../../Loading');
 var Cell = require('../../Products/Cell');
 var Item = require('../../Item');
 
-var ParallaxView = require('react-native-parallax-view');
-
 var {
   View,
-  ListView
+  ListView,
+  Image,
+  Text,
+  ScrollView
 } = React;
 
 var SingleCollection = React.createClass({
@@ -27,7 +28,7 @@ var SingleCollection = React.createClass({
     api.getSingleCollection(this.state.accessToken, this.state.collectionId)
       .then((responseData) => {
         this.setState({
-          collection: responseData.collection
+          collection: responseData.collection,
           dataSource: this.state.dataSource.cloneWithRows(responseData.collection.posts),
           loaded: true
         })
@@ -57,26 +58,23 @@ var SingleCollection = React.createClass({
 
   renderListView: function() {
     return (
-      <View>
-        <ParallaxView
-          backgroundSource={{uri: this.collection.background_image_url}}
-          header={(
-            <Text style={styles.postTitle}>
-              {this.collection.name}
-            </Text>
-            <Text style={styles.postDetailsLine}>
-              {this.collection.title}
-            </Text>
-            )}
-          windowHeight={200} />
-      </View>
-      <View>
-        <ListView
+      <View style={styles.container}>
+      <ScrollView>
+        <Image
+          source={{uri: this.state.collection.background_image_url}}
+          style={styles.image}
+          >
+          <Text style={styles.postTitle}>
+            {this.state.collection.title}
+          </Text>
+        </Image>
+      <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderPostCell}
           style={styles.postsListView} />
-          )
+      </ScrollView>
       </View>
+          )
   },
 
   renderPostCell: function(post) {

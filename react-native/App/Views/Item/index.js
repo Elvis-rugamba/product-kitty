@@ -36,7 +36,7 @@ var Item = React.createClass({
       <SMXTabBarItemIOS
         title="Web"
         selected={this.state.selectedTab === 'web'}
-        iconName={'fontawesome|compass'}
+        iconName={'fontawesome|globe'}
         onPress={() => {
           this.setState({
             selectedTab: 'web'

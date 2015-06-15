@@ -12,13 +12,17 @@ var styles = StyleSheet.create({
   postsListView:{
     backgroundColor: '#FFFFFD',
   },
+  image: {
+    flex: 1,
+    width: 300,
+  },
   postTitle: {
-    fontSize: 15,
-    textAlign: 'left',
+    fontSize: 32,
+    textAlign: 'center',
     marginTop: 10,
     marginBottom: 4,
     marginRight: 10,
-    color: '#D6573D'
+    color: '#FFFFFD'
   },
   postDetailsLine: {
     fontSize: 12,

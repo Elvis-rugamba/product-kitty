@@ -41401,7 +41401,7 @@ var Main = React.createClass({displayName: "Main",
       React.createElement(SMXTabBarIOS, {
         selectedTab: this.state.selectedTab}, 
         React.createElement(SMXTabBarItemIOS, {
-          title: "Products", 
+          title: "Test", 
           selected: this.state.selectedTab === 'products', 
           iconName: 'fontawesome|home', 
           onPress: function()  {
@@ -42650,7 +42650,7 @@ var styles = StyleSheet.create({
 
 module.exports = styles;
 });
-__d('PHReactNative/App/Views/Collections/SingleCollection/index',["react-native/Libraries/react-native/react-native","PHReactNative/App/Views/Collections/SingleCollection/styles","PHReactNative/App/Utils/api","PHReactNative/App/Views/Loading/index","PHReactNative/App/Views/Products/Cell/index","PHReactNative/App/Views/Item/index"],function(global, require, requireDynamic, requireLazy, module, exports) {  var React = require('react-native/Libraries/react-native/react-native');
+__d('PHReactNative/App/Views/Collections/SingleCollection/index',["react-native/Libraries/react-native/react-native","PHReactNative/App/Views/Collections/SingleCollection/styles","PHReactNative/App/Utils/api","PHReactNative/App/Views/Loading/index","PHReactNative/App/Views/Products/Cell/index","PHReactNative/App/Views/Item/index","react-native-parallax-view/index"],function(global, require, requireDynamic, requireLazy, module, exports) {  var React = require('react-native/Libraries/react-native/react-native');
 var styles = require('PHReactNative/App/Views/Collections/SingleCollection/styles');
 
 var api = require('PHReactNative/App/Utils/api');
@@ -42658,10 +42658,13 @@ var Loading = require('PHReactNative/App/Views/Loading/index');
 var Cell = require('PHReactNative/App/Views/Products/Cell/index');
 var Item = require('PHReactNative/App/Views/Item/index');
 
+var ParallaxView = require('react-native-parallax-view/index');
+
 var $__0=
   
   
-  React,View=$__0.View,ListView=$__0.ListView;
+  
+  React,View=$__0.View,ListView=$__0.ListView,Image=$__0.Image;
 
 var SingleCollection = React.createClass({displayName: "SingleCollection",
   getInitialState: function() {
@@ -42677,6 +42680,7 @@ var SingleCollection = React.createClass({displayName: "SingleCollection",
     api.getSingleCollection(this.state.accessToken, this.state.collectionId)
       .then(function(responseData)  {
         this.setState({
+          collection: responseData.collection,
           dataSource: this.state.dataSource.cloneWithRows(responseData.collection.posts),
           loaded: true
         })
@@ -42706,11 +42710,31 @@ var SingleCollection = React.createClass({displayName: "SingleCollection",
 
   renderListView: function() {
     return (
-      React.createElement(ListView, {
-        dataSource: this.state.dataSource, 
-        renderRow: this.renderPostCell, 
-        style: styles.postsListView})
-        )
+      React.createElement(ParallaxView, {
+        backgroundSource: this.collection.background_image_url, 
+        header: (
+          React.createElement(View, null, 
+            React.createElement(View, null, 
+              React.createElement(Text, {style: styles.postTitle}, 
+                this.collection.name
+              )
+            ), 
+            React.createElement(View, null, 
+              React.createElement(Text, {style: styles.postDetailsLine}, 
+                this.collection.title
+              )
+            )
+          ), 
+          )
+        windowHeight: 200}, 
+          React.createElement(View, null, 
+            React.createElement(ListView, {
+              dataSource: this.state.dataSource, 
+              renderRow: this.renderPostCell, 
+              style: styles.postsListView})
+          )
+      )
+          )
   },
 
   renderPostCell: function(post) {
@@ -42746,10 +42770,222 @@ var styles = StyleSheet.create({
   },
   postsListView:{
     backgroundColor: '#FFFFFD',
+  },
+  postTitle: {
+    fontSize: 15,
+    textAlign: 'left',
+    marginTop: 10,
+    marginBottom: 4,
+    marginRight: 10,
+    color: '#D6573D'
+  },
+  postDetailsLine: {
+    fontSize: 12,
+    marginBottom: 10,
+    color: 'gray',
   }
 });
 
 module.exports = styles;
+});
+__d('react-native-parallax-view/index',["react-native-parallax-view/lib/ParallaxView"],function(global, require, requireDynamic, requireLazy, module, exports) {  module.exports = require('react-native-parallax-view/lib/ParallaxView');});
+__d('react-native-parallax-view/lib/ParallaxView',["react-native/Libraries/react-native/react-native","Dimensions","react-native-blur/index"],function(global, require, requireDynamic, requireLazy, module, exports) {  var React = require('react-native/Libraries/react-native/react-native');
+var $__0=
+    
+    
+    
+    
+  React,StyleSheet=$__0.StyleSheet,View=$__0.View,Image=$__0.Image,ScrollView=$__0.ScrollView;
+var BlurView /* = require('react-native-blur/index').BlurView */;
+var screen = require('Dimensions').get('window');
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    scrollView: {
+        backgroundColor: 'transparent',
+    },
+    blur: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundColor: 'transparent',
+    },
+    content: {
+        shadowColor: '#222',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        backgroundColor: '#fff'
+    }
+});
+
+var ParallaxView = React.createClass({displayName: "ParallaxView",
+
+    propTypes: {
+        windowHeight: React.PropTypes.number,
+        backgroundSource: React.PropTypes.object,
+        header: React.PropTypes.node,
+        blur: React.PropTypes.string,
+        contentInset: React.PropTypes.object,
+    },
+
+    getDefaultProps: function () {
+        return {
+            windowHeight: 300,
+            contentInset: {
+                top: 64
+            }
+        };
+    },
+
+    getInitialState: function () {
+        return {
+            offset: 0,
+            marginTop: 0,
+            height: this.props.windowHeight + 64,
+            opacity : 1,
+            windowIsInView: true
+
+        };
+    },
+
+    onScroll: function (event) {
+        if (!this.props.windowHeight) {
+            return;
+        }
+        var offset = event.nativeEvent.contentOffset.y + event.nativeEvent.contentInset.top;
+        var windowIsInView = offset <= this.props.windowHeight;
+
+        if (windowIsInView || this.state.windowIsInView) {
+
+            var pullingDown = offset <= 0;
+            var srcHeight = this.props.windowHeight + this.props.contentInset.top;
+            var marginTop = pullingDown ? 0 : -offset / 3;
+            var height = srcHeight + (pullingDown ? -offset : 0);
+            var opacity = (1 - Math.min(1, 1.3 * Math.max(0, offset) / this.props.windowHeight));
+
+            //this.refs.background.setNativeProps({
+            //    top: this.state.marginTop,
+            //    width: screen.width,
+            //    height: this.state.height
+            //});
+            //
+            //this.refs.header.setNativeProps({
+            //    opacity
+            //});
+            //
+            //this.state = {
+            //    offset,
+            //    marginTop,
+            //    height,
+            //    opacity,
+            //    windowIsInView
+            //};
+
+            this.setState({
+                offset:offset,
+                marginTop:marginTop,
+                height:height,
+                opacity:opacity,
+                windowIsInView:windowIsInView
+            });
+        }
+    },
+
+    renderBackground: function () {
+        if (!this.props.windowHeight) {
+            return null;
+        }
+        if (!this.props.backgroundSource) {
+            return null;
+        }
+
+        var style = {
+            position: 'absolute',
+            backgroundColor: '#2e2f31',
+            marginTop: this.state.marginTop,
+            width: screen.width,
+            height: this.state.height
+        };
+
+        return (
+            React.createElement(Image, {ref: "background", style: style, resizeMode: "cover", source: this.props.backgroundSource}, 
+                
+                    !!this.props.blur &&
+                    (BlurView || (BlurView = require('react-native-blur/index').BlurView)) &&
+                    React.createElement(BlurView, {blurType: this.props.blur, style: styles.blur})
+                
+            )
+        );
+    },
+
+    renderHeader: function () {
+        if (!this.props.windowHeight) {
+            return null;
+        }
+        if (!this.props.backgroundSource) {
+            return null;
+        }
+        return (
+            React.createElement(View, {ref: "header", style: {
+                position: 'relative',
+                height: this.props.windowHeight,
+                opacity: this.state.opacity,
+            }}, 
+                this.props.header
+            )
+        );
+    },
+
+    render: function () {
+        var $__0=     this.props,style=$__0.style,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{style:1});
+        return (
+            React.createElement(View, {style: [styles.container, style]}, 
+                this.renderBackground(), 
+                React.createElement(ScrollView, React.__spread({}, 
+                    props, 
+                    {style: styles.scrollView, 
+                    onScroll: this.onScroll, 
+                    scrollEventThrottle: 16}), 
+                    this.renderHeader(), 
+                    React.createElement(View, {style: styles.content}, 
+                        this.props.children
+                    )
+                )
+            )
+        );
+    }
+});
+
+module.exports = ParallaxView;});
+__d('react-native-blur/index',["createReactNativeComponentClass","ReactNativeViewAttributes","merge"],function(global, require, requireDynamic, requireLazy, module, exports) {  var createComponent = require('createReactNativeComponentClass');
+var ReactNativeViewAttributes = require('ReactNativeViewAttributes');
+var merge = require('merge');
+
+var validAttributes = merge(
+  ReactNativeViewAttributes.UIView, {
+  blurType: true
+});
+
+var BlurView = createComponent({
+  validAttributes: validAttributes,
+  uiViewClassName: 'BlurView'
+});
+
+var VibrancyView = createComponent({
+  validAttributes: validAttributes,
+  uiViewClassName: 'VibrancyView'
+});
+
+// What have you expected to see here? :D
+
+module.exports = {
+    BlurView: BlurView,
+    VibrancyView: VibrancyView
+};
 });
 ;require("PHReactNative/index.ios");
 //@ sourceMappingURL=/index.ios.map

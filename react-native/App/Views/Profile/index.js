@@ -4,8 +4,6 @@ var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 var Loading = require('../Loading');
 
-var ParallaxView = require('react-native-parallax-view')
-
 var {
   Text
   Image,
