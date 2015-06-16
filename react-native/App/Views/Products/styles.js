@@ -10,7 +10,7 @@ var styles = StyleSheet.create({
     flex: 1
   },
   postsListView:{
-    backgroundColor: '#FFFFFD',
+    backgroundColor: '#FFFFFD'
   }
 })
 

@@ -11,6 +11,7 @@ var styles = StyleSheet.create({
   },
   collectionListView:{
     backgroundColor: '#FFFFFD',
+    flex: 1
   }
 })
 

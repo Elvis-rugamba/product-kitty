@@ -28,6 +28,7 @@ var Comments = React.createClass({
     api.getSinglePost(this.state.accessToken, this.state.postId)
       .then((responseData) => {
         this.setState({
+          product: responseData.post,
           productLink: responseData.post.redirect_url,
           dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
@@ -61,14 +62,12 @@ var Comments = React.createClass({
 
   renderListView: function() {
     return (
-      <View style={styles.container}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
-          style={styles.commentListView}
-          automaticallyAdjustContentInsets={false}
-          scrollEnabled={true} />
-      </View>
+          renderHeader={this.renderHeader}
+          automaticallyAdjustContentInsets={true}
+          />
       )
   },
 
@@ -77,7 +76,21 @@ var Comments = React.createClass({
       <CommentCell
         comment={comment} />
       )
-  }
+  },
+
+  renderHeader: function() {
+    return (
+      <View>
+        <Text style={styles.postTitle}>
+          {this.state.product.tagline}
+        </Text>
+        <Text style={styles.postDetailsLine}>
+          {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
+        </Text>
+      </View>
+      )
+  },
+
 });
 
 module.exports = Comments;

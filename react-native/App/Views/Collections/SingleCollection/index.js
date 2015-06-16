@@ -58,22 +58,11 @@ var SingleCollection = React.createClass({
 
   renderListView: function() {
     return (
-      <View style={styles.container}>
-      <ScrollView>
-        <Image
-          source={{uri: this.state.collection.background_image_url}}
-          style={styles.image}
-          >
-          <Text style={styles.postTitle}>
-            {this.state.collection.title}
-          </Text>
-        </Image>
       <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderPostCell}
+          renderHeader={this.renderHeader}
           style={styles.postsListView} />
-      </ScrollView>
-      </View>
           )
   },
 
@@ -82,6 +71,19 @@ var SingleCollection = React.createClass({
       <Cell
       onSelect={() => this.selectPost(post)}
       post={post} />
+      )
+  },
+
+  renderHeader: function() {
+    return (
+      <View>
+      <Text style={styles.postTitle}>
+        {this.state.collection.title}
+      </Text>
+      <Text style={styles.postDetailsLine}>
+        Curated by {this.state.collection.user.name}
+      </Text>
+      </View>
       )
   },
 
