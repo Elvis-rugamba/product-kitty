@@ -8,27 +8,21 @@ var styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#FFFFFD',
-      flexDirection: 'column'
     },
-    commentListView:{
-      margin: 0,
-      marginTop: 10,
-      marginRight: 15,
-      padding: 0,
-      backgroundColor: '#FFFFFD'
-    },
-    centering: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 80
-    },
-    loadingText: {
-      fontSize: 75,
+    postTitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
       textAlign: 'center',
-      marginTop: 75,
-      marginBottom: 10,
-      marginRight: 10,
+      marginTop: 15,
+      marginBottom: 4,
+      marginRight: 5,
       color: '#D6573D'
+    },
+    postDetailsLine: {
+      fontSize: 12,
+      textAlign: 'center',
+      marginBottom: 10,
+      color: 'gray',
     }
 });
 

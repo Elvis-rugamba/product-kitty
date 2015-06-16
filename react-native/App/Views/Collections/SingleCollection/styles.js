@@ -17,15 +17,17 @@ var styles = StyleSheet.create({
     width: 300,
   },
   postTitle: {
-    fontSize: 32,
+    fontSize: 14,
+    fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 4,
-    marginRight: 10,
-    color: '#FFFFFD'
+    marginRight: 5,
+    color: '#D6573D'
   },
   postDetailsLine: {
     fontSize: 12,
+    textAlign: 'center',
     marginBottom: 10,
     color: 'gray',
   }

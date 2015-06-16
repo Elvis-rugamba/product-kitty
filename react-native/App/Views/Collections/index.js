@@ -56,7 +56,9 @@ var Collections = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderCollectionCell}
-        style={styles.collectionListView} />
+        style={styles.collectionListView}
+        automaticallyAdjustContentInsets={true}
+       />
       )
   },
 
