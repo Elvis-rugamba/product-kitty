@@ -66,7 +66,8 @@ var Comments = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
-          automaticallyAdjustContentInsets={true}
+          contentInset={{top: 20, bottom: 49}}
+          automaticallyAdjustContentInsets={false}
           />
       )
   },
@@ -81,10 +82,12 @@ var Comments = React.createClass({
   renderHeader: function() {
     return (
       <View>
-        <Text style={styles.postTitle}>
+        <Text
+          style={styles.postTitle}>
           {this.state.product.tagline}
         </Text>
-        <Text style={styles.postDetailsLine}>
+        <Text
+          style={styles.postDetailsLine}>
           {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
         </Text>
       </View>
