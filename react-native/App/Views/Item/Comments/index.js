@@ -1,16 +1,15 @@
 var React = require('react-native');
-var styles = require('./styles');
+var styles = require('./styles.js');
 
 var api = require('../../../Utils/api.js');
 var CommentCell = require('./CommentCell');
+var ChildComments = require('./ChildComments');
 var Loading = require('../../Loading');
 
 var {
   Text,
   View,
   ListView,
-  ActivityIndicatorIOS,
-  TouchableHighlight
 } = React;
 
 var Comments = React.createClass({
@@ -19,7 +18,6 @@ var Comments = React.createClass({
       accessToken: this.props.accessToken,
       postId: this.props.postId,
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      comments: [],
       loaded: false
     }
   },
@@ -67,32 +65,44 @@ var Comments = React.createClass({
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
           contentInset={{top: 20, bottom: 49}}
-          automaticallyAdjustContentInsets={false}
-          />
+          automaticallyAdjustContentInsets={false} />
       )
   },
 
   renderCommentCell: function(comment) {
     return (
       <CommentCell
-        comment={comment} />
+        comment={comment}
+        onSelect={() => this.selectComment(comment)} />
       )
   },
 
   renderHeader: function() {
     return (
       <View>
-        <Text
-          style={styles.postTitle}>
+        <Text style={styles.postTitle}>
           {this.state.product.tagline}
         </Text>
-        <Text
-          style={styles.postDetailsLine}>
+        <Text style={styles.postDetailsLine}>
           {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
         </Text>
       </View>
       )
   },
+
+  selectComment: function(comment) {
+    if (comment.child_comments_count > 0) {
+      this.props.navigator.push({
+        title: 'Replies',
+        component: ChildComments,
+        passProps: {commet: comment,
+                    username: comment.user.name,
+                    body: comment.body,
+                    image: comment.user.image_url['48px'],
+                    childComments: comment.child_comments}
+      })
+    }
+  }
 
 });
 

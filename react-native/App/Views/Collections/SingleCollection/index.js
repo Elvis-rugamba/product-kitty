@@ -9,7 +9,6 @@ var Item = require('../../Item');
 var {
   View,
   ListView,
-  Image,
   Text,
   ScrollView
 } = React;
