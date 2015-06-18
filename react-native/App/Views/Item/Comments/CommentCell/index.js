@@ -19,19 +19,24 @@ var CommentCell = React.createClass({
 
   render: function() {
     return (
-      <View style={styles.container}>
-      <Image source={{uri: this.state.image}}
-             style={styles.image} />
-      <View style={styles.postDetailsContainer}>
-        <Text style={styles.postTitle}>
-          {this.state.name}
-        </Text>
-        <Text style={styles.postDetailsLine}>
-        {this.state.comment}
-        </Text>
-        <View style={styles.separator} />
-      </View>
-      </View>
+      <TouchableHighlight onPress={this.props.onSelect}>
+        <View style={styles.container}>
+          <Image source={{uri: this.state.image}}
+                 style={styles.image} />
+          <View style={styles.postDetailsContainer}>
+            <Text style={styles.postTitle}>
+              {this.state.name}
+            </Text>
+            <Text style={styles.postDetailsLine}>
+              {this.state.comment}
+            </Text>
+            <Text style={styles.postChildrenDetails}>
+              {this.props.comment.child_comments_count} Replies
+            </Text>
+            <View style={styles.separator} />
+          </View>
+        </View>
+      </TouchableHighlight>
       )
   }
 })

@@ -12,10 +12,6 @@ var styles = StyleSheet.create({
   postsListView:{
     backgroundColor: '#FFFFFD',
   },
-  image: {
-    flex: 1,
-    width: 300,
-  },
   postTitle: {
     fontSize: 14,
     fontWeight: 'bold',

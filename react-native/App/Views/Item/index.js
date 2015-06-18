@@ -55,7 +55,8 @@ var Item = React.createClass({
         <Comments
           accessToken={this.props.accessToken}
           postId={this.props.postId}
-          link={(link) => this.getLink(link)} />
+          link={(link) => this.getLink(link)}
+          navigator={this.props.navigator} />
         </View>
         )
   },
