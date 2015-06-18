@@ -34,8 +34,16 @@ var styles = StyleSheet.create({
   },
   postDetailsLine: {
     fontSize: 12,
-    marginBottom: 10,
+    marginRight: 10,
     color: 'gray',
+  },
+  postChildrenDetails: {
+    fontSize: 12,
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 10,
+    color: 'gray',
+    textAlign: 'right'
   },
   separator: {
     height: 0.5,
