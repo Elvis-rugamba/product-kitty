@@ -22,9 +22,11 @@ var Main = React.createClass({
       selectedTab: 'products'
     }
   },
+
   componentDidMount: function() {
     console.log(screen);
   },
+
   componentWillMount: function() {
     if (!this.state.accessToken){
     api.getToken()
@@ -63,20 +65,10 @@ var Main = React.createClass({
           }}>
           {this.renderCollections()}
         </SMXTabBarItemIOS>
-        <SMXTabBarItemIOS
-          title="Search"
-          selected={this.state.selectedTab === 'search'}
-          iconName={'fontawesome|search'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'search'
-            });
-          }}>
-          {this.renderSearch()}
-        </SMXTabBarItemIOS>
       </SMXTabBarIOS>
       )
   },
+
   renderProducts: function() {
     return (
       <View style={styles.container}>
@@ -85,6 +77,7 @@ var Main = React.createClass({
       </View>
       )
   },
+
   renderCollections: function() {
     return (
       <View style={styles.container}>
@@ -93,9 +86,7 @@ var Main = React.createClass({
         accessToken={this.state.accessToken} />
       </View>)
   },
-  renderSearch: function() {
 
-  },
   setAccessToken: function(token) {
     this.setState({
       accessToken: token
