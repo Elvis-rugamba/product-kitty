@@ -1,25 +1,12 @@
 {
-  "name": "product-hunt-react-native",
-  "version": "0.5.0",
-  "description": "Product Hunt application built on React Native",
-  "main": "index.js",
+  "name": "PHReactNative",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/react-native/packager/packager.sh"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rkho/product-hunt-react-native.git"
-  },
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rkho/product-hunt-react-native/issues"
-  },
-  "homepage": "https://github.com/rkho/product-hunt-react-native#readme"
+  "dependencies": {
+    "react-native": "^0.5.0",
+    "react-native-icons": "^0.0.9"
+  }
 }
