@@ -9,8 +9,6 @@ var Icon = require('FAKIconImage');
 var SMXTabBarIOS = require('SMXTabBarIOS');
 var SMXTabBarItemIOS = SMXTabBarIOS.Item;
 
-var screen = require('Dimensions');
-
 var {
   View
 } = React;
@@ -21,10 +19,6 @@ var Main = React.createClass({
       accessToken: false,
       selectedTab: 'products'
     }
-  },
-
-  componentDidMount: function() {
-    console.log(screen);
   },
 
   componentWillMount: function() {
