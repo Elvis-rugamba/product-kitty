@@ -96,7 +96,6 @@ var Comments = React.createClass({
   },
 
   renderWeb: function() {
-    console.log('Firing!');
     this.props.navigator.push({
       title: 'Web',
       component: Web,

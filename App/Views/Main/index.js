@@ -38,7 +38,7 @@ var Main = React.createClass({
       <SMXTabBarIOS
         selectedTab={this.state.selectedTab}>
         <SMXTabBarItemIOS
-          title='Test'
+          title='Home'
           selected={this.state.selectedTab === 'products'}
           iconName={'fontawesome|home'}
           onPress={() => {
