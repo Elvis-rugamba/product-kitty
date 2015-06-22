@@ -5,11 +5,13 @@ var api = require('../../../Utils/api.js');
 var CommentCell = require('./CommentCell');
 var ChildComments = require('./ChildComments');
 var Loading = require('../../Loading');
+var Web = require('../Web');
 
 var {
   Text,
   View,
   ListView,
+  TouchableHighlight
 } = React;
 
 var Comments = React.createClass({
@@ -79,15 +81,28 @@ var Comments = React.createClass({
 
   renderHeader: function() {
     return (
-      <View>
-        <Text style={styles.postTitle}>
-          {this.state.product.tagline}
-        </Text>
-        <Text style={styles.postDetailsLine}>
-          {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
-        </Text>
-      </View>
+      <TouchableHighlight
+        onPress={() => this.renderWeb()}>
+        <View>
+          <Text style={styles.postTitle}>
+            {this.state.product.tagline}
+          </Text>
+          <Text style={styles.postDetailsLine}>
+            {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
+          </Text>
+        </View>
+      </TouchableHighlight>
       )
+  },
+
+  renderWeb: function() {
+    console.log('Firing!');
+    this.props.navigator.push({
+      title: 'Web',
+      component: Web,
+      passProps: {url: this.state.productLink}
+    })
+
   },
 
   selectComment: function(comment) {
