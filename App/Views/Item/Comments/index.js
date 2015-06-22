@@ -34,9 +34,6 @@ var Comments = React.createClass({
           loaded: true
         });
       })
-      .then(() => {
-        this.props.link(this.state.productLink)
-      })
       .done()
   },
 
@@ -67,7 +64,7 @@ var Comments = React.createClass({
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
           contentInset={{top: 20, bottom: 49}}
-          automaticallyAdjustContentInsets={false} />
+          automaticallyAdjustContentInsets={true} />
       )
   },
 
