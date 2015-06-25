@@ -1,15 +1,17 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../../Utils/api.js');
+var api = require('../../Utils/api.js');
 var CommentCell = require('./CommentCell');
 var ChildComments = require('./ChildComments');
-var Loading = require('../../Loading');
+var Loading = require('../Loading');
+var Web = require('../Web');
 
 var {
   Text,
   View,
   ListView,
+  TouchableHighlight
 } = React;
 
 var Comments = React.createClass({
@@ -31,9 +33,6 @@ var Comments = React.createClass({
           dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
         });
-      })
-      .then(() => {
-        this.props.link(this.state.productLink)
       })
       .done()
   },
@@ -65,7 +64,7 @@ var Comments = React.createClass({
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
           contentInset={{top: 20, bottom: 49}}
-          automaticallyAdjustContentInsets={false} />
+          automaticallyAdjustContentInsets={true} />
       )
   },
 
@@ -79,15 +78,27 @@ var Comments = React.createClass({
 
   renderHeader: function() {
     return (
-      <View>
-        <Text style={styles.postTitle}>
-          {this.state.product.tagline}
-        </Text>
-        <Text style={styles.postDetailsLine}>
-          {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
-        </Text>
-      </View>
+      <TouchableHighlight
+        onPress={() => this.renderWeb()}>
+        <View>
+          <Text style={styles.postTitle}>
+            {this.state.product.tagline}
+          </Text>
+          <Text style={styles.postDetailsLine}>
+            {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
+          </Text>
+        </View>
+      </TouchableHighlight>
       )
+  },
+
+  renderWeb: function() {
+    this.props.navigator.push({
+      title: 'Web',
+      component: Web,
+      passProps: {url: this.state.productLink}
+    })
+
   },
 
   selectComment: function(comment) {

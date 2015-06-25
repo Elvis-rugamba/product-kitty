@@ -1,7 +1,7 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var Loading = require('../../../Loading');
+var Loading = require('../../Loading');
 var CommentCell = require('../CommentCell');
 
 var {
