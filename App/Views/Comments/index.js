@@ -1,10 +1,10 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../../Utils/api.js');
+var api = require('../../Utils/api.js');
 var CommentCell = require('./CommentCell');
 var ChildComments = require('./ChildComments');
-var Loading = require('../../Loading');
+var Loading = require('../Loading');
 var Web = require('../Web');
 
 var {

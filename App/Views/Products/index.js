@@ -4,8 +4,7 @@ var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 var Loading = require('../Loading');
 var Cell = require('./Cell');
-var Item = require('../Item');
-var Comments = require('../Item/Comments');
+var Comments = require('../Comments');
 
 var {
   Text,

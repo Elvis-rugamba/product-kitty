@@ -4,7 +4,7 @@ var styles = require('./styles.js');
 var api = require('../../../Utils/api.js');
 var Loading = require('../../Loading');
 var Cell = require('../../Products/Cell');
-var Item = require('../../Item');
+var Comments = require('../../Comments');
 
 var {
   View,
@@ -89,7 +89,7 @@ var SingleCollection = React.createClass({
   selectPost: function(post) {
     this.props.navigator.push({
       title: post.name,
-      component: Item,
+      component: Comments,
       passProps: {postId: post.id,
                   accessToken: this.state.accessToken}
     })
