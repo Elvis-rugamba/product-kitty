@@ -7,6 +7,8 @@ var ChildComments = require('./ChildComments');
 var Loading = require('../Loading');
 var Web = require('../Web');
 
+var Icon = require('FAKIconImage');
+
 var {
   Text,
   View,

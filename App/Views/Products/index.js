@@ -54,7 +54,6 @@ var Products = React.createClass({
     api.getAllPosts(this.state.accessToken, this.state.currentDay)
       .then((responseData) => {
         var tempDataBlob = this.state.dataBlob;
-        console.log(responseData.posts[0].day)
         var date = new Date(responseData.posts[0].day).toDateString();
         tempDataBlob[date] = responseData.posts;
         this.setState({
@@ -64,7 +63,7 @@ var Products = React.createClass({
         ;
       }).then(() => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlob, ),
+          dataSource: this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlob),
           loaded: true
         })
       })
