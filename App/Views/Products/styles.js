@@ -21,6 +21,10 @@ var styles = StyleSheet.create({
   sectionText: {
     color: '#D6573D',
     fontWeight: 'bold'
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

@@ -10,7 +10,8 @@ var {
   Text,
   View,
   ListView,
-  TouchableHighlight
+  TouchableHighlight,
+  ActivityIndicatorIOS
 } = React;
 
 var Products = React.createClass({
@@ -95,6 +96,7 @@ var Products = React.createClass({
         dataSource={this.state.dataSource}
         renderRow={this.renderPostCell}
         renderSectionHeader={this.renderSectionHeader}
+        renderFooter={this.renderFooter}
         onEndReached={() => {this.getAllPosts(this.state.currentDay)}}
         onEndReachedThreshold={40}
         style={styles.postsListView} />
@@ -115,6 +117,15 @@ var Products = React.createClass({
         <Text style={styles.sectionText}>{sectionID}</Text>
       </View>
       )
+  },
+
+  renderFooter: function() {
+    return (
+      <View>
+        <ActivityIndicatorIOS
+          animating={true}
+          size={'large'} />
+      </View>)
   },
 
   selectPost: function(post) {
