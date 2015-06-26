@@ -10,13 +10,26 @@ var {
   Text,
   View,
   ListView,
+  TouchableHighlight
 } = React;
 
 var Products = React.createClass({
   getInitialState: function() {
+
+    var getSectionData = function(dataBlob, sectionId) {
+      return dataBlob[sectionId];
+    }
+
+
     return {
       accessToken: this.props.accessToken,
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      currentDay: 0,
+      dataBlob: {},
+      dataSource: new ListView.DataSource({
+        getSectionData: getSectionData,
+        rowHasChanged: (r1, r2) => r1 !== r2,
+        sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+        }),
       loaded: false
     }
   },
@@ -37,10 +50,20 @@ var Products = React.createClass({
 
   getAllPosts: function() {
 
-    api.getAllPosts(this.state.accessToken)
+    api.getAllPosts(this.state.accessToken, this.state.currentDay)
       .then((responseData) => {
+        var tempDataBlob = this.state.dataBlob;
+        console.log(responseData.posts[0].day)
+        var date = new Date(responseData.posts[0].day).toDateString();
+        tempDataBlob[date] = responseData.posts;
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
+          currentDay: this.state.currentDay + 1,
+          dataBlob: tempDataBlob
+        });
+        ;
+      }).then(() => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlob, ),
           loaded: true
         })
       })
@@ -71,6 +94,9 @@ var Products = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderPostCell}
+        renderSectionHeader={this.renderSectionHeader}
+        onEndReached={() => {this.getAllPosts(this.state.currentDay)}}
+        onEndReachedThreshold={40}
         style={styles.postsListView} />
       )
   },
@@ -81,6 +107,14 @@ var Products = React.createClass({
           onSelect={() => this.selectPost(post)}
           post={post} />
     )
+  },
+
+  renderSectionHeader: function(sectionData, sectionID) {
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionText}>{sectionID}</Text>
+      </View>
+      )
   },
 
   selectPost: function(post) {
