@@ -24,7 +24,8 @@ var api = {
       })
   },
 
-  getAllPosts: function(token) {
+  getAllPosts: function(token, daysAgo) {
+    daysAgo = daysAgo || 0;
     var requestObj = {
       headers: {
         'Accept': 'application/json',
@@ -34,7 +35,7 @@ var api = {
       }
     };
 
-    return fetch('https://api.producthunt.com/v1/posts', requestObj)
+    return fetch('https://api.producthunt.com/v1/posts?days_ago=' + daysAgo, requestObj)
       .then(function(res) {
         return res.json();
       })
