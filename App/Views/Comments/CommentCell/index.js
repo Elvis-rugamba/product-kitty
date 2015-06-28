@@ -1,6 +1,8 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
+var Icon = require('FAKIconImage');
+
 var {
   Text,
   View,
@@ -30,9 +32,17 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
+            <View>
             <Text style={styles.postChildrenDetails}>
               {this.props.comment.child_comments_count} Replies
             </Text>
+            <Icon
+              name='fontawesome|comments-o'
+              size={25}
+              color='#D6573D'
+              style={styles.icon}
+            />
+            </View>
             <View style={styles.separator} />
           </View>
         </View>

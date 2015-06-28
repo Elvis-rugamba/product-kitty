@@ -43,11 +43,18 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 10,
     color: 'gray',
-    textAlign: 'right'
+    textAlign: 'right',
+    flex: 1
   },
   separator: {
     height: 0.5,
     backgroundColor: '#CCCCCC',
+  },
+  icon: {
+    flex: 1,
+    textAlign: 'right',
+    width: 25,
+    height: 25
   }
 })
 

@@ -108,14 +108,17 @@ var Comments = React.createClass({
       this.props.navigator.push({
         title: 'Replies',
         component: ChildComments,
-        passProps: {commet: comment,
+        rightButtonTitle: 'Test',
+        onRightButtonPress: () => { this.logSomething },
+        passProps: {comment: comment,
                     username: comment.user.name,
                     body: comment.body,
                     image: comment.user.image_url['48px'],
-                    childComments: comment.child_comments}
+                    childComments: comment.child_comments
+                  }
       })
     }
-  }
+  },
 
 });
 
