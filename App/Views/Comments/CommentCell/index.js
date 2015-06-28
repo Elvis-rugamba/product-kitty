@@ -33,7 +33,6 @@ var CommentCell = React.createClass({
 
   render: function() {
     return (
-      <TouchableHighlight onPress={this.props.onSelect}>
         <View style={styles.container}>
           <Image source={{uri: this.state.image}}
                  style={styles.image} />
@@ -44,21 +43,22 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
-            <View style={styles.container}>
-            <Text style={styles.postChildrenDetails}>
-              {this.state.numReplies}
-            </Text>
-            <Icon
-              name='fontawesome|comments-o'
-              size={12}
-              color='#D6573D'
-              style={styles.icon}
-            />
-            </View>
+            <TouchableHighlight onPress={this.props.onSelect}>
+              <View style={styles.container}>
+                <Text style={styles.postChildrenDetails}>
+                  {this.state.numReplies}
+                </Text>
+                <Icon
+                  name='fontawesome|comments-o'
+                  size={12}
+                  color='#D6573D'
+                  style={styles.icon}
+                />
+              </View>
+            </TouchableHighlight>
             <View style={styles.separator} />
           </View>
         </View>
-      </TouchableHighlight>
       )
   }
 })
