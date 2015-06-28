@@ -41,7 +41,7 @@ var styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 10,
+    marginRight: 5,
     color: 'gray',
     textAlign: 'right',
     flex: 1
@@ -51,10 +51,12 @@ var styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
   },
   icon: {
-    flex: 1,
     textAlign: 'right',
-    width: 25,
-    height: 25
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 10,
+    width: 12,
+    height: 12
   }
 })
 

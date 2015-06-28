@@ -19,6 +19,18 @@ var CommentCell = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    if (this.props.comment.child_comments_count === 1) {
+      this.setState({
+        numReplies: '1 Reply'
+      })
+    } else {
+      this.setState({
+        numReplies: this.props.comment.child_comments_count + ' Replies'
+      })
+    }
+  },
+
   render: function() {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>
@@ -32,13 +44,13 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
-            <View>
+            <View style={styles.container}>
             <Text style={styles.postChildrenDetails}>
-              {this.props.comment.child_comments_count} Replies
+              {this.state.numReplies}
             </Text>
             <Icon
               name='fontawesome|comments-o'
-              size={25}
+              size={12}
               color='#D6573D'
               style={styles.icon}
             />

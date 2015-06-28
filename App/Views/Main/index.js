@@ -79,13 +79,8 @@ var Main = React.createClass({
         navigator={this.props.navigator}
         accessToken={this.state.accessToken} />
       </View>)
-  },
-
-  setAccessToken: function(token) {
-    this.setState({
-      accessToken: token
-    });
   }
+
 })
 
 module.exports = Main;
