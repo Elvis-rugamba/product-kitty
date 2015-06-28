@@ -41,13 +41,22 @@ var styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     marginBottom: 10,
-    marginRight: 10,
+    marginRight: 5,
     color: 'gray',
-    textAlign: 'right'
+    textAlign: 'right',
+    flex: 1
   },
   separator: {
     height: 0.5,
     backgroundColor: '#CCCCCC',
+  },
+  icon: {
+    textAlign: 'right',
+    marginTop: 5,
+    marginBottom: 10,
+    marginRight: 10,
+    width: 12,
+    height: 12
   }
 })
 

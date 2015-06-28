@@ -1,6 +1,8 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
+var Icon = require('FAKIconImage');
+
 var {
   Text,
   View,
@@ -17,9 +19,20 @@ var CommentCell = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    if (this.props.comment.child_comments_count === 1) {
+      this.setState({
+        numReplies: '1 Reply'
+      })
+    } else {
+      this.setState({
+        numReplies: this.props.comment.child_comments_count + ' Replies'
+      })
+    }
+  },
+
   render: function() {
     return (
-      <TouchableHighlight onPress={this.props.onSelect}>
         <View style={styles.container}>
           <Image source={{uri: this.state.image}}
                  style={styles.image} />
@@ -30,13 +43,22 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
-            <Text style={styles.postChildrenDetails}>
-              {this.props.comment.child_comments_count} Replies
-            </Text>
+            <TouchableHighlight onPress={this.props.onSelect}>
+              <View style={styles.container}>
+                <Text style={styles.postChildrenDetails}>
+                  {this.state.numReplies}
+                </Text>
+                <Icon
+                  name='fontawesome|comments-o'
+                  size={12}
+                  color='#D6573D'
+                  style={styles.icon}
+                />
+              </View>
+            </TouchableHighlight>
             <View style={styles.separator} />
           </View>
         </View>
-      </TouchableHighlight>
       )
   }
 })

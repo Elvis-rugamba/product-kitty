@@ -17,17 +17,11 @@ var {
 var Products = React.createClass({
   getInitialState: function() {
 
-    var getSectionData = function(dataBlob, sectionId) {
-      return dataBlob[sectionId];
-    }
-
-
     return {
       accessToken: this.props.accessToken,
       currentDay: 0,
       dataBlob: {},
       dataSource: new ListView.DataSource({
-        getSectionData: getSectionData,
         rowHasChanged: (r1, r2) => r1 !== r2,
         sectionHeaderHasChanged: (s1, s2) => s1 !== s2
         }),
