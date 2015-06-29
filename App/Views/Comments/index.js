@@ -8,11 +8,13 @@ var Loading = require('../Loading');
 var Web = require('../Web');
 
 var Icon = require('FAKIconImage');
+var VibrancyView = require('react-native-blur').VibrancyView;
 
 var {
   Text,
   View,
   ListView,
+  Image,
   TouchableHighlight
 } = React;
 
@@ -31,6 +33,7 @@ var Comments = React.createClass({
       .then((responseData) => {
         this.setState({
           product: responseData.post,
+          image: responseData.post.screenshot_url['850px'],
           productLink: responseData.post.redirect_url,
           dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
@@ -82,13 +85,21 @@ var Comments = React.createClass({
     return (
       <TouchableHighlight
         onPress={() => this.renderWeb()}>
-        <View>
-          <Text style={styles.postTitle}>
-            {this.state.product.tagline}
-          </Text>
-          <Text style={styles.postDetailsLine}>
-            {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
-          </Text>
+        <View style={styles.container}>
+          <Image style={styles.backgroundImage}
+              source={{uri: this.state.image}}>
+            <VibrancyView blurType="xlight" style={styles.blur}>
+              <Text style={styles.postTitle}>
+                {this.state.product.tagline}
+              </Text>
+              <Text style={styles.postDetailsLine}>
+                Posted by {this.state.product.user.name}
+              </Text>
+              <Text style={styles.postDetailsLine}>
+                {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
+              </Text>
+            </VibrancyView>
+          </Image>
         </View>
       </TouchableHighlight>
       )

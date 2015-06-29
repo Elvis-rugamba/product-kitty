@@ -51,7 +51,6 @@ var styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
   },
   icon: {
-    textAlign: 'right',
     marginTop: 5,
     marginBottom: 10,
     marginRight: 10,

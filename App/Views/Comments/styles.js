@@ -9,21 +9,30 @@ var styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#FFFFFD',
     },
+    blur: {
+      flex: 1,
+      backgroundColor: 'transparent',
+      resizeMode: 'cover',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 150
+    },
     postTitle: {
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: 'bold',
-      textAlign: 'center',
-      marginTop: 15,
       marginBottom: 4,
-      marginRight: 5,
-      color: '#D6573D'
+      color: 'black'
     },
     postDetailsLine: {
       fontSize: 12,
-      textAlign: 'center',
       marginBottom: 10,
       color: 'gray',
-    }
+    },
+    backgroundImage: {
+      flex: 1,
+      resizeMode: 'cover',
+      height: 150,
+    },
 });
 
 module.exports = styles;
