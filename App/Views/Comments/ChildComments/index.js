@@ -64,6 +64,7 @@ var ChildComments = React.createClass({
         comment={comment}
         isChildComment={true}
         navigator={this.props.navigator} />
+        selectProfile={() => this.props.selectProfile(comment.user.id)} />
         )
   },
 

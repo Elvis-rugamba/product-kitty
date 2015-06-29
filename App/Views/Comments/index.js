@@ -81,6 +81,8 @@ var Comments = React.createClass({
         isChildComment={false}
         onSelect={() => this.selectComment(comment)}
         navigator={this.props.navigator} />
+        selectProfile={() => this.selectProfile(comment.user.id)}
+        selectChildComment={() => this.selectComment(comment)} />
       )
   },
 
@@ -130,6 +132,7 @@ var Comments = React.createClass({
                     image: comment.user.image_url['48px'],
                     childComments: comment.child_comments,
                     backIcon: this.props.backIcon
+                    selectProfile: (id) => { this.selectProfile(id) }
                   }
       })
     }
@@ -142,6 +145,8 @@ var Comments = React.createClass({
         url: link,
         imageUrl: this.state.image
       }))
+  selectProfile: function(id) {
+    console.log(id);
   }
 
 });
