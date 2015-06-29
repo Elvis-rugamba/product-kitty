@@ -40,6 +40,25 @@ var Profile = React.createClass({
   },
 
   renderProfile: function() {
+    return (
+      <View style={styles.container}
+        <RenderHeader />
+        <RenderList />)
+  },
+
+  renderHeader: function() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.centering}>
+          <Image style={styles.image}
+            source={{uri: this.state.image}} />
+
+        </View>
+      </View>
+          )
+  },
+
+  renderList: function() {
 
   }
 
