@@ -74,7 +74,8 @@ var Comments = React.createClass({
     return (
       <CommentCell
         comment={comment}
-        onSelect={() => this.selectComment(comment)} />
+        selectProfile={() => this.selectProfile(comment.user.id)}
+        selectChildComment={() => this.selectComment(comment)} />
       )
   },
 
@@ -114,11 +115,16 @@ var Comments = React.createClass({
                     username: comment.user.name,
                     body: comment.body,
                     image: comment.user.image_url['48px'],
-                    childComments: comment.child_comments
+                    childComments: comment.child_comments,
+                    selectProfile: (id) => { this.selectProfile(id) }
                   }
       })
     }
   },
+
+  selectProfile: function(id) {
+    console.log(id);
+  }
 
 });
 

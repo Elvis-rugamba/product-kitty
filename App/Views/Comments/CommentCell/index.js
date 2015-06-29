@@ -15,7 +15,7 @@ var CommentCell = React.createClass({
     return {
       name: this.props.comment.user.name,
       comment: this.props.comment.body,
-      image: this.props.comment.user.image_url['48px']
+      image: this.props.comment.user.image_url['48px'],
     }
   },
 
@@ -34,8 +34,12 @@ var CommentCell = React.createClass({
   render: function() {
     return (
         <View style={styles.container}>
-          <Image source={{uri: this.state.image}}
-                 style={styles.image} />
+          <View>
+          <TouchableHighlight onPress={() => this.props.selectProfile()}>
+            <Image source={{uri: this.state.image}}
+                   style={styles.image} />
+          </TouchableHighlight>
+          </View>
           <View style={styles.postDetailsContainer}>
             <Text style={styles.postTitle}>
               {this.state.name}
@@ -43,7 +47,7 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
-            <TouchableHighlight onPress={this.props.onSelect}>
+            <TouchableHighlight onPress={this.props.selectChildComment}>
               <View style={styles.container}>
                 <Text style={styles.postChildrenDetails}>
                   {this.state.numReplies}
@@ -60,7 +64,8 @@ var CommentCell = React.createClass({
           </View>
         </View>
       )
-  }
+  },
+
 })
 
 module.exports = CommentCell;

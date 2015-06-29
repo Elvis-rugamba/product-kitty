@@ -62,7 +62,8 @@ var ChildComments = React.createClass({
   renderCommentCell: function(comment) {
     return (
       <CommentCell
-        comment={comment} />
+        comment={comment}
+        selectProfile={() => this.props.selectProfile(comment.user.id)} />
         )
   },
 
