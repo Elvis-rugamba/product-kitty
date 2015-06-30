@@ -7,7 +7,7 @@ var {
   Text,
   View,
   Image,
-  TouchableHighlight
+  TouchableWithoutFeedback
 } = React;
 
 var CommentCell = React.createClass({
@@ -43,7 +43,7 @@ var CommentCell = React.createClass({
             <Text style={styles.postDetailsLine}>
               {this.state.comment}
             </Text>
-            <TouchableHighlight onPress={this.props.onSelect}>
+            <TouchableWithoutFeedback onPress={this.props.onSelect}>
               <View style={styles.container}>
                 <Text style={styles.postChildrenDetails}>
                   {this.state.numReplies}
@@ -55,7 +55,7 @@ var CommentCell = React.createClass({
                   style={styles.icon}
                 />
               </View>
-            </TouchableHighlight>
+            </TouchableWithoutFeedback>
             <View style={styles.separator} />
           </View>
         </View>
