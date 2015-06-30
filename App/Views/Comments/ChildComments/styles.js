@@ -16,16 +16,16 @@ var styles = StyleSheet.create({
       textAlign: 'left',
       marginTop: 15,
       marginBottom: 4,
-      marginLeft: 5,
+      marginLeft: 10,
       color: '#D6573D'
     },
     postDetailsLine: {
       fontSize: 12,
       textAlign: 'left',
       marginBottom: 10,
-      marginLeft: 5,
+      marginLeft: 10,
       color: 'gray',
-    }
+    },
 });
 
 module.exports = styles;

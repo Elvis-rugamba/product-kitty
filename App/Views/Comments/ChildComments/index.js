@@ -7,8 +7,7 @@ var CommentCell = require('../CommentCell');
 var {
   Text,
   View,
-  ListView,
-  Image
+  ListView
 } = React;
 
 var ChildComments = React.createClass({
