@@ -62,7 +62,8 @@ var ChildComments = React.createClass({
   renderCommentCell: function(comment) {
     return (
       <CommentCell
-        comment={comment} />
+        comment={comment}
+        isChildComment={true} />
         )
   },
 

@@ -29,37 +29,70 @@ var CommentCell = React.createClass({
         numReplies: this.props.comment.child_comments_count + ' Replies'
       })
     }
+
+    this.setState({
+      isChildComment: this.props.isChildComment
+    })
   },
 
   render: function() {
+    if (!this.state.isChildComment) {
+      return (
+        this.renderParentComment()
+        )
+    }
     return (
-        <View style={styles.container}>
-          <Image source={{uri: this.state.image}}
-                 style={styles.image} />
-          <View style={styles.postDetailsContainer}>
-            <Text style={styles.postTitle}>
-              {this.state.name}
-            </Text>
-            <Text style={styles.postDetailsLine}>
-              {this.state.comment}
-            </Text>
-            <TouchableWithoutFeedback onPress={this.props.onSelect}>
-              <View style={styles.container}>
-                <Text style={styles.postChildrenDetails}>
-                  {this.state.numReplies}
-                </Text>
-                <Icon
-                  name='fontawesome|comments-o'
-                  size={12}
-                  color='#D6573D'
-                  style={styles.icon}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-            <View style={styles.separator} />
-          </View>
-        </View>
+      this.renderChildComment()
       )
+  },
+
+  renderParentComment: function() {
+    return (
+      <View style={styles.container}>
+        <Image source={{uri: this.state.image}}
+               style={styles.image} />
+        <View style={styles.postDetailsContainer}>
+          <Text style={styles.postTitle}>
+            {this.state.name}
+          </Text>
+          <Text style={styles.postDetailsLine}>
+            {this.state.comment}
+          </Text>
+          <TouchableWithoutFeedback onPress={this.props.onSelect}>
+            <View style={styles.container}>
+              <Text style={styles.postChildrenDetails}>
+                {this.state.numReplies}
+              </Text>
+              <Icon
+                name='fontawesome|comments-o'
+                size={12}
+                color='#D6573D'
+                style={styles.icon}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+          <View style={styles.separator} />
+        </View>
+      </View>
+      )
+  },
+
+  renderChildComment: function() {
+    return (
+      <View style={styles.container}>
+        <Image source={{uri: this.state.image}}
+               style={styles.image} />
+        <View style={styles.postDetailsContainer}>
+          <Text style={styles.postTitle}>
+            {this.state.name}
+          </Text>
+          <Text style={styles.childPostDetailsLine}>
+            {this.state.comment}
+          </Text>
+          <View style={styles.separator} />
+        </View>
+      </View>
+    )
   }
 })
 

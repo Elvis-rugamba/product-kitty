@@ -77,6 +77,7 @@ var Comments = React.createClass({
     return (
       <CommentCell
         comment={comment}
+        isChildComment={false}
         onSelect={() => this.selectComment(comment)} />
       )
   },
@@ -119,8 +120,6 @@ var Comments = React.createClass({
       this.props.navigator.push({
         title: 'Replies',
         component: ChildComments,
-        rightButtonTitle: 'Test',
-        onRightButtonPress: () => { this.logSomething },
         passProps: {comment: comment,
                     username: comment.user.name,
                     body: comment.body,
