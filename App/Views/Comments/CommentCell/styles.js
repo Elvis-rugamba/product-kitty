@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
     width: 48,
     borderRadius: 25,
     marginTop: 10,
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     marginRight: 15,
     marginLeft: 15
   },
