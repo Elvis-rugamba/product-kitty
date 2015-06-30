@@ -6,6 +6,8 @@ var Loading = require('../Loading');
 var Cell = require('./Cell');
 var Comments = require('../Comments');
 
+var moment = require('moment');
+
 var {
   Text,
   View,
@@ -48,7 +50,15 @@ var Products = React.createClass({
     api.getAllPosts(this.state.accessToken, this.state.currentDay)
       .then((responseData) => {
         var tempDataBlob = this.state.dataBlob;
-        var date = new Date(responseData.posts[0].day).toDateString();
+        var postDate = responseData.posts[0].day;
+        var date;
+        if (postDate === moment().format('YYYY[-]MM[-]D')) {
+          date = moment(postDate).format('[Today,] MMMM Do');
+        } else if (postDate === moment().subtract(1, 'days').format('YYYY[-]MM[-]D')) {
+          date = moment(postDate).format('[Yesterday,] MMMM Do')
+        } else {
+          date = moment(postDate).format('dddd[,] MMMM Do')
+        }
         tempDataBlob[date] = responseData.posts;
         this.setState({
           currentDay: this.state.currentDay + 1,
