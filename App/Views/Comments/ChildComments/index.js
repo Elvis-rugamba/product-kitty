@@ -7,8 +7,7 @@ var CommentCell = require('../CommentCell');
 var {
   Text,
   View,
-  ListView,
-  Image
+  ListView
 } = React;
 
 var ChildComments = React.createClass({
@@ -62,7 +61,8 @@ var ChildComments = React.createClass({
   renderCommentCell: function(comment) {
     return (
       <CommentCell
-        comment={comment} />
+        comment={comment}
+        isChildComment={true} />
         )
   },
 

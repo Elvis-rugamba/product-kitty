@@ -37,6 +37,12 @@ var styles = StyleSheet.create({
     marginRight: 10,
     color: 'gray',
   },
+  childPostDetailsLine: {
+    fontSize: 12,
+    marginRight: 10,
+    marginBottom: 10,
+    color: 'gray'
+  },
   postChildrenDetails: {
     fontSize: 12,
     marginTop: 5,
