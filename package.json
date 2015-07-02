@@ -1,12 +1,13 @@
 {
-  "name": "product-kitty",
+  "name": "productkitty",
   "version": "1.0.0",
   "description": "A Product Hunt iOS app built in React Native",
   "main": "index.ios.js",
   "dependencies": {
+    "moment": "^2.10.3",
     "react-native": "^0.5.0",
-    "react-native-icons": "^0.0.9",
-    "react-native-blur": "^0.5.3"
+    "react-native-blur": "^0.5.3",
+    "react-native-icons": "^0.0.9"
   },
   "devDependencies": {},
   "scripts": {
