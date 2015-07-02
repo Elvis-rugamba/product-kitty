@@ -1,14 +1,25 @@
 {
-  "name": "PHReactNative",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
-  },
+  "name": "product-kitty",
+  "version": "1.0.0",
+  "description": "A Product Hunt iOS app built in React Native",
+  "main": "index.ios.js",
   "dependencies": {
     "react-native": "^0.5.0",
-    "react-native-blur": "^0.5.3",
     "react-native-icons": "^0.0.9",
-    "moment": "^2.10.3",
-  }
+    "react-native-blur": "^0.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rkho/product-hunt-react-native"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkho/product-hunt-react-native/issues"
+  },
+  "homepage": "https://github.com/rkho/product-hunt-react-native"
 }
