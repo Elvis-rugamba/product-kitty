@@ -78,7 +78,8 @@ var Comments = React.createClass({
       <CommentCell
         comment={comment}
         isChildComment={false}
-        onSelect={() => this.selectComment(comment)} />
+        onSelect={() => this.selectComment(comment)}
+        navigator={this.props.navigator} />
       )
   },
 

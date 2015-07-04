@@ -61,7 +61,7 @@ var CommentCell = React.createClass({
           </Text>
           <Text style={styles.postDetailsLine}>
             <Hypertext
-              onLinkClick={this.renderWeb()}>{parseLinks(this.state.comment)}</Hypertext>
+              onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
           </Text>
           <TouchableWithoutFeedback onPress={this.props.onSelect}>
             <View style={styles.container}>
@@ -101,7 +101,11 @@ var CommentCell = React.createClass({
   },
 
   renderWeb: function() {
-    console.log(arguments);
+    this.props.navigator.push({
+      title: 'Web',
+      component: Web,
+      passProps: {url: arguments[0]}
+    })
   }
 })
 
