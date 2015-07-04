@@ -55,16 +55,16 @@ var CommentCell = React.createClass({
   renderParentComment: function() {
     return (
       <View style={styles.container}>
-        <View>
-          <TouchableHighlight onPress={() => this.props.selectProfile()}>
+          <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
             <Image source={{uri: this.state.image}}
                    style={styles.image} />
-          </TouchableHighlight>
-        </View>
+          </TouchableWithoutFeedback>
         <View style={styles.postDetailsContainer}>
-          <Text style={styles.postTitle}>
-            {this.state.name}
-          </Text>
+          <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
+            <Text style={styles.postTitle}>
+              {this.state.name}
+            </Text>
+          </TouchableWithoutFeedback>
           <Text style={styles.postDetailsLine}>
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
