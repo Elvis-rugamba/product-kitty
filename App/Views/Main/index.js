@@ -5,12 +5,11 @@ var api = require('../../Utils/api.js');
 var Products = require('../Products');
 var Collections = require('../Collections');
 
-var Icon = require('FAKIconImage');
-var SMXTabBarIOS = require('SMXTabBarIOS');
-var SMXTabBarItemIOS = SMXTabBarIOS.Item;
+var Icon = require('Foundation');
 
 var {
-  View
+  View,
+  TabBarIOS
 } = React;
 
 var Main = React.createClass({
@@ -35,31 +34,32 @@ var Main = React.createClass({
 
   render: function() {
     return (
-      <SMXTabBarIOS
-        selectedTab={this.state.selectedTab}>
-        <SMXTabBarItemIOS
+      <TabBarIOS>
+        <Icon.TabBarItem
           title='Home'
           selected={this.state.selectedTab === 'products'}
-          iconName={'fontawesome|home'}
+          iconName={'home'}
+          iconSize={20}
           onPress={() => {
             this.setState({
               selectedTab: 'products'
             });
           }}>
           {this.renderProducts()}
-        </SMXTabBarItemIOS>
-        <SMXTabBarItemIOS
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
           title="Collections"
           selected={this.state.selectedTab === 'collections'}
-          iconName={'fontawesome|bars'}
+          iconName={'list'}
+          iconSize={20}
           onPress={() => {
             this.setState({
               selectedTab: 'collections'
             });
           }}>
           {this.renderCollections()}
-        </SMXTabBarItemIOS>
-      </SMXTabBarIOS>
+        </Icon.TabBarItem>
+      </TabBarIOS>
       )
   },
 

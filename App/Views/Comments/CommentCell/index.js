@@ -3,7 +3,7 @@ var styles = require('./styles.js');
 
 var Web = require('../../Web');
 
-var Icon = require('FAKIconImage');
+var Icon = require('FontAwesome');
 var Hypertext = require('react-native-hypertext');
 var parseLinks = require('../../../Utils/parse.js')
 
@@ -70,7 +70,7 @@ var CommentCell = React.createClass({
                 {this.state.numReplies}
               </Text>
               <Icon
-                name='fontawesome|comments-o'
+                name='comments-o'
                 size={12}
                 color='#D6573D'
                 style={styles.icon}
