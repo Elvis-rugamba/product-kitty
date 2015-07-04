@@ -12,7 +12,8 @@ var {
   View,
   Image,
   Navigator,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } = React;
 
 var CommentCell = React.createClass({
@@ -55,7 +56,7 @@ var CommentCell = React.createClass({
     return (
       <View style={styles.container}>
         <View>
-          <TouchableHighlight onPress={() => this.props.selectProfile()}
+          <TouchableHighlight onPress={() => this.props.selectProfile()}>
             <Image source={{uri: this.state.image}}
                    style={styles.image} />
           </TouchableHighlight>

@@ -80,7 +80,7 @@ var Comments = React.createClass({
         comment={comment}
         isChildComment={false}
         onSelect={() => this.selectComment(comment)}
-        navigator={this.props.navigator} />
+        navigator={this.props.navigator}
         selectProfile={() => this.selectProfile(comment.user.id)}
         selectChildComment={() => this.selectComment(comment)} />
       )
@@ -131,7 +131,7 @@ var Comments = React.createClass({
                     body: comment.body,
                     image: comment.user.image_url['48px'],
                     childComments: comment.child_comments,
-                    backIcon: this.props.backIcon
+                    backIcon: this.props.backIcon,
                     selectProfile: (id) => { this.selectProfile(id) }
                   }
       })
@@ -144,7 +144,10 @@ var Comments = React.createClass({
         text: 'Check out ' + this.state.product.name + ' on Product Hunt',
         url: link,
         imageUrl: this.state.image
-      }))
+      })
+    )
+  },
+
   selectProfile: function(id) {
     console.log(id);
   }
