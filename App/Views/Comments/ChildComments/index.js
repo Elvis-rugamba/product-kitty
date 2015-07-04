@@ -62,7 +62,8 @@ var ChildComments = React.createClass({
     return (
       <CommentCell
         comment={comment}
-        isChildComment={true} />
+        isChildComment={true}
+        navigator={this.props.navigator} />
         )
   },
 

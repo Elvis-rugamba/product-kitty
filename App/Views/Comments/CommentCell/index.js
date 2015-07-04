@@ -11,6 +11,7 @@ var {
   Text,
   View,
   Image,
+  Navigator,
   TouchableWithoutFeedback
 } = React;
 
@@ -92,7 +93,8 @@ var CommentCell = React.createClass({
             {this.state.name}
           </Text>
           <Text style={styles.childPostDetailsLine}>
-            {this.state.comment}
+            <Hypertext
+              onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
           </Text>
           <View style={styles.separator} />
         </View>
