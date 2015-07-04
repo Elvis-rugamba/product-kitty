@@ -6,6 +6,7 @@
   "dependencies": {
     "moment": "^2.10.3",
     "react-native": "^0.5.0",
+    "react-native-activity-view": "^0.2.1",
     "react-native-blur": "^0.5.3",
     "react-native-hypertext": "git://github.com/rkho/react-native-hypertext.git",
     "react-native-icons": "^0.0.9",

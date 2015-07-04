@@ -7,6 +7,8 @@ var Cell = require('./Cell');
 var Comments = require('../Comments');
 
 var moment = require('moment');
+var ActivityView = require('react-native-activity-view');
+var Icon = require('EvilIcons')
 
 var {
   Text,
@@ -32,6 +34,11 @@ var Products = React.createClass({
   },
 
   componentDidMount: function () {
+    Icon.getImageSource('share-apple', 30)
+      .then((source) => {
+        this.setState({ backIcon: source })
+      });
+
     if (!this.state.accessToken){
     api.getToken()
       .then((responseData) => {
@@ -135,9 +142,20 @@ var Products = React.createClass({
     this.props.navigator.push({
       title: post.name,
       component: Comments,
+      rightButtonIcon: this.state.backIcon,
+      onRightButtonPress: () => this.shareSheet(post),
       passProps: {postId: post.id,
                   accessToken: this.state.accessToken}
     })
+  },
+
+  shareSheet: function(post) {
+    return (
+      ActivityView.show({
+        text: "Check out " + post.name + " on Product Hunt",
+        url: post.redirect_url,
+        imageUrl: post.screenshot_url['300px']
+      }))
   }
 })
 
