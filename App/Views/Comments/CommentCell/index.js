@@ -1,12 +1,17 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
+var Web = require('../../Web');
+
 var Icon = require('FAKIconImage');
+var Hypertext = require('react-native-hypertext');
+var parseLinks = require('../../../Utils/parse.js')
 
 var {
   Text,
   View,
   Image,
+  Navigator,
   TouchableWithoutFeedback
 } = React;
 
@@ -56,7 +61,8 @@ var CommentCell = React.createClass({
             {this.state.name}
           </Text>
           <Text style={styles.postDetailsLine}>
-            {this.state.comment}
+            <Hypertext
+              onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
           </Text>
           <TouchableWithoutFeedback onPress={this.props.onSelect}>
             <View style={styles.container}>
@@ -87,12 +93,21 @@ var CommentCell = React.createClass({
             {this.state.name}
           </Text>
           <Text style={styles.childPostDetailsLine}>
-            {this.state.comment}
+            <Hypertext
+              onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
           </Text>
           <View style={styles.separator} />
         </View>
       </View>
     )
+  },
+
+  renderWeb: function() {
+    this.props.navigator.push({
+      title: 'Web',
+      component: Web,
+      passProps: {url: arguments[0]}
+    })
   }
 })
 
