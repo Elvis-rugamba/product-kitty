@@ -8,6 +8,8 @@ var Loading = require('../Loading');
 var Web = require('../Web');
 
 var VibrancyView = require('react-native-blur').VibrancyView;
+var ActivityView = require('react-native-activity-view');
+
 
 var {
   Text,
@@ -110,6 +112,8 @@ var Comments = React.createClass({
     this.props.navigator.push({
       title: 'Web',
       component: Web,
+      rightButtonIcon: this.props.backIcon,
+      onRightButtonPress: () => this.shareSheet(this.state.productLink),
       passProps: {url: this.state.productLink}
     })
 
@@ -124,11 +128,21 @@ var Comments = React.createClass({
                     username: comment.user.name,
                     body: comment.body,
                     image: comment.user.image_url['48px'],
-                    childComments: comment.child_comments
+                    childComments: comment.child_comments,
+                    backIcon: this.props.backIcon
                   }
       })
     }
   },
+
+  shareSheet: function(link) {
+    return (
+      ActivityView.show({
+        text: 'Check out ' + this.state.product.name + ' on Product Hunt',
+        url: link,
+        imageUrl: this.state.image
+      }))
+  }
 
 });
 

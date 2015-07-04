@@ -145,14 +145,15 @@ var Products = React.createClass({
       rightButtonIcon: this.state.backIcon,
       onRightButtonPress: () => this.shareSheet(post),
       passProps: {postId: post.id,
-                  accessToken: this.state.accessToken}
+                  accessToken: this.state.accessToken,
+                  backIcon: this.state.backIcon}
     })
   },
 
   shareSheet: function(post) {
     return (
       ActivityView.show({
-        text: "Check out " + post.name + " on Product Hunt",
+        text: 'Check out ' + post.name + ' on Product Hunt',
         url: post.redirect_url,
         imageUrl: post.screenshot_url['300px']
       }))
