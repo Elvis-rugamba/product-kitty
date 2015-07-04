@@ -13,7 +13,6 @@ var {
   Image,
   Navigator,
   TouchableWithoutFeedback,
-  TouchableHighlight,
 } = React;
 
 var CommentCell = React.createClass({
