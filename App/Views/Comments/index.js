@@ -6,6 +6,7 @@ var CommentCell = require('./CommentCell');
 var ChildComments = require('./ChildComments');
 var Loading = require('../Loading');
 var Web = require('../Web');
+var Profile = require('../Profile');
 
 var VibrancyView = require('react-native-blur').VibrancyView;
 var ActivityView = require('react-native-activity-view');
