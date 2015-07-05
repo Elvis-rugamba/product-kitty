@@ -9,7 +9,8 @@ var Icon = require('Foundation');
 
 var {
   View,
-  TabBarIOS
+  TabBarIOS,
+  NavigatorIOS
 } = React;
 
 var Main = React.createClass({
@@ -41,11 +42,15 @@ var Main = React.createClass({
           iconName={'home'}
           iconSize={20}
           onPress={() => {
-            this.setState({
-              selectedTab: 'products'
-            });
+            if (this.state.selectedTab !== 'products') {
+              this.setState({
+                selectedTab: 'products'
+              });
+            } else if (this.state.selectedTab === 'products') {
+              this.refs.productRef.popToTop();
+            }
           }}>
-          {this.renderProducts()}
+          {this.renderProductView()}
         </Icon.TabBarItem>
         <Icon.TabBarItem
           title="Collections"
@@ -53,32 +58,51 @@ var Main = React.createClass({
           iconName={'list'}
           iconSize={20}
           onPress={() => {
-            this.setState({
-              selectedTab: 'collections'
-            });
+            if (this.state.selectedTab !== 'collections') {
+              this.setState({
+                selectedTab: 'collections'
+              });
+            } else if (this.state.selectedTab === 'collections') {
+              this.refs.collectionRef.popToTop();
+            }
           }}>
-          {this.renderCollections()}
+          {this.renderCollectionView()}
         </Icon.TabBarItem>
       </TabBarIOS>
       )
   },
 
-  renderProducts: function() {
+  renderProductView: function() {
     return (
-      <View style={styles.container}>
-      <Products
-        navigator={this.props.navigator} />
-      </View>
-      )
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
+        ref='productRef'
+        initialRoute={{
+          title: 'Product Kitty',
+          component: Products
+        }} />
+        )
   },
 
-  renderCollections: function() {
+  renderCollectionView: function() {
     return (
-      <View style={styles.container}>
-      <Collections
-        navigator={this.props.navigator}
-        accessToken={this.state.accessToken} />
-      </View>)
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
+        ref='collectionRef'
+        initialRoute={{
+          title: 'Collections',
+          component: Collections,
+          passProps: {
+            accessToken: this.state.accessToken
+          }
+        }} />
+        )
   }
 
 })
