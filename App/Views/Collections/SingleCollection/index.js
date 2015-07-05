@@ -6,11 +6,13 @@ var Loading = require('../../Loading');
 var Cell = require('../../Products/Cell');
 var Comments = require('../../Comments');
 
+var ActivityView = require('react-native-activity-view');
+var Icon = require('EvilIcons');
+
 var {
   View,
   ListView,
-  Text,
-  ScrollView
+  Text
 } = React;
 
 var SingleCollection = React.createClass({
@@ -24,6 +26,11 @@ var SingleCollection = React.createClass({
   },
 
   componentDidMount: function() {
+    Icon.getImageSource('share-apple', 30)
+      .then((source) => {
+        this.setState({ shareIcon: source })
+      });
+
     api.getSingleCollection(this.state.accessToken, this.state.collectionId)
       .then((responseData) => {
         this.setState({
@@ -76,12 +83,12 @@ var SingleCollection = React.createClass({
   renderHeader: function() {
     return (
       <View>
-      <Text style={styles.postTitle}>
-        {this.state.collection.title}
-      </Text>
-      <Text style={styles.postDetailsLine}>
-        Curated by {this.state.collection.user.name}
-      </Text>
+        <Text style={styles.postTitle}>
+          {this.state.collection.title}
+        </Text>
+        <Text style={styles.postDetailsLine}>
+          Curated by {this.state.collection.user.name}
+        </Text>
       </View>
       )
   },
@@ -91,9 +98,21 @@ var SingleCollection = React.createClass({
       title: post.name,
       component: Comments,
       backButtonTitle: ' ',
+      rightButtonIcon: this.state.shareIcon,
+      onRightButtonPress: () => this.shareSheet(post),
       passProps: {postId: post.id,
-                  accessToken: this.state.accessToken}
+                  accessToken: this.state.accessToken,
+                  shareIcon: this.state.shareIcon}
     })
+  },
+
+  shareSheet: function(post) {
+    return (
+      ActivityView.show({
+        text: 'Check out ' + post.name + ' on Product Hunt',
+        url: post.redirect_url,
+        imageUrl: post.screenshot_url['300px']
+      }))
   }
 });
 

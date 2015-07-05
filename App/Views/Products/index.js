@@ -8,7 +8,7 @@ var Comments = require('../Comments');
 
 var moment = require('moment');
 var ActivityView = require('react-native-activity-view');
-var Icon = require('EvilIcons')
+var Icon = require('EvilIcons');
 
 var {
   Text,
@@ -36,7 +36,7 @@ var Products = React.createClass({
   componentDidMount: function () {
     Icon.getImageSource('share-apple', 30)
       .then((source) => {
-        this.setState({ backIcon: source })
+        this.setState({ shareIcon: source })
       });
 
     if (!this.state.accessToken){
@@ -143,11 +143,11 @@ var Products = React.createClass({
       title: post.name,
       component: Comments,
       backButtonTitle: ' ',
-      rightButtonIcon: this.state.backIcon,
+      rightButtonIcon: this.state.shareIcon,
       onRightButtonPress: () => this.shareSheet(post),
       passProps: {postId: post.id,
                   accessToken: this.state.accessToken,
-                  backIcon: this.state.backIcon}
+                  shareIcon: this.state.shareIcon}
     })
   },
 
