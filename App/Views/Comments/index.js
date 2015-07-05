@@ -93,10 +93,13 @@ var Comments = React.createClass({
               source={{uri: this.state.image}}>
             <VibrancyView blurType="xlight" style={styles.blur}>
               <Text style={styles.postTitle}>
+                {this.state.product.name}
+              </Text>
+              <Text style={styles.postDetailsLine}>
                 {this.state.product.tagline}
               </Text>
               <Text style={styles.postDetailsLine}>
-                Posted by {this.state.product.user.name}
+                  Posted by {this.state.product.user.name}
               </Text>
               <Text style={styles.postDetailsLine}>
                 {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
