@@ -12,10 +12,11 @@ var Cell = React.createClass({
   getInitialState: function() {
     return {
       postName: this.props.post.name,
+      tagLine: this.props.post.tagline,
       numComments: this.props.post.comments_count,
       numVotes: this.props.post.votes_count,
       postedBy: this.props.post.user.name,
-      imageLink: this.props.post.user.image_url['48px']
+      imageLink: this.props.post.screenshot_url['300px']
     }
   },
 
@@ -30,9 +31,8 @@ var Cell = React.createClass({
                 {this.state.postName}
               </Text>
               <Text style={styles.postDetailsLine}>
-              {this.state.numComments} Comments | {this.state.numVotes} Votes | Posted by {this.state.postedBy}
+              {this.state.tagLine}
               </Text>
-              <View style={styles.separator} />
             </View>
         </View>
       </TouchableHighlight>

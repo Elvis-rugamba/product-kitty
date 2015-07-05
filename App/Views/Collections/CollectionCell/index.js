@@ -13,6 +13,7 @@ var CollectionCell = React.createClass({
     return {
       collectionName: this.props.collection.name,
       curator: this.props.collection.user.name,
+      tagLine: this.props.collection.title,
       imageLink: this.props.collection.background_image_url
     }
   },
@@ -27,7 +28,7 @@ var CollectionCell = React.createClass({
                 {this.state.collectionName}
               </Text>
               <Text style={styles.collectionDetailsLine}>
-                By {this.state.curator}
+                {this.state.tagLine}
               </Text>
             </View>
             <View style={styles.separator} />
