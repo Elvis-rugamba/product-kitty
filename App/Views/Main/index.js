@@ -42,9 +42,13 @@ var Main = React.createClass({
           iconName={'home'}
           iconSize={20}
           onPress={() => {
-            this.setState({
-              selectedTab: 'products'
-            });
+            if (this.state.selectedTab !== 'products') {
+              this.setState({
+                selectedTab: 'products'
+              });
+            } else if (this.state.selectedTab === 'products') {
+              this.refs.productRef.popToTop();
+            }
           }}>
           {this.renderProductView()}
         </Icon.TabBarItem>
@@ -54,9 +58,13 @@ var Main = React.createClass({
           iconName={'list'}
           iconSize={20}
           onPress={() => {
-            this.setState({
-              selectedTab: 'collections'
-            });
+            if (this.state.selectedTab !== 'collections') {
+              this.setState({
+                selectedTab: 'collections'
+              });
+            } else if (this.state.selectedTab === 'collections') {
+              this.refs.collectionRef.popToTop();
+            }
           }}>
           {this.renderCollectionView()}
         </Icon.TabBarItem>
@@ -71,6 +79,7 @@ var Main = React.createClass({
         tintColor='#D6573D'
         barTintColor='#FFFFFD'
         titleTextColor='#D6573D'
+        ref='productRef'
         initialRoute={{
           title: 'Product Kitty',
           component: Products
@@ -85,6 +94,7 @@ var Main = React.createClass({
         tintColor='#D6573D'
         barTintColor='#FFFFFD'
         titleTextColor='#D6573D'
+        ref='collectionRef'
         initialRoute={{
           title: 'Collections',
           component: Collections,
