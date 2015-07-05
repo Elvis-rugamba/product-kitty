@@ -90,6 +90,7 @@ var SingleCollection = React.createClass({
     this.props.navigator.push({
       title: post.name,
       component: Comments,
+      backButtonTitle: ' ',
       passProps: {postId: post.id,
                   accessToken: this.state.accessToken}
     })
