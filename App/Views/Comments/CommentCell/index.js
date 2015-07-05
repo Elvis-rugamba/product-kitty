@@ -105,6 +105,7 @@ var CommentCell = React.createClass({
   renderWeb: function() {
     this.props.navigator.push({
       title: 'Web',
+      backButtonTitle: ' ',
       component: Web,
       passProps: {url: arguments[0]}
     })

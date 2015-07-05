@@ -74,6 +74,7 @@ var Collections = React.createClass({
     this.props.navigator.push({
       title: collection.name,
       component: SingleCollection,
+      backButtonTitle: ' ',
       passProps: {collectionId: collection.id,
                   accessToken: this.state.accessToken}
     })
