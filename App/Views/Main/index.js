@@ -82,7 +82,8 @@ var Main = React.createClass({
         ref='productRef'
         initialRoute={{
           title: 'Product Kitty',
-          component: Products
+          component: Products,
+          backButtonTitle: ' '
         }} />
         )
   },
@@ -98,6 +99,7 @@ var Main = React.createClass({
         initialRoute={{
           title: 'Collections',
           component: Collections,
+          backButtonTitle: ' ',
           passProps: {
             accessToken: this.state.accessToken
           }
