@@ -59,6 +59,13 @@ var Products = React.createClass({
         var tempDataBlob = this.state.dataBlob;
         var postDate = responseData.posts[0].day;
         var date;
+        if (!postDate) {
+          this.setState({
+            currentDay: this.state.currentDay + 1
+          });
+          return this.getAllPosts();
+        }
+
         if (postDate === moment().format('YYYY[-]MM[-]DD')) {
           date = moment(postDate).format('[Today,] MMMM Do');
         } else if (postDate === moment().subtract(1, 'days').format('YYYY[-]MM[-]DD')) {
