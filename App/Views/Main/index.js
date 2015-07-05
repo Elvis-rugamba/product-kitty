@@ -9,7 +9,8 @@ var Icon = require('Foundation');
 
 var {
   View,
-  TabBarIOS
+  TabBarIOS,
+  NavigatorIOS
 } = React;
 
 var Main = React.createClass({
@@ -45,7 +46,7 @@ var Main = React.createClass({
               selectedTab: 'products'
             });
           }}>
-          {this.renderProducts()}
+          {this.renderProductView()}
         </Icon.TabBarItem>
         <Icon.TabBarItem
           title="Collections"
@@ -63,13 +64,18 @@ var Main = React.createClass({
       )
   },
 
-  renderProducts: function() {
+  renderProductView: function() {
     return (
-      <View style={styles.container}>
-      <Products
-        navigator={this.props.navigator} />
-      </View>
-      )
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
+        initialRoute={{
+          title: 'Product Kitty',
+          component: Products
+        }} />
+        )
   },
 
   renderCollections: function() {
