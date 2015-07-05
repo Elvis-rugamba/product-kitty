@@ -58,7 +58,7 @@ var Main = React.createClass({
               selectedTab: 'collections'
             });
           }}>
-          {this.renderCollections()}
+          {this.renderCollectionView()}
         </Icon.TabBarItem>
       </TabBarIOS>
       )
@@ -78,13 +78,21 @@ var Main = React.createClass({
         )
   },
 
-  renderCollections: function() {
+  renderCollectionView: function() {
     return (
-      <View style={styles.container}>
-      <Collections
-        navigator={this.props.navigator}
-        accessToken={this.state.accessToken} />
-      </View>)
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
+        initialRoute={{
+          title: 'Collections',
+          component: Collections,
+          passProps: {
+            accessToken: this.state.accessToken
+          }
+        }} />
+        )
   }
 
 })
