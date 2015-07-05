@@ -99,7 +99,7 @@ var Comments = React.createClass({
                 {this.state.product.tagline}
               </Text>
               <Text style={styles.postDetailsLine}>
-                  Posted by {this.state.product.user.name}
+                Posted by {this.state.product.user.name}
               </Text>
               <Text style={styles.postDetailsLine}>
                 {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
