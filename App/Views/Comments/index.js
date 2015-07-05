@@ -116,7 +116,7 @@ var Comments = React.createClass({
       title: 'Web',
       component: Web,
       backButtonTitle: ' ',
-      rightButtonIcon: this.props.backIcon,
+      rightButtonIcon: this.props.shareIcon,
       onRightButtonPress: () => this.shareSheet(this.state.productLink),
       passProps: {url: this.state.productLink}
     })
@@ -134,7 +134,7 @@ var Comments = React.createClass({
                     body: comment.body,
                     image: comment.user.image_url['48px'],
                     childComments: comment.child_comments,
-                    backIcon: this.props.backIcon
+                    shareIcon: this.props.shareIcon
                   }
       })
     }
