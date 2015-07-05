@@ -142,6 +142,7 @@ var Products = React.createClass({
     this.props.navigator.push({
       title: post.name,
       component: Comments,
+      backButtonTitle: ' ',
       rightButtonIcon: this.state.backIcon,
       onRightButtonPress: () => this.shareSheet(post),
       passProps: {postId: post.id,

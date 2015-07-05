@@ -115,6 +115,7 @@ var Comments = React.createClass({
     this.props.navigator.push({
       title: 'Web',
       component: Web,
+      backButtonTitle: ' ',
       rightButtonIcon: this.props.backIcon,
       onRightButtonPress: () => this.shareSheet(this.state.productLink),
       passProps: {url: this.state.productLink}
@@ -127,6 +128,7 @@ var Comments = React.createClass({
       this.props.navigator.push({
         title: 'Replies',
         component: ChildComments,
+        backButtonTitle: ' ',
         passProps: {comment: comment,
                     username: comment.user.name,
                     body: comment.body,
