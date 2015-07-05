@@ -10,17 +10,34 @@ var Main = require('./App/Views/Main');
 
 var {
   AppRegistry,
-  NavigatorIOS
+  Navigator,
+  View
 } = React;
 
 var PHReactNative = React.createClass({
+
+  renderScene: function(route, navigator) {
+    var Component = route.component;
+    return (
+      <View style={styles.container}>
+        <Component
+          route={route}
+          navigator={navigator}
+          topNavigator={navigator} />
+      </View>
+      )
+  },
+
   render: function() {
     return (
-      <NavigatorIOS
-        style={styles.container}
+      <Navigator
+        sceneStyle={styles.container}
+        ref={(navigator) => { this.navigator = navigator; }}
+        renderScene={this.renderScene}
         tintColor='#D6573D'
         barTintColor='#FFFFFD'
         titleTextColor='#D6573D'
+        navigationBarHidden={true}
         initialRoute={{
           title: 'Product Kitty',
           component: Main,
