@@ -56,7 +56,7 @@ var api = {
       })
   },
 
-  getAllCollections: function(token) {
+  getFeaturedCollections: function(token) {
     var requestObj = {
       headers: {
         'Accept': 'application/json',
@@ -67,6 +67,23 @@ var api = {
       }
     };
     return fetch('https://api.producthunt.com/v1/collections?search[featured]=true', requestObj)
+      .then(function(res) {
+        return res.json();
+      })
+  },
+
+  getAllCollections: function(token) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+
+    return fetch('https://api.producthunt.com/v1/collections?per_page=50', requestObj)
       .then(function(res) {
         return res.json();
       })

@@ -8,27 +8,38 @@ var SingleCollection = require('./SingleCollection');
 
 var {
  View,
- ListView
+ ListView,
+ SegmentedControlIOS
 } = React;
 
 var Collections = React.createClass({
   getInitialState: function() {
     return {
       accessToken: this.props.accessToken,
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      loaded: false,
+      featuredCollectionsDataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      allCollectionsDataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      selectedTab: 'Featured',
+      loaded: false
     }
   },
 
   componentDidMount: function() {
-    api.getAllCollections(this.props.accessToken)
+    api.getFeaturedCollections(this.props.accessToken)
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.collections),
+          featuredCollectionsDataSource: this.state.featuredCollectionsDataSource.cloneWithRows(responseData.collections),
           loaded: true
         })
       })
-      .done()
+    .then(() => {
+      api.getAllCollections(this.props.accessToken)
+        .then((responseData) => {
+          this.setState({
+            allCollectionsDataSource: this.state.allCollectionsDataSource.cloneWithRows(responseData.collections),
+          })
+        })
+    })
+    .done()
   },
 
   render: function() {
@@ -38,7 +49,18 @@ var Collections = React.createClass({
         )
       }
       return (
-        this.renderListView()
+          <View style={styles.segmentControl}>
+            <SegmentedControlIOS
+              values={['Featured', 'All']}
+              selectedIndex={0}
+              tintColor={'#D6573D'}
+              onValueChange={(val) => {
+                this.setState({
+                  selectedTab: val
+                })
+              }} />
+              {this.renderListView()}
+          </View>
         )
   },
 
@@ -52,12 +74,38 @@ var Collections = React.createClass({
   },
 
   renderListView: function() {
+    if (this.state.selectedTab === 'Featured') {
+      return (
+        <View style={styles.container}>
+          {this.renderFeaturedCollectionsListView()}
+        </View>
+        )
+    } else if (this.state.selectedTab === 'All') {
+      return (
+          this.renderAllCollectionsListView()
+        )
+    }
+  },
+
+  renderFeaturedCollectionsListView: function() {
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={this.state.featuredCollectionsDataSource}
         renderRow={this.renderCollectionCell}
         style={styles.collectionListView}
-        automaticallyAdjustContentInsets={true}
+        automaticallyAdjustContentInsets={false}
+        contentInset={{bottom: 50}} />
+        )
+  },
+
+  renderAllCollectionsListView: function() {
+    return (
+      <ListView
+        dataSource={this.state.allCollectionsDataSource}
+        renderRow={this.renderCollectionCell}
+        style={styles.collectionListView}
+        automaticallyAdjustContentInsets={false}
+        contentInset={{bottom: 50}}
        />
       )
   },

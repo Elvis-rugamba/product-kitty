@@ -7,11 +7,15 @@ var {
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
-    flex: 1
+    flex: 1,
   },
   collectionListView:{
     backgroundColor: '#FFFFFD',
     flex: 1
+  },
+  segmentControl: {
+    flex: 1,
+    marginTop: 64
   }
 })
 
