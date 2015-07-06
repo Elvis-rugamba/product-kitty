@@ -9,7 +9,7 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#FFFFFD',
   },
   image: {

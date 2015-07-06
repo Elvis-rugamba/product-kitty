@@ -12,7 +12,7 @@ var {
   View,
   Image,
   Navigator,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } = React;
 
 var CommentCell = React.createClass({
@@ -54,12 +54,16 @@ var CommentCell = React.createClass({
   renderParentComment: function() {
     return (
       <View style={styles.container}>
-        <Image source={{uri: this.state.image}}
-               style={styles.image} />
+          <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
+            <Image source={{uri: this.state.image}}
+                   style={styles.image} />
+          </TouchableWithoutFeedback>
         <View style={styles.postDetailsContainer}>
+        <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
           <Text style={styles.postTitle}>
           {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
           </Text>
+        </TouchableWithoutFeedback>
           <Text style={styles.postDetailsLine}>
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
@@ -86,12 +90,16 @@ var CommentCell = React.createClass({
   renderChildComment: function() {
     return (
       <View style={styles.container}>
-        <Image source={{uri: this.state.image}}
-               style={styles.image} />
-        <View style={styles.postDetailsContainer}>
+        <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
+          <Image source={{uri: this.state.image}}
+                 style={styles.image} />
+        </TouchableWithoutFeedback>
+      <View style={styles.postDetailsContainer}>
+        <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
           <Text style={styles.postTitle}>
           {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
           </Text>
+        </TouchableWithoutFeedback>
           <Text style={styles.childPostDetailsLine}>
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>

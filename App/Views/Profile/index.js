@@ -5,7 +5,7 @@ var api = require('../../Utils/api.js');
 var Loading = require('../Loading');
 
 var {
-  Text
+  Text,
   Image,
   View,
   ListView
@@ -33,13 +33,34 @@ var Profile = React.createClass({
 
   renderLoading: function() {
     return (
-      <View style={styles.container}
+      <View style={styles.container}>
         <Loading
           loaded={this.state.loaded} />
+      </View>
           )
   },
 
   renderProfile: function() {
+    return (
+      <View style={styles.container}>
+        <RenderHeader />
+        <RenderList />
+      </View>
+        )
+  },
+
+  renderHeader: function() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.centering}>
+          <Image style={styles.image}
+            source={{uri: this.state.image}} />
+        </View>
+      </View>
+          )
+  },
+
+  renderList: function() {
 
   }
 
