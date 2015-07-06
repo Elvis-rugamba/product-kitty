@@ -58,8 +58,9 @@ var CommentCell = React.createClass({
                style={styles.image} />
         <View style={styles.postDetailsContainer}>
           <Text style={styles.postTitle}>
-          {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
+          {this.state.name}
           </Text>
+          <Text style={styles.commentorDetails}>{this.props.comment.user.headline}</Text>
           <Text style={styles.postDetailsLine}>
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
