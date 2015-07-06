@@ -18,6 +18,13 @@ var CollectionCell = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    if (!this.state.imageLink) {
+      this.setState({
+        imageLink: this.props.collection.user.image_url['original']
+      })
+    }
+  },
 
   render: function() {
     return (

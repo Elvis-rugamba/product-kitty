@@ -20,7 +20,7 @@ var CommentCell = React.createClass({
     return {
       name: this.props.comment.user.name,
       comment: this.props.comment.body,
-      image: this.props.comment.user.image_url['48px']
+      image: this.props.comment.user.image_url['original']
     }
   },
 
