@@ -18,6 +18,13 @@ var CollectionCell = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    if (!this.state.imageLink) {
+      this.setState({
+        imageLink: this.props.collection.user.image_url['original']
+      })
+    }
+  },
 
   render: function() {
     return (
@@ -25,7 +32,7 @@ var CollectionCell = React.createClass({
         <View style={styles.container}>
             <View style={styles.commentDetailsContainer}>
               <Text style={styles.collectionTitle}>
-                {this.state.collectionName}
+                {this.state.collectionName} <Text style={styles.collectionDetailsLine}> {this.state.curator} </Text>
               </Text>
               <Text style={styles.collectionDetailsLine}>
                 {this.state.tagLine}
