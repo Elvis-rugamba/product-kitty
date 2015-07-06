@@ -58,7 +58,7 @@ var CommentCell = React.createClass({
                style={styles.image} />
         <View style={styles.postDetailsContainer}>
           <Text style={styles.postTitle}>
-            {this.state.name}
+          {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
           </Text>
           <Text style={styles.postDetailsLine}>
             <Hypertext
@@ -90,7 +90,7 @@ var CommentCell = React.createClass({
                style={styles.image} />
         <View style={styles.postDetailsContainer}>
           <Text style={styles.postTitle}>
-            {this.state.name}
+          {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
           </Text>
           <Text style={styles.childPostDetailsLine}>
             <Hypertext
