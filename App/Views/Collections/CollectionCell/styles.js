@@ -38,6 +38,12 @@ var styles = StyleSheet.create({
     marginLeft: 25,
     color: 'gray',
   },
+  collectionCurator: {
+    fontSize: 12,
+    marginBottom: 5,
+    marginLeft: 25,
+    color: '#D6573D'
+  },
   separator: {
     height: 0.5,
     backgroundColor: '#CCCCCC',

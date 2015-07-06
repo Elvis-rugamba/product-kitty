@@ -7,7 +7,7 @@ var ChildComments = require('./ChildComments');
 var Loading = require('../Loading');
 var Web = require('../Web');
 
-var VibrancyView = require('react-native-blur').VibrancyView;
+var BlurView = require('react-native-blur').BlurView;
 var ActivityView = require('react-native-activity-view');
 
 
@@ -90,7 +90,7 @@ var Comments = React.createClass({
         <View style={styles.container}>
           <Image style={styles.backgroundImage}
               source={{uri: this.state.image}}>
-            <VibrancyView blurType="xlight" style={styles.blur}>
+            <BlurView blurType="xlight" style={styles.blur}>
               <Text style={styles.postTitle}>
                 {this.state.product.name}
               </Text>
@@ -103,7 +103,7 @@ var Comments = React.createClass({
               <Text style={styles.postDetailsLine}>
                 {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
               </Text>
-            </VibrancyView>
+            </BlurView>
           </Image>
         </View>
       </TouchableHighlight>

@@ -6,13 +6,15 @@ var Loading = require('../../Loading');
 var Cell = require('../../Products/Cell');
 var Comments = require('../../Comments');
 
+var BlurView = require('react-native-blur').BlurView
 var ActivityView = require('react-native-activity-view');
 var Icon = require('EvilIcons');
 
 var {
   View,
   ListView,
-  Text
+  Text,
+  Image
 } = React;
 
 var SingleCollection = React.createClass({
@@ -83,12 +85,23 @@ var SingleCollection = React.createClass({
   renderHeader: function() {
     return (
       <View>
-        <Text style={styles.postTitle}>
-          {this.state.collection.title}
-        </Text>
-        <Text style={styles.postDetailsLine}>
-          Curated by {this.state.collection.user.name}
-        </Text>
+        <Image style={styles.backgroundImage}
+          source={{uri: this.state.collection.background_image_url}}>
+          <BlurView blurType="xlight" style={styles.blur}>
+            <Text style={styles.postTitle}>
+              {this.state.collection.name}
+            </Text>
+            <Text style={styles.postDetailsLine}>
+              {this.state.collection.title}
+            </Text>
+            <Text style={styles.postDetailsLine}>
+              {this.state.collection.posts_count} Items
+            </Text>
+            <Text style={styles.postDetailsLine}>
+              Curated by {this.state.collection.user.name}
+            </Text>
+          </BlurView>
+        </Image>
       </View>
       )
   },

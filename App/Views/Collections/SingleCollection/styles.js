@@ -9,6 +9,19 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFFFFD',
     flex: 1
   },
+  blur: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    height: 150,
+  },
   postsListView:{
     backgroundColor: '#FFFFFD',
   },
