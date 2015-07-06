@@ -69,7 +69,6 @@ var Comments = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
-          contentInset={{top: 20, bottom: 49}}
           automaticallyAdjustContentInsets={true} />
       )
   },
