@@ -7,7 +7,8 @@ var {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   header: {
     flex: 1,
@@ -41,7 +42,20 @@ var styles = StyleSheet.create({
     borderRadius: 25,
     marginBottom: 15,
     alignSelf: 'center',
-
+  },
+  productListView: {
+    flex: 1,
+  },
+  noContent: {
+    marginTop: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 16,
+    marginTop: 25,
+    marginBottom: 10,
+    color: 'gray'
   }
 })
 

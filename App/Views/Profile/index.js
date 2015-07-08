@@ -6,6 +6,7 @@ var Loading = require('../Loading');
 
 var BlurView = require('react-native-blur').BlurView;
 var ActivityView = require('react-native-activity-view');
+var Icon = require('EvilIcons');
 
 var {
   Text,
@@ -32,16 +33,36 @@ var Profile = React.createClass({
   },
 
   componentDidMount: function() {
+
+    Icon.getImageSource('share-apple', 30)
+      .then((source) => {
+        this.setState({ shareIcon: source })
+      });
+
     api.getProfileInfo(this.state.accessToken, this.state.profileId)
       .then((responseData) => {
-        console.log(responseData);
         this.setState({
           image: responseData.user.image_url['original'],
           user: responseData.user,
-          upvotedDataSource: this.state.upvotedDataSource.cloneWithRows(responseData.user.votes),
-          submittedDataSource: this.state.submittedDataSource.cloneWithRows(responseData.user.posts),
+          upvotedDataSource: responseData.user.votes_count === 0 ? false : this.state.upvotedDataSource.cloneWithRows(responseData.user.votes),
+          submittedDataSource: responseData.user.posts_count === 0 ? false : this.state.submittedDataSource.cloneWithRows(responseData.user.posts),
+          madeDataSource: responseData.user.maker_of_count === 0 ? false : this.state.madeDataSource.cloneWithRows(responseData.user.maker_of),
           loaded: true
         })
+
+        if (responseData.user.collections_count === 0) {
+          this.setState({
+            collectionsDataSource: false
+          })
+        } else {
+          api.getUserCollectionInfo(this.state.accessToken, this.state.profileId)
+            .then((responseData) => {
+              this.setState({
+                collectionsDataSource: this.state.collectionsDataSource.cloneWithRows(responseData.collections)
+              })
+            })
+            .done()
+        }
       })
       .done()
   },
@@ -53,9 +74,13 @@ var Profile = React.createClass({
         )
     }
     return (
-      <View>
-        {this.renderHeader()}
-        {this.renderSegments()}
+      <View style={styles.container}>
+        <View>
+          {this.renderHeader()}
+        </View>
+        <View style={styles.container}>
+          {this.renderSegments()}
+        </View>
       </View>
       )
   },
@@ -72,7 +97,7 @@ var Profile = React.createClass({
   renderHeader: function() {
     return (
       <View style={styles.header}>
-        <View style={styles.centering}>
+        <View>
           <Image style={styles.backgroundImage}
             source={{uri: this.state.image}}>
             <BlurView blurType='xlight' style={styles.blur}>
@@ -112,44 +137,178 @@ var Profile = React.createClass({
     if (this.state.selectedTab === 'Upvoted') {
       return (
         <View style={styles.container}>
-          {this.renderUpvotedListView()}
+            {this.renderUpvotedListView()}
         </View>
         )
-    } else if (this.stateselectedTab === 'Submitted') {
+    } else if (this.state.selectedTab === 'Submitted') {
       return (
-        <View style={styles.container}>
-          {this.renderSubmittedListView()}
-        </View>
+          this.renderSubmittedListView()
           )
     } else if (this.state.selectedTab === 'Collections') {
       return (
-        <View style={styles.container}>
-          {this.renderCollectionsListView()}
-        </View>
+          this.renderCollectionsListView()
           )
     } else if (this.state.selectedTab === 'Made') {
       return (
-        <View style={styles.container}>
-          {this.renderMadeListView()}
-        </View>
+          this.renderMadeListView()
         )
     }
   },
 
   renderUpvotedListView: function() {
-
+      if (!this.state.upvotedDataSource) {
+        return (
+          <View style={styles.noContent}>
+            <Icon style={styles.icon} name="close-o" size={50} color="gray" />
+            <Text style={styles.text}>
+              No Products Upvoted
+            </Text>
+          </View>
+          )
+      } else {
+        return (
+          <ListView
+            dataSource={this.state.upvotedDataSource}
+            renderRow={this.renderProductCell}
+            style={styles.productListView}
+            automaticallyAdjustContentInsets={false}
+            contentInset={{bottom: 50}} />
+          )
+      }
   },
 
   renderSubmittedListView: function() {
+    if (!this.state.submittedDataSource) {
+      return (
+        <View style={styles.noContent}>
+          <Icon style={styles.icon} name="close-o" size={50} color="gray" />
+          <Text style={styles.text}>
+            No Products Submitted
+          </Text>
+        </View>
+        )
+    } else {
+      return (
+        <ListView
+          dataSource={this.state.submittedDataSource}
+          renderRow={this.renderSubmittedCell}
+          style={styles.productListView}
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom: 50}} />
+        )
+    }
 
   },
 
   renderCollectionsListView: function() {
-
+    if (!this.state.collectionsDataSource) {
+      return (
+        <View style={styles.noContent}>
+          <Icon style={styles.icon} name="close-o" size={50} color="gray" />
+          <Text style={styles.text}>
+            No Collections Curated
+          </Text>
+        </View>
+        )
+    } else {
+      return (
+        <ListView
+          dataSource={this.state.collectionsDataSource}
+          renderRow={this.renderCollectionCell}
+          style={styles.productListView}
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom: 50}} />
+        )
+    }
   },
 
   renderMadeListView: function() {
+    if (!this.state.madeDataSource) {
+      return (
+        <View style={styles.noContent}>
+          <Icon style={styles.icon} name="close-o" size={50} color="gray" />
+          <Text style={styles.text}>
+            No Products Made
+          </Text>
+        </View>
+        )
+    } else {
+      return (
+        <ListView
+          dataSource={this.state.madeDataSource}
+          renderRow={this.renderSubmittedCell}
+          style={styles.productListView}
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom: 50}} />
+        )
+    }
+  },
 
+  renderProductCell: function(post) {
+    var ProductCell = require('../Products/Cell');
+
+    return (
+      <ProductCell
+        onSelect={() => this.selectPost(post.post)}
+        post={post.post} />
+          )
+  },
+
+  renderSubmittedCell: function(post) {
+    var ProductCell = require('../Products/Cell');
+
+    return (
+      <ProductCell
+        onSelect={() => this.selectPost(post)}
+        post={post} />
+          )
+  },
+
+  renderCollectionCell: function(collection) {
+    var CollectionCell = require('../Collections/CollectionCell');
+
+    return (
+      <CollectionCell
+        onSelect={() => this.selectSingleCollection(collection)}
+        collection={collection} />
+        )
+  },
+
+  selectPost: function(post) {
+    var Comments = require('../Comments');
+
+    this.props.navigator.push({
+      title: post.name,
+      component: Comments,
+      backButtonTitle: ' ',
+      rightButtonIcon: this.state.shareIcon,
+      onRightButtonPress: () => this.shareSheet(post),
+      passProps: {postId: post.id,
+                  accessToken: this.state.accessToken,
+                  shareIcon: this.state.shareIcon}
+    })
+  },
+
+  selectCollection: function(collection) {
+    var SingleCollection = require('../Collections/SingleCollection');
+
+    this.props.navigator.push({
+      title: collection.name,
+      component: SingleCollection,
+      backButtonTitle: ' ',
+      passProps: {collectionId: collection.id,
+                  accessToken: this.state.accessToken}
+    })
+  },
+
+  shareSheet: function(post) {
+    return (
+      ActivityView.show({
+        text: 'Check out ' + post.name + ' on Product Hunt',
+        url: post.redirect_url,
+        imageUrl: post.screenshot_url['300px']
+      })
+      )
   }
 
 })

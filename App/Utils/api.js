@@ -105,7 +105,7 @@ var api = {
       })
   },
 
-  getProfileInfo: function(token, username) {
+  getProfileInfo: function(token, user) {
     var requestObj = {
       headers: {
         'Accept': 'application/json',
@@ -115,13 +115,27 @@ var api = {
         'Host': 'api.producthunt.com'
       }
     };
-    return fetch('https://api.producthunt.com/v1/users/' + username, requestObj)
+    return fetch('https://api.producthunt.com/v1/users/' + user, requestObj)
       .then(function(res) {
         return res.json();
       })
   },
 
-
+  getUserCollectionInfo: function(token, user) {
+    var requestObj = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'origin': '',
+        'Host': 'api.producthunt.com'
+      }
+    };
+    return fetch('https://api.producthunt.com/v1/users/' + user + '/collections', requestObj)
+      .then(function(res) {
+        return res.json();
+      })
+  }
 }
 
 module.exports = api;
