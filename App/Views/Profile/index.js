@@ -290,7 +290,7 @@ var Profile = React.createClass({
     })
   },
 
-  selectCollection: function(collection) {
+  selectSingleCollection: function(collection) {
     var SingleCollection = require('../Collections/SingleCollection');
 
     this.props.navigator.push({
