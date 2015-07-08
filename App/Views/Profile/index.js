@@ -1,11 +1,6 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../Utils/api.js');
-var Loading = require('../Loading');
-
-var BlurView = require('react-native-blur').BlurView;
-var ActivityView = require('react-native-activity-view');
 var Icon = require('EvilIcons');
 
 var {
@@ -33,6 +28,8 @@ var Profile = React.createClass({
   },
 
   componentDidMount: function() {
+    var api = require('../../Utils/api.js');
+
 
     Icon.getImageSource('share-apple', 30)
       .then((source) => {
@@ -86,6 +83,8 @@ var Profile = React.createClass({
   },
 
   renderLoading: function() {
+    var Loading = require('../Loading');
+
     return (
       <View style={styles.container}>
         <Loading
@@ -95,6 +94,8 @@ var Profile = React.createClass({
   },
 
   renderHeader: function() {
+    var BlurView = require('react-native-blur').BlurView;
+
     return (
       <View style={styles.header}>
         <View>
@@ -302,6 +303,8 @@ var Profile = React.createClass({
   },
 
   shareSheet: function(post) {
+    var ActivityView = require('react-native-activity-view');
+
     return (
       ActivityView.show({
         text: 'Check out ' + post.name + ' on Product Hunt',
