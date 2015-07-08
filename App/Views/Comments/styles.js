@@ -28,6 +28,10 @@ var styles = StyleSheet.create({
       marginBottom: 10,
       color: 'gray',
     },
+    makersLine: {
+      fontSize: 12,
+      color: '#D6573D'
+    },
     backgroundImage: {
       flex: 1,
       resizeMode: 'cover',

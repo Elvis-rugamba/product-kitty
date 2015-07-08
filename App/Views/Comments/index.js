@@ -37,9 +37,12 @@ var Comments = React.createClass({
           product: responseData.post,
           image: responseData.post.screenshot_url['850px'],
           productLink: responseData.post.redirect_url,
+          makers: responseData.post.makers,
           dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
         });
+
+        console.log(this.state.makers)
       })
       .done()
   },
@@ -86,6 +89,13 @@ var Comments = React.createClass({
   },
 
   renderHeader: function() {
+    var str = '';
+    this.state.makers.forEach(function(elem) {
+      str += elem.name + ', '
+    })
+
+    str = str.replace(/,\s*$/, "");
+
     return (
       <TouchableHighlight
         onPress={() => this.renderWeb()}>
@@ -101,6 +111,9 @@ var Comments = React.createClass({
               </Text>
               <Text style={styles.postDetailsLine}>
                 Posted by {this.state.product.user.name}
+              </Text>
+              <Text style={styles.makersLine}>
+                Made by {str}
               </Text>
               <Text style={styles.postDetailsLine}>
                 {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
