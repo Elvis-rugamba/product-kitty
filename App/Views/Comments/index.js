@@ -92,7 +92,7 @@ var Comments = React.createClass({
         <View style={styles.container}>
           <Image style={styles.backgroundImage}
               source={{uri: this.state.image}}>
-            <BlurView blurType="xlight" style={styles.blur}>
+            <BlurView blurType='xlight' style={styles.blur}>
               <Text style={styles.postTitle}>
                 {this.state.product.name}
               </Text>
@@ -151,13 +151,14 @@ var Comments = React.createClass({
     )
   },
 
-  selectProfile: function(id, name) {
+  selectProfile: function(profileId, name) {
     this.props.navigator.push({
       title: 'Profile',
       component: Profile,
       backButtonTitle: ' ',
-      passProps: {id: id,
-                  name: name
+      passProps: {profileId: profileId,
+                  name: name,
+                  accessToken: this.state.accessToken
       }
     })
   }
