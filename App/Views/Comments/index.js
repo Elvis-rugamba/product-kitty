@@ -6,6 +6,7 @@ var CommentCell = require('./CommentCell');
 var ChildComments = require('./ChildComments');
 var Loading = require('../Loading');
 var Web = require('../Web');
+var Profile = require('../Profile');
 
 var BlurView = require('react-native-blur').BlurView;
 var ActivityView = require('react-native-activity-view');
@@ -68,8 +69,7 @@ var Comments = React.createClass({
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
-          renderHeader={this.renderHeader}
-          automaticallyAdjustContentInsets={true} />
+          renderHeader={this.renderHeader} />
       )
   },
 
@@ -79,7 +79,9 @@ var Comments = React.createClass({
         comment={comment}
         isChildComment={false}
         onSelect={() => this.selectComment(comment)}
-        navigator={this.props.navigator} />
+        navigator={this.props.navigator}
+        selectProfile={() => this.selectProfile(comment.user.id, comment.user.name)}
+        selectChildComment={() => this.selectComment(comment)} />
       )
   },
 
@@ -90,7 +92,7 @@ var Comments = React.createClass({
         <View style={styles.container}>
           <Image style={styles.backgroundImage}
               source={{uri: this.state.image}}>
-            <BlurView blurType="xlight" style={styles.blur}>
+            <BlurView blurType='xlight' style={styles.blur}>
               <Text style={styles.postTitle}>
                 {this.state.product.name}
               </Text>
@@ -133,7 +135,7 @@ var Comments = React.createClass({
                     body: comment.body,
                     image: comment.user.image_url['48px'],
                     childComments: comment.child_comments,
-                    shareIcon: this.props.shareIcon
+                    selectProfile: (id, name) => { this.selectProfile(id, name) }
                   }
       })
     }
@@ -145,7 +147,20 @@ var Comments = React.createClass({
         text: 'Check out ' + this.state.product.name + ' on Product Hunt',
         url: link,
         imageUrl: this.state.image
-      }))
+      })
+    )
+  },
+
+  selectProfile: function(profileId, name) {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      backButtonTitle: ' ',
+      passProps: {profileId: profileId,
+                  name: name,
+                  accessToken: this.state.accessToken
+      }
+    })
   }
 
 });

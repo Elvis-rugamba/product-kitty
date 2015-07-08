@@ -9,7 +9,7 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#FFFFFD',
   },
   image: {
@@ -28,14 +28,13 @@ var styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'left',
     marginTop: 10,
-    marginBottom: 2,
     marginRight: 10,
     color: '#D6573D'
   },
   commentorDetails: {
     fontSize: 12,
     marginBottom: 5,
-    color: '#D6573D'
+    color: 'gray'
   },
   postDetailsLine: {
     fontSize: 12,

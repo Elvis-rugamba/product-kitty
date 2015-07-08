@@ -19,7 +19,6 @@ var Cell = React.createClass({
       imageLink: this.props.post.screenshot_url['300px']
     }
   },
-
   render: function() {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>

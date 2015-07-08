@@ -164,7 +164,8 @@ var Products = React.createClass({
         text: 'Check out ' + post.name + ' on Product Hunt',
         url: post.redirect_url,
         imageUrl: post.screenshot_url['300px']
-      }))
+      })
+      )
   }
 })
 
