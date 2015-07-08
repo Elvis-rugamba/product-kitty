@@ -61,9 +61,10 @@ var CommentCell = React.createClass({
         <View style={styles.postDetailsContainer}>
         <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
           <Text style={styles.postTitle}>
-          {this.state.name} <Text style={styles.postDetailsLine}> {this.props.comment.user.headline}</Text>
+          {this.state.name}
           </Text>
         </TouchableWithoutFeedback>
+          <Text style={styles.commentorDetails}>{this.props.comment.user.headline}</Text>
           <Text style={styles.postDetailsLine}>
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>

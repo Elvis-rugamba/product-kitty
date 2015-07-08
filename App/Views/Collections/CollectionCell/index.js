@@ -24,6 +24,18 @@ var CollectionCell = React.createClass({
         imageLink: this.props.collection.user.image_url['original']
       })
     }
+
+    if (!this.state.tagLine) {
+      if (this.props.collection.posts_count === 1) {
+        this.setState({
+          tagLine: this.props.collection.posts_count + ' Item'
+        })
+      } else {
+        this.setState({
+          tagLine: this.props.collection.posts_count + ' Items'
+        })
+      }
+    }
   },
 
   render: function() {
@@ -32,8 +44,9 @@ var CollectionCell = React.createClass({
         <View style={styles.container}>
             <View style={styles.commentDetailsContainer}>
               <Text style={styles.collectionTitle}>
-                {this.state.collectionName} <Text style={styles.collectionDetailsLine}> {this.state.curator} </Text>
+                {this.state.collectionName}
               </Text>
+              <Text style={styles.collectionCurator}>Curated by {this.state.curator} </Text>
               <Text style={styles.collectionDetailsLine}>
                 {this.state.tagLine}
               </Text>

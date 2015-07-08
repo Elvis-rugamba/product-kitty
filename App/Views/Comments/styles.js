@@ -21,7 +21,7 @@ var styles = StyleSheet.create({
       fontSize: 14,
       fontWeight: 'bold',
       marginBottom: 4,
-      color: 'black'
+      color: '#D6573D'
     },
     postDetailsLine: {
       fontSize: 12,
@@ -32,7 +32,7 @@ var styles = StyleSheet.create({
       flex: 1,
       resizeMode: 'cover',
       height: 150,
-    },
+    }
 });
 
 module.exports = styles;

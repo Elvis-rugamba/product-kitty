@@ -4,8 +4,10 @@ var styles = require('./styles.js');
 var api = require('../../Utils/api.js');
 var Products = require('../Products');
 var Collections = require('../Collections');
+var About = require('../About');
 
 var Icon = require('Foundation');
+
 
 var {
   View,
@@ -68,6 +70,18 @@ var Main = React.createClass({
           }}>
           {this.renderCollectionView()}
         </Icon.TabBarItem>
+        <Icon.TabBarItem
+          title="About"
+          selected={this.state.selectedTab === 'about'}
+          iconName={'info'}
+          iconSize={20}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'about'
+            });
+          }}>
+          {this.renderAboutView()}
+        </Icon.TabBarItem>
       </TabBarIOS>
       )
   },
@@ -104,6 +118,26 @@ var Main = React.createClass({
             accessToken: this.state.accessToken
           }
         }} />
+        )
+  },
+
+  renderAboutView: function() {
+    return (
+      <View style={styles.container}>
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#D6573D'
+        barTintColor='#FFFFFD'
+        titleTextColor='#D6573D'
+        initialRoute={{
+          title: 'About',
+          component: About,
+          backButtonTitle: ' ',
+          passProps: {
+            heartIcon: this.state.heartIcon
+          }
+        }} />
+      </View>
         )
   }
 
