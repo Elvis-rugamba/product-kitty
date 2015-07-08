@@ -5,6 +5,7 @@ var api = require('../../Utils/api.js');
 var Products = require('../Products');
 var Collections = require('../Collections');
 var About = require('../About');
+var Loading = require('../Loading');
 
 var Icon = require('Foundation');
 
@@ -12,30 +13,66 @@ var Icon = require('Foundation');
 var {
   View,
   TabBarIOS,
-  NavigatorIOS
+  NavigatorIOS,
+  NetInfo,
+  AlertIOS
 } = React;
 
 var Main = React.createClass({
   getInitialState: function() {
     return {
       accessToken: false,
+      isConnected: null,
       selectedTab: 'products'
     }
   },
 
-  componentWillMount: function() {
-    if (!this.state.accessToken){
-    api.getToken()
-      .then((responseData) => {
-        this.setState({
-          accessToken: responseData.access_token,
-        });
+  componentDidMount: function() {
+    NetInfo.isConnected.fetch().done((data) => {
+      this.setState({
+        isConnected: data
       })
-      .done();
+      console.log('HELLO' + data)
+
+    })
+  },
+
+  componentWillUpdate: function() {
+    if (this.state.isConnected && !this.state.accessToken){
+      api.getToken()
+        .then((responseData) => {
+          this.setState({
+            accessToken: responseData.access_token,
+          });
+        })
+        .done();
     }
   },
 
+  componentWillUnmount: function() {
+    NetInfo.isConnected.removeEventListener(
+      'change',
+      this._handleConnectivityChange
+    );
+  },
+
+
+  handleConnectivityChange: function(change) {
+    this.setState({
+      isConnected: change
+    })
+    console.log("I have changed!" + change)
+  },
+
   render: function() {
+    if (!this.state.isConnected) {
+      return (
+        <View style={styles.container}>
+          <Loading
+            loaded={this.state.isConnected} />
+        </View>
+        )
+    }
     return (
       <TabBarIOS>
         <Icon.TabBarItem
@@ -97,7 +134,10 @@ var Main = React.createClass({
         initialRoute={{
           title: 'Product Kitty',
           component: Products,
-          backButtonTitle: ' '
+          backButtonTitle: ' ',
+          passProps: {
+            isConnected: this.state.isConnected
+          }
         }} />
         )
   },

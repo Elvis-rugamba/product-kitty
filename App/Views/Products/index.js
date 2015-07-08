@@ -20,9 +20,9 @@ var {
 
 var Products = React.createClass({
   getInitialState: function() {
-
     return {
       accessToken: this.props.accessToken,
+      isConnected: this.props.isConnected,
       currentDay: 0,
       dataBlob: {},
       dataSource: new ListView.DataSource({
