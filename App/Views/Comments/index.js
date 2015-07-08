@@ -70,7 +70,8 @@ var Comments = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
           renderHeader={this.renderHeader}
-          automaticallyAdjustContentInsets={true} />
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom: 50}} />
       )
   },
 
@@ -81,7 +82,7 @@ var Comments = React.createClass({
         isChildComment={false}
         onSelect={() => this.selectComment(comment)}
         navigator={this.props.navigator}
-        selectProfile={() => this.selectProfile(comment.user.id)}
+        selectProfile={() => this.selectProfile(comment.user.id, comment.user.name)}
         selectChildComment={() => this.selectComment(comment)} />
       )
   },
@@ -137,7 +138,7 @@ var Comments = React.createClass({
                     image: comment.user.image_url['48px'],
                     childComments: comment.child_comments,
                     shareIcon: this.props.shareIcon,
-                    selectProfile: (id) => { this.selectProfile(id) }
+                    selectProfile: (id, name) => { this.selectProfile(id, name) }
                   }
       })
     }
@@ -153,8 +154,9 @@ var Comments = React.createClass({
     )
   },
 
-  selectProfile: function(id) {
-    console.log(id);
+  selectProfile: function(id, name) {
+    console.log('username:' + name);
+    console.log('id' + id)
   }
 
 });
