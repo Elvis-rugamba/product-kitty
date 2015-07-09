@@ -8,9 +8,12 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    backgroundColor: '#FFFFFD',
+  },
+  votesContainer: {
     alignItems: 'center',
     backgroundColor: '#FFFFFD',
+    marginRight: 15
   },
   image: {
     height: 48,
@@ -20,6 +23,12 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     marginRight: 15,
     marginLeft: 15
+  },
+  icon: {
+    alignSelf: 'center'
+  },
+  votes: {
+    textAlign: 'center'
   },
   postCount: {
     fontSize: 20,

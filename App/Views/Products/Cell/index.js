@@ -1,6 +1,8 @@
 var React = require('react-native');
 var styles = require('./styles');
 
+var Icon = require('EvilIcons');
+
 var {
   Text,
   View,
@@ -18,6 +20,15 @@ var Cell = React.createClass({
       postedBy: this.props.post.user.name,
       imageLink: this.props.post.screenshot_url['300px']
     }
+  },
+
+  componentWillMount: function() {
+    Icon.getImageSource('chevron-up', 30)
+      .then((source) => {
+        this.setState({
+          upvotesIcon: source
+        })
+      })
   },
 
   componentDidMount: function() {
@@ -38,6 +49,12 @@ var Cell = React.createClass({
               </Text>
               <Text style={styles.postDetailsLine}>
               {this.state.tagLine}
+              </Text>
+            </View>
+            <View style={styles.votesContainer}>
+              <Icon name='chevron-up' size={30} color="#D6573D" style={styles.icon}/>
+              <Text style={styles.votes}>
+                {this.state.numVotes}
               </Text>
             </View>
         </View>
