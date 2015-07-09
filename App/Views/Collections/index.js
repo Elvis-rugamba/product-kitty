@@ -9,7 +9,9 @@ var SingleCollection = require('./SingleCollection');
 var {
  View,
  ListView,
- SegmentedControlIOS
+ SegmentedControlIOS,
+ AlertIOS,
+ AppStateIOS
 } = React;
 
 var Collections = React.createClass({
@@ -23,7 +25,23 @@ var Collections = React.createClass({
     }
   },
 
+  componentWillMount: function() {
+    this.getCollectionsData()
+  },
+
   componentDidMount: function() {
+    AppStateIOS.addEventListener('change', this.handleAppStateChange);
+  },
+
+  componentWillUnmount: function() {
+    AppStateIOS.removeEventListener('change', this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(state) {
+    this.getCollectionsData();
+  },
+
+  getCollectionsData: function() {
     api.getFeaturedCollections(this.props.accessToken)
       .then((responseData) => {
         this.setState({
@@ -38,6 +56,9 @@ var Collections = React.createClass({
             allCollectionsDataSource: this.state.allCollectionsDataSource.cloneWithRows(responseData.collections),
           })
         })
+    })
+    .catch((error) => {
+      AlertIOS.alert('Error', 'You need to be connected to the internet')
     })
     .done()
   },
