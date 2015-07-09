@@ -1,7 +1,6 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../Utils/api.js');
 var Products = require('../Products');
 var Collections = require('../Collections');
 var About = require('../About');
@@ -12,26 +11,15 @@ var Icon = require('Foundation');
 var {
   View,
   TabBarIOS,
-  NavigatorIOS
+  NavigatorIOS,
 } = React;
 
 var Main = React.createClass({
   getInitialState: function() {
+    console.log('token' + this.props.accessToken);
     return {
-      accessToken: false,
+      accessToken: this.props.accessToken,
       selectedTab: 'products'
-    }
-  },
-
-  componentWillMount: function() {
-    if (!this.state.accessToken){
-    api.getToken()
-      .then((responseData) => {
-        this.setState({
-          accessToken: responseData.access_token,
-        });
-      })
-      .done();
     }
   },
 
@@ -40,6 +28,7 @@ var Main = React.createClass({
       <TabBarIOS>
         <Icon.TabBarItem
           title='Home'
+          ref='productsTabBar'
           selected={this.state.selectedTab === 'products'}
           iconName={'home'}
           iconSize={20}
@@ -101,7 +90,10 @@ var Main = React.createClass({
         initialRoute={{
           title: 'Product Kitty',
           component: Products,
-          backButtonTitle: ' '
+          backButtonTitle: ' ',
+          passProps: {
+            accessToken: this.state.accessToken,
+          }
         }} />
         )
   },

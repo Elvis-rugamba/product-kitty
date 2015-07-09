@@ -9,7 +9,9 @@ var {
   View,
   ListView,
   TouchableHighlight,
-  SegmentedControlIOS
+  SegmentedControlIOS,
+  AlertIOS,
+  AppStateIOS
 } = React;
 
 var Profile = React.createClass({
@@ -27,14 +29,29 @@ var Profile = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    var api = require('../../Utils/api.js');
-
-
+  componentWillMount: function() {
     Icon.getImageSource('share-apple', 30)
       .then((source) => {
         this.setState({ shareIcon: source })
       });
+
+    this.getProfileInfo();
+  },
+
+  componentDidMount: function () {
+    AppStateIOS.addEventListener('change', this.handleAppStateChange);
+  },
+
+  componentWillUnmount: function() {
+    AppStateIOS.removeEventListener('change', this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(state) {
+    this.getProfileInfo();
+  },
+
+  getProfileInfo: function() {
+    var api = require('../../Utils/api.js');
 
     api.getProfileInfo(this.state.accessToken, this.state.profileId)
       .then((responseData) => {
@@ -60,6 +77,9 @@ var Profile = React.createClass({
             })
             .done()
         }
+      })
+      .catch((error) => {
+        AlertIOS.alert('Error', 'You need to be connected to the internet')
       })
       .done()
   },
