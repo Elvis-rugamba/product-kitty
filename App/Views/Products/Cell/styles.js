@@ -28,7 +28,8 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   votes: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 15
   },
   postCount: {
     fontSize: 20,
