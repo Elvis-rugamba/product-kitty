@@ -27,17 +27,17 @@ var Main = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
+    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
     NetInfo.isConnected.fetch().done((data) => {
+      console.log(this.state.isConnected);
       this.setState({
         isConnected: data
       })
-      console.log('HELLO' + data)
-
     })
   },
 
-  componentWillUpdate: function() {
+  componentDidMount: function() {
     if (this.state.isConnected && !this.state.accessToken){
       api.getToken()
         .then((responseData) => {
@@ -52,7 +52,7 @@ var Main = React.createClass({
   componentWillUnmount: function() {
     NetInfo.isConnected.removeEventListener(
       'change',
-      this._handleConnectivityChange
+      this.handleConnectivityChange
     );
   },
 
@@ -65,11 +65,18 @@ var Main = React.createClass({
   },
 
   render: function() {
-    if (!this.state.isConnected) {
+    if (this.state.isConnected === 'null') {
       return (
         <View style={styles.container}>
           <Loading
             loaded={this.state.isConnected} />
+        </View>
+        )
+    }
+    if (this.state.isConnected === 'false') {
+      return (
+        <View>
+          {AlertIOS.alert('You need to be connected to the internet!')}
         </View>
         )
     }
