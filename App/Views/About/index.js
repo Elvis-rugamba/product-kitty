@@ -14,8 +14,10 @@ var {
 } = React;
 
 var About = React.createClass({
-  componentDidMount: function() {
-    console.log(this.props.heartIcon)
+  getInitialState: function() {
+    return({
+      accessToken: this.props.accessToken
+    })
   },
 
   render: function() {
@@ -56,6 +58,9 @@ var About = React.createClass({
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => this.twitter('twitter.com/rkho')}>
             <Icon style={styles.icon} name="social-twitter" size={50} color="#55acee" />
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.selectProfile()}>
+            <Image source={require('image!glasshole-kitty')} style={styles.phIcon} />
           </TouchableWithoutFeedback>
         </View>
       </View>

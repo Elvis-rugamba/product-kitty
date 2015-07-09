@@ -134,7 +134,8 @@ var Main = React.createClass({
           component: About,
           backButtonTitle: ' ',
           passProps: {
-            heartIcon: this.state.heartIcon
+            heartIcon: this.state.heartIcon,
+            accessToken: this.state.accessToken
           }
         }} />
       </View>

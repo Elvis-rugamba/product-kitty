@@ -29,6 +29,7 @@ var styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     marginBottom: 10,
+    fontSize: 14,
     color: 'gray'
   },
   text: {
@@ -45,6 +46,14 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 20,
+    marginRight: 20,
+  },
+  phIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60,
+    width: 60,
+    marginLeft: 10,
     marginRight: 20
   },
   image: {
@@ -54,7 +63,7 @@ var styles = StyleSheet.create({
     marginBottom: 40,
     alignSelf: 'center',
     justifyContent: 'center',
-  }
+  },
 })
 
 module.exports = styles;
