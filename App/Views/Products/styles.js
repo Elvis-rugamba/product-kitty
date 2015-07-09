@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#F0F0F0'
   },
   sectionText: {
-    color: '#D6573D',
+    color: '#DA552F',
     fontWeight: 'bold'
   }
 })

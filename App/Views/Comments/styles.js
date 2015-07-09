@@ -21,7 +21,7 @@ var styles = StyleSheet.create({
       fontSize: 14,
       fontWeight: 'bold',
       marginBottom: 4,
-      color: '#D6573D'
+      color: '#DA552F'
     },
     postDetailsLine: {
       fontSize: 12,
@@ -30,7 +30,7 @@ var styles = StyleSheet.create({
     },
     makersLine: {
       fontSize: 12,
-      color: '#D6573D'
+      color: '#DA552F'
     },
     backgroundImage: {
       flex: 1,

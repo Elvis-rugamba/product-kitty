@@ -29,7 +29,7 @@ var styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 10,
     marginRight: 10,
-    color: '#D6573D'
+    color: '#DA552F'
   },
   commentorDetails: {
     fontSize: 12,

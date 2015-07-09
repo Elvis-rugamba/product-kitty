@@ -77,7 +77,7 @@ var CommentCell = React.createClass({
               <Icon
                 name='comments-o'
                 size={12}
-                color='#D6573D'
+                color='#DA552F'
                 style={styles.icon}
               />
             </View>
