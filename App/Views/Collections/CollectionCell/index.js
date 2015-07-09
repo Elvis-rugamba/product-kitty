@@ -51,7 +51,6 @@ var CollectionCell = React.createClass({
                 {this.state.tagLine}
               </Text>
             </View>
-            <View style={styles.separator} />
             <Image source={{uri: this.state.imageLink}}
                    style={styles.image} />
         </View>
