@@ -30,7 +30,7 @@ var styles = StyleSheet.create({
     marginBottom: 4,
     marginRight: 10,
     marginLeft: 25,
-    color: '#D6573D'
+    color: '#DA552F'
   },
   collectionDetailsLine: {
     fontSize: 12,
@@ -42,7 +42,7 @@ var styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 5,
     marginLeft: 25,
-    color: '#D6573D'
+    color: '#DA552F'
   },
   separator: {
     height: 0.5,

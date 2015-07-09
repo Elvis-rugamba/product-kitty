@@ -34,9 +34,9 @@ var PHReactNative = React.createClass({
         sceneStyle={styles.container}
         ref={(navigator) => { this.navigator = navigator; }}
         renderScene={this.renderScene}
-        tintColor='#D6573D'
+        tintColor='#DA552F'
         barTintColor='#FFFFFD'
-        titleTextColor='#D6573D'
+        titleTextColor='#DA552F'
         navigationBarHidden={true}
         initialRoute={{
           title: 'Product Kitty',

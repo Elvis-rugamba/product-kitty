@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 4,
-    color: '#D6573D'
+    color: '#DA552F'
   },
   userHeadline: {
     fontSize: 12,

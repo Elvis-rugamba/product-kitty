@@ -53,7 +53,7 @@ var Collections = React.createClass({
             <SegmentedControlIOS
               values={['Featured', 'All']}
               selectedIndex={0}
-              tintColor={'#D6573D'}
+              tintColor={'#DA552F'}
               onValueChange={(val) => {
                 this.setState({
                   selectedTab: val

@@ -2,6 +2,7 @@ var React = require('react-native');
 var styles = require('./styles.js');
 
 var Icon = require('Foundation');
+var Profile = require('../Profile');
 
 var {
   View,
@@ -13,8 +14,10 @@ var {
 } = React;
 
 var About = React.createClass({
-  componentDidMount: function() {
-    console.log(this.props.heartIcon)
+  getInitialState: function() {
+    return({
+      accessToken: this.props.accessToken
+    })
   },
 
   render: function() {
@@ -24,10 +27,21 @@ var About = React.createClass({
           Product Kitty
         </Text>
         <View style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Text style={styles.headline}>
+              A Product Hunt browser built in React Native
+            </Text>
+            <TouchableWithoutFeedback onPress={() => this.web('producthunt.com')}>
+              <Image source={require('image!ph-logo')}
+                style={styles.image} />
+            </TouchableWithoutFeedback>
+          </View>
+        </View>
+        <View style={styles.container}>
           <Text style={styles.text}>
             Made with
           </Text>
-          <Icon style={styles.lineIcon} name="heart" size={20} color="#D6573D" />
+          <Icon style={styles.lineIcon} name="heart" size={20} color="#DA552F" />
           <Text style={styles.text}>
              in San Francisco.
           </Text>
@@ -37,13 +51,16 @@ var About = React.createClass({
         </Text>
         <View style={styles.container}>
           <TouchableWithoutFeedback onPress={() => this.email()}>
-            <Icon style={styles.icon} name="mail" size={50} color="#D6573D" />
+            <Icon style={styles.icon} name="mail" size={50} color="#DA552F" />
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => this.web('github.com/rkho')}>
             <Icon style={styles.icon} name="social-github" size={50} color="#292f33" />
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => this.twitter('twitter.com/rkho')}>
             <Icon style={styles.icon} name="social-twitter" size={50} color="#55acee" />
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.selectProfile()}>
+            <Image source={require('image!glasshole-kitty')} style={styles.phIcon} />
           </TouchableWithoutFeedback>
         </View>
       </View>
@@ -68,7 +85,7 @@ var About = React.createClass({
     var chromeURL = encodeURI('googlechromes://' + url);
     LinkingIOS.canOpenURL(chromeURL, (supported) => {
       if (!supported) {
-        LinkingIOS.openURL(url);
+        LinkingIOS.openURL('http://' + url);
       } else {
         LinkingIOS.openURL(chromeURL);
       }
@@ -91,7 +108,20 @@ var About = React.createClass({
         LinkingIOS.openURL(tweetBotURL);
       }
     })
+  },
+
+  selectProfile: function() {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      backButtonTitle: ' ',
+      passProps: {profileId: 'rkho',
+                  name: 'Richard Kho',
+                  accessToken: this.state.accessToken
+      }
+    })
   }
+
 });
 
 module.exports = About;
