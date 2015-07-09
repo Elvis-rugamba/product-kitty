@@ -45,6 +45,17 @@ var styles = StyleSheet.create({
     },
     commentListView: {
       flex: 1
+    },
+    noContent: {
+      marginTop: 60,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    text: {
+      fontSize: 16,
+      marginTop: 25,
+      marginBottom: 10,
+      color: 'gray'
     }
 });
 
