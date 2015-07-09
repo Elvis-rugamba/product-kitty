@@ -12,6 +12,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFD'
   },
+  logoContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  },
   header: {
     flex: 1,
     marginTop: 75,
@@ -21,8 +25,14 @@ var styles = StyleSheet.create({
     color: '#DA552F',
     fontWeight: '200'
   },
+  headline: {
+    flex: 1,
+    textAlign: 'center',
+    marginBottom: 10,
+    color: 'gray'
+  },
   text: {
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'center',
     color: 'gray'
   },
@@ -41,10 +51,9 @@ var styles = StyleSheet.create({
     height: 48,
     width: 48,
     borderRadius: 25,
-    marginTop: 10,
-    alignSelf: 'flex-start',
-    marginRight: 15,
-    marginLeft: 15
+    marginBottom: 40,
+    alignSelf: 'center',
+    justifyContent: 'center',
   }
 })
 
