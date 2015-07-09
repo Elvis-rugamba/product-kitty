@@ -1,11 +1,9 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var api = require('../../Utils/api.js');
 var Products = require('../Products');
 var Collections = require('../Collections');
 var About = require('../About');
-var Loading = require('../Loading');
 
 var Icon = require('Foundation');
 

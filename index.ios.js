@@ -19,7 +19,6 @@ var PHReactNative = React.createClass({
     return {
       accessToken: false,
       loaded: false,
-      currentAppState: AppStateIOS.currentState
     }
   },
 
