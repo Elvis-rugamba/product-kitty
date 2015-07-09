@@ -120,9 +120,13 @@ var Main = React.createClass({
           iconName={'info'}
           iconSize={20}
           onPress={() => {
+            if (this.state.selectedTab !== 'about') {
             this.setState({
               selectedTab: 'about'
             });
+            } else if (this.state.selectedTab === 'about') {
+              this.refs.aboutRef.popToTop();
+            }
           }}>
           {this.renderAboutView()}
         </Icon.TabBarItem>
@@ -176,6 +180,7 @@ var Main = React.createClass({
         tintColor='#DA552F'
         barTintColor='#FFFFFD'
         titleTextColor='#DA552F'
+        ref='aboutRef'
         initialRoute={{
           title: 'About',
           component: About,

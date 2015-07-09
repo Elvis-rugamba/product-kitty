@@ -57,28 +57,29 @@ var Products = React.createClass({
     api.getAllPosts(this.state.accessToken, this.state.currentDay)
       .then((responseData) => {
         var tempDataBlob = this.state.dataBlob;
-        var postDate = responseData.posts[0].day;
-        var date;
-        if (!postDate) {
+
+        if (!responseData.posts[0].day) {
           this.setState({
             currentDay: this.state.currentDay + 1
           });
           return this.getAllPosts();
-        }
-
-        if (postDate === moment().format('YYYY[-]MM[-]DD')) {
-          date = moment(postDate).format('[Today,] MMMM Do');
-        } else if (postDate === moment().subtract(1, 'days').format('YYYY[-]MM[-]DD')) {
-          date = moment(postDate).format('[Yesterday,] MMMM Do')
         } else {
-          date = moment(postDate).format('dddd[,] MMMM Do')
-        }
-        tempDataBlob[date] = responseData.posts;
-        this.setState({
-          currentDay: this.state.currentDay + 1,
-          dataBlob: tempDataBlob
-        });
-        ;
+            var postDate = responseData.posts[0].day;
+            var date;
+
+            if (postDate === moment().format('YYYY[-]MM[-]DD')) {
+              date = moment(postDate).format('[Today,] MMMM Do');
+            } else if (postDate === moment().subtract(1, 'days').format('YYYY[-]MM[-]DD')) {
+              date = moment(postDate).format('[Yesterday,] MMMM Do')
+            } else {
+              date = moment(postDate).format('dddd[,] MMMM Do')
+            }
+            tempDataBlob[date] = responseData.posts;
+            this.setState({
+              currentDay: this.state.currentDay + 1,
+              dataBlob: tempDataBlob
+            });
+          }
       }).then(() => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlob),
