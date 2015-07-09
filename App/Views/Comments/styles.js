@@ -9,6 +9,13 @@ var styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#FFFFFD',
     },
+    header: {
+      flex: 1,
+      marginTop: 64
+    },
+    segmentControl: {
+      flex: 1
+    },
     blur: {
       flex: 1,
       backgroundColor: 'transparent',
@@ -25,7 +32,6 @@ var styles = StyleSheet.create({
     },
     postDetailsLine: {
       fontSize: 12,
-      marginBottom: 10,
       color: 'gray',
     },
     makersLine: {
@@ -36,6 +42,20 @@ var styles = StyleSheet.create({
       flex: 1,
       resizeMode: 'cover',
       height: 150,
+    },
+    commentListView: {
+      flex: 1
+    },
+    noContent: {
+      marginTop: 60,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    text: {
+      fontSize: 16,
+      marginTop: 25,
+      marginBottom: 10,
+      color: 'gray'
     }
 });
 
