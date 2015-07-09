@@ -17,7 +17,8 @@ var {
   View,
   ListView,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  SegmentedControlIOS
 } = React;
 
 var Comments = React.createClass({
@@ -25,6 +26,7 @@ var Comments = React.createClass({
     return {
       accessToken: this.props.accessToken,
       postId: this.props.postId,
+      selectedTab: 'Comments',
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       loaded: false
     }
@@ -41,8 +43,6 @@ var Comments = React.createClass({
           dataSource: this.state.dataSource.cloneWithRows(responseData.post.comments),
           loaded: true
         });
-
-        console.log(this.state.makers)
       })
       .done()
   },
@@ -54,7 +54,14 @@ var Comments = React.createClass({
         )
     }
     return (
-      this.renderListView()
+      <View style={styles.container}>
+        <View>
+          {this.renderHeader()}
+        </View>
+        <View style={styles.container}>
+          {this.renderSegments()}
+        </View>
+      </View>
       )
   },
 
@@ -67,12 +74,31 @@ var Comments = React.createClass({
       )
   },
 
+  renderSegments: function() {
+    return (
+      <View style={styles.segmentControl}>
+        <SegmentedControlIOS
+          values={['Comments', 'Similar', 'Makers']}
+          selectedIndex={0}
+          tintColor={'#DA552F'}
+          onValueChange={(val) => {
+            this.setState({
+              selectedTab: val
+            })
+          }} />
+        {this.renderListView()}
+      </View>
+      )
+  },
+
   renderListView: function() {
     return (
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderCommentCell}
-          renderHeader={this.renderHeader} />
+          style={styles.commentListView}
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom: 50}} />
       )
   },
 
@@ -89,31 +115,21 @@ var Comments = React.createClass({
   },
 
   renderHeader: function() {
-    var str = '';
-    this.state.makers.forEach(function(elem) {
-      str += elem.name + ', '
-    })
-
-    str = str.replace(/,\s*$/, "");
-
     return (
       <TouchableHighlight
         onPress={() => this.renderWeb()}>
-        <View style={styles.container}>
+        <View style={styles.header}>
           <Image style={styles.backgroundImage}
               source={{uri: this.state.image}}>
             <BlurView blurType='xlight' style={styles.blur}>
               <Text style={styles.postTitle}>
-                {this.state.product.name}
+                {this.state.product.name + ' '}
               </Text>
               <Text style={styles.postDetailsLine}>
-                {this.state.product.tagline}
+                {this.state.product.tagline + ' '}
               </Text>
               <Text style={styles.postDetailsLine}>
                 Posted by {this.state.product.user.name}
-              </Text>
-              <Text style={styles.makersLine}>
-                Made by {str}
               </Text>
               <Text style={styles.postDetailsLine}>
                 {this.state.product.votes_count} Votes, {this.state.product.comments_count} Comments
