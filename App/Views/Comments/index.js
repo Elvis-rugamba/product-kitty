@@ -1,15 +1,15 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
-var Icon = require('EvilIcons');
-
 var {
   Text,
   View,
   ListView,
   Image,
   TouchableHighlight,
-  SegmentedControlIOS
+  SegmentedControlIOS,
+  AlertIOS,
+  AppStateIOS
 } = React;
 
 var Comments = React.createClass({
@@ -26,6 +26,22 @@ var Comments = React.createClass({
   },
 
   componentWillMount: function() {
+    this.getSinglePost();
+  },
+
+  componentDidMount: function () {
+    AppStateIOS.addEventListener('change', this.handleAppStateChange);
+  },
+
+  componentWillUnmount: function() {
+    AppStateIOS.removeEventListener('change', this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(state) {
+    this.getSinglePost();
+  },
+
+  getSinglePost: function() {
     var api = require('../../Utils/api.js');
 
     api.getSinglePost(this.state.accessToken, this.state.postId)
@@ -39,6 +55,9 @@ var Comments = React.createClass({
           makersDataSource: responseData.post.makers.length === 0 ? false : this.state.makersDataSource.cloneWithRows(responseData.post.makers),
           loaded: true
         });
+      })
+      .catch((error) => {
+        AlertIOS.alert('Error', 'You need to be connected to the internet')
       })
       .done()
   },
@@ -108,6 +127,8 @@ var Comments = React.createClass({
   },
 
   renderCommentsListView: function() {
+    var Icon = require('EvilIcons');
+
     if (!this.state.commentsDataSource) {
       return (
         <View style={styles.noContent}>
