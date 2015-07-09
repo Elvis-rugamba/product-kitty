@@ -18,7 +18,7 @@ var styles = StyleSheet.create({
     marginBottom: 60,
     fontSize: 48,
     textAlign: 'center',
-    color: '#D6573D',
+    color: '#DA552F',
     fontWeight: '200'
   },
   text: {
@@ -36,6 +36,15 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 20,
     marginRight: 20
+  },
+  image: {
+    height: 48,
+    width: 48,
+    borderRadius: 25,
+    marginTop: 10,
+    alignSelf: 'flex-start',
+    marginRight: 15,
+    marginLeft: 15
   }
 })
 

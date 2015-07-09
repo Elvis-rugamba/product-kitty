@@ -52,7 +52,7 @@ var Cell = React.createClass({
               </Text>
             </View>
             <View style={styles.votesContainer}>
-              <Icon name='chevron-up' size={30} color="#D6573D" style={styles.icon}/>
+              <Icon name='chevron-up' size={30} color="#DA552F" style={styles.icon}/>
               <Text style={styles.votes}>
                 {this.state.numVotes}
               </Text>

@@ -2,6 +2,7 @@ var React = require('react-native');
 var styles = require('./styles.js');
 
 var Icon = require('Foundation');
+var Profile = require('../Profile');
 
 var {
   View,
@@ -23,6 +24,7 @@ var About = React.createClass({
         <Text style={styles.header}>
           Product Kitty
         </Text>
+
         <View style={styles.container}>
           <Text style={styles.text}>
             Made with
@@ -91,7 +93,20 @@ var About = React.createClass({
         LinkingIOS.openURL(tweetBotURL);
       }
     })
+  },
+
+  selectProfile: function() {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      backButtonTitle: ' ',
+      passProps: {profileId: 'rkho',
+                  name: 'Richard Kho',
+                  accessToken: this.state.accessToken
+      }
+    })
   }
+
 });
 
 module.exports = About;

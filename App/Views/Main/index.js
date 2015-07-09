@@ -90,9 +90,9 @@ var Main = React.createClass({
     return (
       <NavigatorIOS
         style={styles.container}
-        tintColor='#D6573D'
+        tintColor='#DA552F'
         barTintColor='#FFFFFD'
-        titleTextColor='#D6573D'
+        titleTextColor='#DA552F'
         ref='productRef'
         initialRoute={{
           title: 'Product Kitty',
@@ -106,9 +106,9 @@ var Main = React.createClass({
     return (
       <NavigatorIOS
         style={styles.container}
-        tintColor='#D6573D'
+        tintColor='#DA552F'
         barTintColor='#FFFFFD'
-        titleTextColor='#D6573D'
+        titleTextColor='#DA552F'
         ref='collectionRef'
         initialRoute={{
           title: 'Collections',
@@ -126,9 +126,9 @@ var Main = React.createClass({
       <View style={styles.container}>
       <NavigatorIOS
         style={styles.container}
-        tintColor='#D6573D'
+        tintColor='#DA552F'
         barTintColor='#FFFFFD'
-        titleTextColor='#D6573D'
+        titleTextColor='#DA552F'
         initialRoute={{
           title: 'About',
           component: About,

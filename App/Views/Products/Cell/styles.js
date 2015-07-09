@@ -46,7 +46,7 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 4,
     marginRight: 10,
-    color: '#D6573D'
+    color: '#DA552F'
   },
   postDetailsLine: {
     fontSize: 12,

@@ -123,7 +123,7 @@ var Profile = React.createClass({
         <SegmentedControlIOS
           values={['Upvoted', 'Submitted', 'Collections', 'Made']}
           selectedIndex={0}
-          tintColor={'#D6573D'}
+          tintColor={'#DA552F'}
           onValueChange={(val) => {
             this.setState({
               selectedTab: val
