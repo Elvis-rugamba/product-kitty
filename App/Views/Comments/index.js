@@ -30,7 +30,6 @@ var Comments = React.createClass({
 
     api.getSinglePost(this.state.accessToken, this.state.postId)
       .then((responseData) => {
-        console.log(responseData.post.makers);
         this.setState({
           product: responseData.post,
           image: responseData.post.screenshot_url['850px'],

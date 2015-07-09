@@ -14,76 +14,23 @@ var {
   View,
   TabBarIOS,
   NavigatorIOS,
-  NetInfo,
-  AlertIOS
 } = React;
 
 var Main = React.createClass({
   getInitialState: function() {
+    console.log('token' + this.props.accessToken);
     return {
-      accessToken: false,
-      isConnected: null,
+      accessToken: this.props.accessToken,
       selectedTab: 'products'
     }
   },
 
-  componentWillMount: function() {
-    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
-    NetInfo.isConnected.fetch().done((data) => {
-      console.log(this.state.isConnected);
-      this.setState({
-        isConnected: data
-      })
-    })
-  },
-
-  componentDidMount: function() {
-    if (this.state.isConnected && !this.state.accessToken){
-      api.getToken()
-        .then((responseData) => {
-          this.setState({
-            accessToken: responseData.access_token,
-          });
-        })
-        .done();
-    }
-  },
-
-  componentWillUnmount: function() {
-    NetInfo.isConnected.removeEventListener(
-      'change',
-      this.handleConnectivityChange
-    );
-  },
-
-
-  handleConnectivityChange: function(change) {
-    this.setState({
-      isConnected: change
-    })
-    console.log("I have changed!" + change)
-  },
-
   render: function() {
-    if (this.state.isConnected === 'null') {
-      return (
-        <View style={styles.container}>
-          <Loading
-            loaded={this.state.isConnected} />
-        </View>
-        )
-    }
-    if (this.state.isConnected === 'false') {
-      return (
-        <View>
-          {AlertIOS.alert('You need to be connected to the internet!')}
-        </View>
-        )
-    }
     return (
       <TabBarIOS>
         <Icon.TabBarItem
           title='Home'
+          ref='productsTabBar'
           selected={this.state.selectedTab === 'products'}
           iconName={'home'}
           iconSize={20}
@@ -147,7 +94,7 @@ var Main = React.createClass({
           component: Products,
           backButtonTitle: ' ',
           passProps: {
-            isConnected: this.state.isConnected
+            accessToken: this.state.accessToken,
           }
         }} />
         )

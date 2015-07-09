@@ -1,20 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
-
 var React = require('react-native');
 var styles = require('./styles.js');
 var Main = require('./App/Views/Main');
 
+var api = require('./App/Utils/api.js');
+var Loading = require('./App/Views/Loading');
+
 var {
   AppRegistry,
   Navigator,
-  View
+  View,
+  AlertIOS,
+  AppStateIOS
 } = React;
 
 var PHReactNative = React.createClass({
+
+  getInitialState: function() {
+    return {
+      accessToken: false,
+      loaded: false,
+      currentAppState: AppStateIOS.currentState
+    }
+  },
+
+  componentWillMount: function() {
+    this.getAccessToken();
+  },
+
+  componentDidMount: function() {
+    AppStateIOS.addEventListener('change', this.handleAppStateChange);
+  },
+
+  componentWillUnmount: function() {
+    AppStateIOS.removeEventListener('change', this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(state) {
+    this.getAccessToken();
+  },
+
+  getAccessToken: function() {
+    api.getToken()
+      .then((responseData) => {
+        this.setState({
+          accessToken: responseData.access_token,
+          loaded: true
+        });
+      })
+      .catch((error) => {
+        AlertIOS.alert('Error', 'You need to be connected to the internet')
+      })
+      .done();
+  },
 
   renderScene: function(route, navigator) {
     var Component = route.component;
@@ -23,12 +60,20 @@ var PHReactNative = React.createClass({
         <Component
           route={route}
           navigator={navigator}
-          topNavigator={navigator} />
+          topNavigator={navigator}
+          accessToken={this.state.accessToken} />
       </View>
       )
   },
 
   render: function() {
+
+    while (!this.state.loaded) {
+      return (
+        this.renderLoading()
+        )
+    }
+
     return (
       <Navigator
         sceneStyle={styles.container}
@@ -43,6 +88,15 @@ var PHReactNative = React.createClass({
           component: Main,
         }} />
     );
+  },
+
+  renderLoading: function() {
+    return (
+      <View style={styles.container}>
+        <Loading
+          loaded={this.state.loaded} />
+      </View>
+      )
   }
 });
 
