@@ -15,6 +15,8 @@ var {
   View,
   ListView,
   TouchableHighlight,
+  AlertIOS,
+  AppStateIOS,
   ActivityIndicatorIOS
 } = React;
 
@@ -32,7 +34,7 @@ var Products = React.createClass({
     }
   },
 
-  componentDidMount: function () {
+  componentWillMount: function() {
     Icon.getImageSource('share-apple', 30)
       .then((source) => {
         this.setState({ shareIcon: source })
@@ -41,8 +43,19 @@ var Products = React.createClass({
     this.getAllPosts()
   },
 
+  componentDidMount: function () {
+    AppStateIOS.addEventListener('change', this.handleAppStateChange);
+  },
+
+  componentWillUnmount: function() {
+    AppStateIOS.removeEventListener('change', this.handleAppStateChange);
+  },
+
+  handleAppStateChange: function(state) {
+    this.getAllPosts();
+  },
+
   getAllPosts: function() {
-    if (this.state.accessToken){
     api.getAllPosts(this.state.accessToken, this.state.currentDay)
       .then((responseData) => {
         var tempDataBlob = this.state.dataBlob;
@@ -75,9 +88,10 @@ var Products = React.createClass({
           loaded: true
         })
       })
+      .catch((error) => {
+        AlertIOS.alert('Error', 'You need to be connected to the internet')
+      })
       .done();
-
-    }
   },
 
   render: function() {
