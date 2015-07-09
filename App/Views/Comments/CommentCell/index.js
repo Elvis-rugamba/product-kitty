@@ -11,8 +11,7 @@ var {
   Text,
   View,
   Image,
-  Navigator,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } = React;
 
 var CommentCell = React.createClass({
@@ -59,11 +58,11 @@ var CommentCell = React.createClass({
                    style={styles.image} />
           </TouchableWithoutFeedback>
         <View style={styles.postDetailsContainer}>
-        <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
-          <Text style={styles.postTitle}>
-          {this.state.name}
-          </Text>
-        </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
+            <Text style={styles.postTitle}>
+            { this.state.name}
+            </Text>
+          </TouchableWithoutFeedback>
           <Text style={styles.commentorDetails}>{this.props.comment.user.headline}</Text>
           <Text style={styles.postDetailsLine}>
             <Hypertext
