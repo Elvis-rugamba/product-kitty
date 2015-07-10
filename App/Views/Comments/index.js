@@ -220,8 +220,6 @@ var Comments = React.createClass({
     return (
       <CommentCell
         comment={comment}
-        isChildComment={false}
-        onSelect={() => this.selectComment(comment)}
         navigator={this.props.navigator}
         selectProfile={() => this.selectProfile(comment.user.id, comment.user.name)}
         selectChildComment={() => this.selectComment(comment)} />
@@ -290,25 +288,6 @@ var Comments = React.createClass({
       passProps: {url: this.state.productLink}
     })
 
-  },
-
-  selectComment: function(comment) {
-    var ChildComments = require('./ChildComments');
-
-    if (comment.child_comments_count > 0) {
-      this.props.navigator.push({
-        title: 'Replies',
-        component: ChildComments,
-        backButtonTitle: ' ',
-        passProps: {comment: comment,
-                    username: comment.user.name,
-                    body: comment.body,
-                    image: comment.user.image_url['48px'],
-                    childComments: comment.child_comments,
-                    selectProfile: (id, name) => { this.selectProfile(id, name) }
-                  }
-      })
-    }
   },
 
   selectPost: function(post) {
