@@ -29,3 +29,6 @@ npm-debug.log
 
 # api keys
 app/utils/keys.js
+
+# app bundle
+iOS/main.jsbundle
