@@ -16,7 +16,6 @@ var {
 
 var Main = React.createClass({
   getInitialState: function() {
-    console.log('token' + this.props.accessToken);
     return {
       accessToken: this.props.accessToken,
       selectedTab: 'products'

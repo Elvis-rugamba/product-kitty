@@ -1,6 +1,9 @@
 var React = require('react-native');
 var styles = require('./styles.js');
 
+var Icon = require('EvilIcons');
+
+
 var {
   Text,
   View,
@@ -50,7 +53,7 @@ var Comments = React.createClass({
           product: responseData.post,
           image: responseData.post.screenshot_url['850px'],
           productLink: responseData.post.redirect_url,
-          commentsDataSource: responseData.post.comments_count === 0 ? false : this.state.commentsDataSource.cloneWithRows(responseData.post.comments),
+          commentsDataSource: responseData.post.comments.length === 0 ? false : this.state.commentsDataSource.cloneWithRows(this.loadAllComments(responseData.post.comments)),
           similarDataSource: responseData.post.related_posts.length === 0 ? false : this.state.similarDataSource.cloneWithRows(responseData.post.related_posts),
           makersDataSource: responseData.post.makers.length === 0 ? false : this.state.makersDataSource.cloneWithRows(responseData.post.makers),
           loaded: true
@@ -60,6 +63,24 @@ var Comments = React.createClass({
         AlertIOS.alert('Error', 'You need to be connected to the internet')
       })
       .done()
+  },
+
+  loadAllComments: function(commentsArray) {
+    var commentsArr = [];
+
+    commentsArray.forEach(function(elem) {
+      commentsArr.push(elem);
+
+      if (elem.child_comments_count > 0) {
+        elem.child_comments.forEach(function(childElem) {
+          childElem.leftMargin = 30;
+          childElem.isChildComment = true;
+          commentsArr.push(childElem);
+        })
+      }
+    })
+
+    return commentsArr;
   },
 
   render: function() {
@@ -127,7 +148,6 @@ var Comments = React.createClass({
   },
 
   renderCommentsListView: function() {
-    var Icon = require('EvilIcons');
 
     if (!this.state.commentsDataSource) {
       return (

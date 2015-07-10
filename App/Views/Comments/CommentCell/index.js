@@ -28,6 +28,10 @@ var CommentCell = React.createClass({
       this.setState({
         numReplies: '1 Reply'
       })
+    } else if (this.props.comment.child_comments_count === 0) {
+      this.setState({
+        numReplies: ' '
+      })
     } else {
       this.setState({
         numReplies: this.props.comment.child_comments_count + ' Replies'
@@ -52,7 +56,7 @@ var CommentCell = React.createClass({
 
   renderParentComment: function() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {marginLeft: this.props.comment.leftMargin}]}>
           <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
             <Image source={{uri: this.state.image}}
                    style={styles.image} />
