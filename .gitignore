@@ -31,4 +31,4 @@ npm-debug.log
 app/utils/keys.js
 
 # app bundle
-iOS/main.jsbundle
+ios/main.jsbundle
