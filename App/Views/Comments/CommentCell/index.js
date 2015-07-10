@@ -28,23 +28,15 @@ var CommentCell = React.createClass({
       this.setState({
         numReplies: '1 Reply'
       })
-    } else if (this.props.comment.child_comments_count === 0) {
-      this.setState({
-        numReplies: ' '
-      })
     } else {
       this.setState({
         numReplies: this.props.comment.child_comments_count + ' Replies'
       })
     }
-
-    this.setState({
-      isChildComment: this.props.isChildComment
-    })
   },
 
   render: function() {
-    if (!this.state.isChildComment) {
+    if (!this.props.comment.isChildComment) {
       return (
         this.renderParentComment()
         )
@@ -56,7 +48,7 @@ var CommentCell = React.createClass({
 
   renderParentComment: function() {
     return (
-      <View style={[styles.container, {marginLeft: this.props.comment.leftMargin}]}>
+      <View style={styles.container}>
           <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
             <Image source={{uri: this.state.image}}
                    style={styles.image} />
@@ -72,7 +64,6 @@ var CommentCell = React.createClass({
             <Hypertext
               onLinkClick={(link) => this.renderWeb(link)}>{parseLinks(this.state.comment)}</Hypertext>
           </Text>
-          <TouchableWithoutFeedback onPress={this.props.onSelect}>
             <View style={styles.container}>
               <Text style={styles.postChildrenDetails}>
                 {this.state.numReplies}
@@ -84,7 +75,6 @@ var CommentCell = React.createClass({
                 style={styles.icon}
               />
             </View>
-          </TouchableWithoutFeedback>
           <View style={styles.separator} />
         </View>
       </View>
@@ -93,7 +83,7 @@ var CommentCell = React.createClass({
 
   renderChildComment: function() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {marginLeft: this.props.comment.leftMargin}]}>
         <TouchableWithoutFeedback onPress={() => this.props.selectProfile()}>
           <Image source={{uri: this.state.image}}
                  style={styles.image} />
