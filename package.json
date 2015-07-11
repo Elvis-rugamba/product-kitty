@@ -9,7 +9,6 @@
     "react-native-activity-view": "^0.2.1",
     "react-native-blur": "^0.5.3",
     "react-native-hypertext": "git://github.com/rkho/react-native-hypertext.git",
-    "react-native-icons": "^0.0.9",
     "react-native-vector-icons": "^0.6.2"
   },
   "devDependencies": {},
