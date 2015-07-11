@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Product Kitty" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="178" width="375" height="43"/>
+                    <rect key="frame" x="20" y="226" width="375" height="43"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="36"/>
                     <color key="textColor" red="0.82745098039999998" green="0.24313725489999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
