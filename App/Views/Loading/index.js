@@ -17,9 +17,6 @@ var Loading = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-      <Image
-        source={require('image!glasshole-kitty')}
-         />
         <ActivityIndicatorIOS
           animating={!this.state.loaded}
           style={styles.centering}

@@ -153,7 +153,7 @@ var Products = React.createClass({
 
   selectPost: function(post) {
     this.props.navigator.push({
-      title: post.name,
+      title: 'Details',
       component: Comments,
       backButtonTitle: ' ',
       rightButtonIcon: this.state.shareIcon,

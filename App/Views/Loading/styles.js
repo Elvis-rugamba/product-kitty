@@ -9,6 +9,8 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFD',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   centering: {
     alignItems: 'center',
