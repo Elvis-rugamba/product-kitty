@@ -26,7 +26,6 @@ var Web = React.createClass({
   componentDidMount: function () {
     AppStateIOS.addEventListener('change', this.handleAppStateChange);
     NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange);
-
   },
 
   componentWillUnmount: function() {

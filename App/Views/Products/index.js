@@ -39,8 +39,9 @@ var Products = React.createClass({
       .then((source) => {
         this.setState({ shareIcon: source })
       });
-
-    this.getAllPosts()
+    if (!this.state.loaded) {
+      this.getAllPosts()
+    }
   },
 
   componentDidMount: function () {
@@ -52,7 +53,9 @@ var Products = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getAllPosts();
+    if (!this.state.loaded) {
+      this.getAllPosts()
+    }
   },
 
   getAllPosts: function() {

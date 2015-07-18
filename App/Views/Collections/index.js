@@ -26,7 +26,9 @@ var Collections = React.createClass({
   },
 
   componentWillMount: function() {
-    this.getCollectionsData()
+    if (!this.state.loaded) {
+      this.getCollectionsData()
+    }
   },
 
   componentDidMount: function() {
@@ -38,7 +40,9 @@ var Collections = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getCollectionsData();
+    if (!this.state.loaded) {
+      this.getCollectionsData()
+    }
   },
 
   getCollectionsData: function() {

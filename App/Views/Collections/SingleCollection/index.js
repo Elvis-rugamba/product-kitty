@@ -35,7 +35,9 @@ var SingleCollection = React.createClass({
         this.setState({ shareIcon: source })
       });
 
-      this.getSingleCollection();
+      if (!this.state.loaded) {
+        this.getSingleCollection()
+      }
   },
 
   componentDidMount: function () {
@@ -47,7 +49,9 @@ var SingleCollection = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getSingleCollection();
+    if (!this.state.loaded) {
+      this.getSingleCollection()
+    }
   },
 
   getSingleCollection: function() {

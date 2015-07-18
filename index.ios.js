@@ -23,7 +23,9 @@ var PHReactNative = React.createClass({
   },
 
   componentWillMount: function() {
-    this.getAccessToken();
+    if (!this.state.loaded) {
+      this.getAccessToken();
+    }
   },
 
   componentDidMount: function() {
@@ -35,7 +37,9 @@ var PHReactNative = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getAccessToken();
+    if (!this.state.loaded) {
+      this.getAccessToken();
+    }
   },
 
   getAccessToken: function() {

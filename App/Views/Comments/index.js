@@ -29,7 +29,9 @@ var Comments = React.createClass({
   },
 
   componentWillMount: function() {
-    this.getSinglePost();
+    if (!this.state.loaded) {
+      this.getSinglePost()
+    }
   },
 
   componentDidMount: function () {
@@ -41,7 +43,9 @@ var Comments = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getSinglePost();
+    if (!this.state.loaded) {
+      this.getSinglePost()
+    }
   },
 
   getSinglePost: function() {

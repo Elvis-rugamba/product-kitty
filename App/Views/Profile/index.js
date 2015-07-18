@@ -35,7 +35,9 @@ var Profile = React.createClass({
         this.setState({ shareIcon: source })
       });
 
-    this.getProfileInfo();
+    if (!this.state.loaded) {
+      this.getProfileInfo()
+    }
   },
 
   componentDidMount: function () {
@@ -47,7 +49,9 @@ var Profile = React.createClass({
   },
 
   handleAppStateChange: function(state) {
-    this.getProfileInfo();
+    if (!this.state.loaded) {
+      this.getProfileInfo()
+    }
   },
 
   getProfileInfo: function() {
