@@ -64,7 +64,9 @@ var Comments = React.createClass({
         });
       })
       .catch((error) => {
-        AlertIOS.alert('Error', 'You need to be connected to the internet')
+        if (!this.state.loaded) {
+          AlertIOS.alert('Error', 'You need to be connected to the internet')
+        }
       })
       .done()
   },
