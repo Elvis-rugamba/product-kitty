@@ -99,7 +99,7 @@ var About = React.createClass({
       if (!supported) {
         LinkingIOS.canOpenURL(twitterURL, (supported) => {
           if (!supported) {
-            this.web('https://' + url);
+            this.web(url);
           } else {
             LinkingIOS.openURL(twitterURL);
           }

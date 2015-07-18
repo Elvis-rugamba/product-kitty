@@ -29,7 +29,6 @@
 		EFD23C641B51D4AD0033FC7B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFD23C621B51D4AD0033FC7B /* FontAwesome.ttf */; };
 		EFD23C661B51D4D50033FC7B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFD23C651B51D4D50033FC7B /* Foundation.ttf */; };
 		EFD23C6D1B51D4FE0033FC7B /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD23C6C1B51D4F10033FC7B /* libRNVectorIcons.a */; };
-		EFD23C741B51DD430033FC7B /* libActivityView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD23C731B51D5100033FC7B /* libActivityView.a */; };
 		EFD23C811B51E0B30033FC7B /* .codeclimate.yml in Resources */ = {isa = PBXBuildFile; fileRef = EFD23C761B51E0B30033FC7B /* .codeclimate.yml */; };
 		EFD23C821B51E0B30033FC7B /* .npmignore in Resources */ = {isa = PBXBuildFile; fileRef = EFD23C771B51E0B30033FC7B /* .npmignore */; };
 		EFD23C831B51E0B30033FC7B /* ActivityView.android.js in Resources */ = {isa = PBXBuildFile; fileRef = EFD23C781B51E0B30033FC7B /* ActivityView.android.js */; };
@@ -183,7 +182,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFD23C741B51DD430033FC7B /* libActivityView.a in Frameworks */,
 				EFD23C6D1B51D4FE0033FC7B /* libRNVectorIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -689,7 +687,7 @@
 					"$(SRCROOT)/node_modules/react-native-activity-view/",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -713,7 +711,7 @@
 					"$(SRCROOT)/node_modules/react-native-activity-view/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
