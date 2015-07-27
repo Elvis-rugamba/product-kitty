@@ -1,0 +1,5 @@
+// Register here: https://api.producthunt.com/v1/oauth/applications/new
+module.exports = {
+  key: 'your-key',
+  secret: 'your-secret',
+}
