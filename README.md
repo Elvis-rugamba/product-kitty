@@ -1,5 +1,5 @@
-# product-hunt-react-native
-A Product Hunt iOS app built in React Native
+# Product Kitty
+A Product Hunt iOS browser built in React Native
 
 ## Installation
 You'll want to make sure `react-native-cli` and `watchman` are installed, as well as Xcode on your machine to run iOS Simulator.
